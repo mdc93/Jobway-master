@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.ListSelectionView?>
+
+<fx:root prefHeight="917.0" prefWidth="1137.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="443.0" prefWidth="835.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <GridPane alignment="CENTER" prefHeight="251.0" prefWidth="835.0" styleClass="colorZoneBox" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="192.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="112.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="6.0" prefWidth="112.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="327.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="161.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="260.0" minHeight="10.0" prefHeight="260.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="148.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                     <children>
+                        <Label text="Choix Thématique :">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ListSelectionView fx:id="listSelection" prefHeight="374.0" prefWidth="574.0" styleClass="listSelection" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowSpan="2" />
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="817.0" prefWidth="175.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="77.0" prefWidth="175.0" />
+            <Label prefHeight="251.0" prefWidth="221.0" styleClass="title" text="Analyse de la demande thématique(s) prise en charge (plusieurs choix possibles)" textAlignment="CENTER" textFill="#3b93ad" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </Label>
+            <Region prefHeight="215.0" prefWidth="302.0" />
+         </children>
+      </VBox>
+   </left>
+</fx:root>

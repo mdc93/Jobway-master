@@ -1,0 +1,5 @@
+
+*.log
+*.zip
+jobway/config.properties
+jobway/text.xlsx
