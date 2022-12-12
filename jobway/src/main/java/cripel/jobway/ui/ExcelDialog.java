@@ -5,6 +5,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.controlsfx.dialog.ProgressDialog;
@@ -128,11 +130,13 @@ public class ExcelDialog extends BorderPane {
 	private void taskExport() throws FileNotFoundException {
 		DirectoryChooser dir = new DirectoryChooser();
 		File file = dir.showDialog(this.getScene().getWindow());
-		String filename = createFileName(file);
+		File fileExport = new File(createFileName(file));
 
-		if (!filename.equalsIgnoreCase("")) {
+		if (fileExport!=null) {
 			XSSFWorkbook wb = new XSSFWorkbook();
 			XSSFSheet sheet = wb.createSheet("Data");
+
+			FileOutputStream output = new FileOutputStream(fileExport);
 			Service<Void> service = new Service<>() {
 				@Override
 				protected Task<Void> createTask() {
@@ -143,11 +147,10 @@ public class ExcelDialog extends BorderPane {
 							int progress = 0;
 							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
 							updateMessage("Création des titres");
-							FileOutputStream output = new FileOutputStream(filename);
 							for (Person person : listPerson) {
 								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
 										datePickerEnd.getValue());
-								PoiUtil.export(exp.getMap(), wb, sheet);
+								PoiUtil.export(exp.getMap(), (XSSFWorkbook) wb, (XSSFSheet) sheet);
 								updateProgress(progress++, listPerson.size() + 1);
 								updateMessage("Ligne : "+progress);
 								try  {
@@ -156,21 +159,25 @@ public class ExcelDialog extends BorderPane {
 								} catch (IOException e) {
 									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
 									alert.showAndWait();
+
 								}
+
 							}
 							updateMessage("Adaptation de la largeur des colonnes");
-							PoiUtil.resizeColumn(sheet, countColumn);
+							PoiUtil.resizeColumn((XSSFSheet) sheet, countColumn);
 							updateProgress(progress++, listPerson.size() + 1);
+//							FileOutputStream output = new FileOutputStream(fileExport);
+
 
 //							try (OutputStream output = new FileOutputStream(createFileName(file))) {
-//							try (OutputStream output = new FileOutputStream(filename)) {
+//							try  {
 //								wb.write(output);
 //
 //							} catch (IOException e) {
 //								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
 //								alert.showAndWait();
 //							}
-
+							output.close();
 							wb.close();
 
 							return null;
