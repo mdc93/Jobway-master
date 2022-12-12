@@ -1,9 +1,6 @@
 package cripel.jobway.ui;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -72,12 +69,71 @@ public class ExcelDialog extends BorderPane {
 	 * export with a {@link ProgressDialog}
 	 *
 	 */
-	private void taskExport() {
+//	private void taskExport() {
+//		DirectoryChooser dir = new DirectoryChooser();
+//		File file = dir.showDialog(this.getScene().getWindow());
+//
+//		if (file != null) {
+//			XSSFWorkbook wb = new XSSFWorkbook();
+//			XSSFSheet sheet = wb.createSheet("Data");
+//			Service<Void> service = new Service<>() {
+//				@Override
+//				protected Task<Void> createTask() {
+//					return new Task<>() {
+//						@Override
+//						protected Void call() throws InterruptedException, IOException {
+//
+//							int progress = 0;
+//							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
+//							updateMessage("Création des titres");
+//							for (Person person : listPerson) {
+//								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
+//										datePickerEnd.getValue());
+//								PoiUtil.export(exp.getMap(), wb, sheet);
+//								updateProgress(progress++, listPerson.size() + 1);
+//								updateMessage("Ligne : "+progress);
+//
+//							}
+//							updateMessage("Adaptation de la largeur des colonnes");
+//							PoiUtil.resizeColumn(sheet, countColumn);
+//							updateProgress(progress++, listPerson.size() + 1);
+//
+//							try (OutputStream output = new FileOutputStream(createFileName(file))) {
+//								wb.write(output);
+//
+//							} catch (IOException e) {
+//								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
+//								alert.showAndWait();
+//							} finally {
+//								wb.close();
+//							}
+//
+//							return null;
+//						}
+//					};
+//				}
+//			};
+//
+//			ProgressDialog dialog = new ProgressDialog(service);
+//			dialog.setHeaderText("En cours d'export");
+//			dialog.setTitle("Export");
+//			dialog.initModality(Modality.NONE);
+//			dialog.initOwner(this.getScene().getWindow());
+//			dialog.show();
+//			service.start();
+//
+//		}
+//	}
+
+	private void taskExport() throws FileNotFoundException {
 		DirectoryChooser dir = new DirectoryChooser();
 		File file = dir.showDialog(this.getScene().getWindow());
-		if (file != null) {
+		String filename = createFileName(file);
+
+		if (!filename.equalsIgnoreCase("")) {
 			XSSFWorkbook wb = new XSSFWorkbook();
 			XSSFSheet sheet = wb.createSheet("Data");
+			OutputStream output = new FileOutputStream(filename);
 			Service<Void> service = new Service<>() {
 				@Override
 				protected Task<Void> createTask() {
@@ -94,21 +150,28 @@ public class ExcelDialog extends BorderPane {
 								PoiUtil.export(exp.getMap(), wb, sheet);
 								updateProgress(progress++, listPerson.size() + 1);
 								updateMessage("Ligne : "+progress);
+								try  {
+									wb.write(output);
 
+								} catch (IOException e) {
+									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
+									alert.showAndWait();
+								}
 							}
 							updateMessage("Adaptation de la largeur des colonnes");
 							PoiUtil.resizeColumn(sheet, countColumn);
 							updateProgress(progress++, listPerson.size() + 1);
 
-							try (OutputStream output = new FileOutputStream(createFileName(file))) {
+//							try (OutputStream output = new FileOutputStream(createFileName(file))) {
+							try (OutputStream output = new FileOutputStream(filename)) {
 								wb.write(output);
-								
+
 							} catch (IOException e) {
 								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
 								alert.showAndWait();
-							} finally {
-								wb.close();
 							}
+
+							wb.close();
 
 							return null;
 						}
@@ -135,7 +198,7 @@ public class ExcelDialog extends BorderPane {
 	 */
 	private String createFileName(File file) {
 		String fileName;
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm");
 		String time = ZonedDateTime.now(ZoneId.systemDefault()).format(format);
 		fileName = file.getAbsolutePath() + File.separator + "Export-" + time + ".xlsx";
 		return fileName;
@@ -147,7 +210,7 @@ public class ExcelDialog extends BorderPane {
 	 * @param event
 	 */
 	@FXML
-	void onActionStart(ActionEvent event) {
+	void onActionStart(ActionEvent event) throws FileNotFoundException {
 		if (listPerson != null && !listPerson.isEmpty()) {
 			taskExport();
 		}
@@ -194,4 +257,5 @@ public class ExcelDialog extends BorderPane {
 			throw new RuntimeException(exception);
 		}
 	}
+
 }
