@@ -153,14 +153,14 @@ public class ExcelDialog extends BorderPane {
 								PoiUtil.export(exp.getMap(), (XSSFWorkbook) wb, (XSSFSheet) sheet);
 								updateProgress(progress++, listPerson.size() + 1);
 								updateMessage("Ligne : "+progress);
-								try  {
-									wb.write(output);
-
-								} catch (IOException e) {
-									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
-									alert.showAndWait();
-
-								}
+//								try  {
+//									wb.write(output);
+//
+//								} catch (IOException e) {
+//									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
+//									alert.showAndWait();
+//
+//								}
 
 							}
 							updateMessage("Adaptation de la largeur des colonnes");
@@ -170,13 +170,13 @@ public class ExcelDialog extends BorderPane {
 
 
 //							try (OutputStream output = new FileOutputStream(createFileName(file))) {
-//							try  {
-//								wb.write(output);
-//
-//							} catch (IOException e) {
-//								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
-//								alert.showAndWait();
-//							}
+							try  {
+								wb.write(output);
+
+							} catch (IOException e) {
+								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
+								alert.showAndWait();
+							}
 							output.close();
 							wb.close();
 
