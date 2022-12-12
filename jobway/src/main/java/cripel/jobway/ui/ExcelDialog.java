@@ -133,7 +133,6 @@ public class ExcelDialog extends BorderPane {
 		if (!filename.equalsIgnoreCase("")) {
 			XSSFWorkbook wb = new XSSFWorkbook();
 			XSSFSheet sheet = wb.createSheet("Data");
-			OutputStream output = new FileOutputStream(filename);
 			Service<Void> service = new Service<>() {
 				@Override
 				protected Task<Void> createTask() {
@@ -144,6 +143,7 @@ public class ExcelDialog extends BorderPane {
 							int progress = 0;
 							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
 							updateMessage("Création des titres");
+							FileOutputStream output = new FileOutputStream(filename);
 							for (Person person : listPerson) {
 								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
 										datePickerEnd.getValue());
@@ -163,13 +163,13 @@ public class ExcelDialog extends BorderPane {
 							updateProgress(progress++, listPerson.size() + 1);
 
 //							try (OutputStream output = new FileOutputStream(createFileName(file))) {
-							try (OutputStream output = new FileOutputStream(filename)) {
-								wb.write(output);
-
-							} catch (IOException e) {
-								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
-								alert.showAndWait();
-							}
+//							try (OutputStream output = new FileOutputStream(filename)) {
+//								wb.write(output);
+//
+//							} catch (IOException e) {
+//								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
+//								alert.showAndWait();
+//							}
 
 							wb.close();
 
