@@ -4,6 +4,7 @@ import java.io.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -150,7 +151,7 @@ public class ExcelDialog extends BorderPane {
 							for (Person person : listPerson) {
 								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
 										datePickerEnd.getValue());
-								PoiUtil.export(exp.getMap(), (XSSFWorkbook) wb, (XSSFSheet) sheet);
+								PoiUtil.export(exp.getMap(), wb,  sheet);
 								updateProgress(progress++, listPerson.size() + 1);
 								updateMessage("Ligne : "+progress);
 //								try  {
@@ -163,6 +164,8 @@ public class ExcelDialog extends BorderPane {
 //								}
 
 							}
+							System.out.println("test");
+
 							updateMessage("Adaptation de la largeur des colonnes");
 							PoiUtil.resizeColumn((XSSFSheet) sheet, countColumn);
 							updateProgress(progress++, listPerson.size() + 1);
