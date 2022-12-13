@@ -4,8 +4,11 @@ import java.io.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
+import cripel.jobway.dao.PersonDAO;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -32,6 +35,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.hibernate.collection.internal.PersistentList;
 
 /** The Dialog Controller class to export people data to excel */
 public class ExcelDialog extends BorderPane {
@@ -136,8 +140,6 @@ public class ExcelDialog extends BorderPane {
 		if (fileExport!=null) {
 			XSSFWorkbook wb = new XSSFWorkbook();
 			XSSFSheet sheet = wb.createSheet("Data");
-
-			FileOutputStream output = new FileOutputStream(fileExport);
 			Service<Void> service = new Service<>() {
 				@Override
 				protected Task<Void> createTask() {
@@ -149,7 +151,6 @@ public class ExcelDialog extends BorderPane {
 							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
 							updateMessage("Création des titres");
 							fillWorkbookExport(wb,sheet);
-//							for (Person person : listPerson) {
 //							for (Person person : listPerson) {
 //								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
 //										datePickerEnd.getValue());
@@ -169,12 +170,10 @@ public class ExcelDialog extends BorderPane {
 							System.out.println("test");
 
 							updateMessage("Adaptation de la largeur des colonnes");
-							PoiUtil.resizeColumn((XSSFSheet) sheet, countColumn);
+							PoiUtil.resizeColumn(sheet, countColumn);
 							updateProgress(progress++, listPerson.size() + 1);
-//							FileOutputStream output = new FileOutputStream(fileExport);
+							FileOutputStream output = new FileOutputStream(fileExport);
 
-
-//							try (OutputStream output = new FileOutputStream(createFileName(file))) {
 							try  {
 								wb.write(output);
 
