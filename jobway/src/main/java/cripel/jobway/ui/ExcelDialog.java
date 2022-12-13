@@ -148,22 +148,24 @@ public class ExcelDialog extends BorderPane {
 							int progress = 0;
 							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
 							updateMessage("Création des titres");
-							for (Person person : listPerson) {
-								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
-										datePickerEnd.getValue());
-								PoiUtil.export(exp.getMap(), wb,  sheet);
-								updateProgress(progress++, listPerson.size() + 1);
-								updateMessage("Ligne : "+progress);
-//								try  {
-//									wb.write(output);
+							fillWorkbookExport(wb,sheet);
+//							for (Person person : listPerson) {
+//							for (Person person : listPerson) {
+//								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
+//										datePickerEnd.getValue());
+//								PoiUtil.export(exp.getMap(), wb,  sheet);
+//								updateProgress(progress++, listPerson.size() + 1);
+//								updateMessage("Ligne : "+progress);
+////								try  {
+////									wb.write(output);
+////
+////								} catch (IOException e) {
+////									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
+////									alert.showAndWait();
+////
+////								}
 //
-//								} catch (IOException e) {
-//									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
-//									alert.showAndWait();
-//
-//								}
-
-							}
+//							}
 							System.out.println("test");
 
 							updateMessage("Adaptation de la largeur des colonnes");
@@ -265,6 +267,20 @@ public class ExcelDialog extends BorderPane {
 			fxmlLoader.load();
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
+		}
+	}
+
+	public void fillWorkbookExport(XSSFWorkbook wb, XSSFSheet sheet){
+
+		try{
+			for (Person person : listPerson) {
+				PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
+						datePickerEnd.getValue());
+				PoiUtil.export(exp.getMap(), wb, sheet);
+			}
+		}
+		catch(Exception e){
+			e.getMessage();
 		}
 	}
 
