@@ -554,6 +554,7 @@ public class PersonDisplay extends BorderPane {
 
 		labelNewsLetter.setText(booleanCheck(person.isPersonNewsLetterWork()));
 
+
 		tableViewFormations.getItems().addAll(person.getFormations());
 
 		/////////////////////////////////////////////////////// Expériences

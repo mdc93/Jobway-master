@@ -42,6 +42,7 @@ public class FormG extends BorderPane {
 	/** The list view for the list of selections */
 	@FXML
 	private ListSelectionView<Theme> listSelection;
+	
 
 	// **************************************************************************************************
 	// FIELDS
@@ -62,6 +63,22 @@ public class FormG extends BorderPane {
 	public FormG() {
 		load();
 		setup();
+	}
+	
+	/**
+	 * Constructor to set every field with a person's information.
+	 *
+	 * @param person the person selected
+	 */
+	public FormG(Person person) {
+		load();
+		setup();
+		ObservableList<Theme> listThemeSelected = FXCollections.observableArrayList();
+		for(Event event : person.getEvents()) {
+			listThemeSelected.add(event.getTheme());
+		}
+		listSelection.setTargetItems(listThemeSelected);
+
 	}
 
 	// **************************************************************************************************

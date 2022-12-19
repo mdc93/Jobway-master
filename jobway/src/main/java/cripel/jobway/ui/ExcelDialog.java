@@ -72,61 +72,6 @@ public class ExcelDialog extends BorderPane {
 	 * export with a {@link ProgressDialog}
 	 *
 	 */
-//	private void taskExport() {
-//		DirectoryChooser dir = new DirectoryChooser();
-//		File file = dir.showDialog(this.getScene().getWindow());
-//
-//		if (file != null) {
-//			XSSFWorkbook wb = new XSSFWorkbook();
-//			XSSFSheet sheet = wb.createSheet("Data");
-//			Service<Void> service = new Service<>() {
-//				@Override
-//				protected Task<Void> createTask() {
-//					return new Task<>() {
-//						@Override
-//						protected Void call() throws InterruptedException, IOException {
-//
-//							int progress = 0;
-//							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
-//							updateMessage("Création des titres");
-//							for (Person person : listPerson) {
-//								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
-//										datePickerEnd.getValue());
-//								PoiUtil.export(exp.getMap(), wb, sheet);
-//								updateProgress(progress++, listPerson.size() + 1);
-//								updateMessage("Ligne : "+progress);
-//
-//							}
-//							updateMessage("Adaptation de la largeur des colonnes");
-//							PoiUtil.resizeColumn(sheet, countColumn);
-//							updateProgress(progress++, listPerson.size() + 1);
-//
-//							try (OutputStream output = new FileOutputStream(createFileName(file))) {
-//								wb.write(output);
-//
-//							} catch (IOException e) {
-//								Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
-//								alert.showAndWait();
-//							} finally {
-//								wb.close();
-//							}
-//
-//							return null;
-//						}
-//					};
-//				}
-//			};
-//
-//			ProgressDialog dialog = new ProgressDialog(service);
-//			dialog.setHeaderText("En cours d'export");
-//			dialog.setTitle("Export");
-//			dialog.initModality(Modality.NONE);
-//			dialog.initOwner(this.getScene().getWindow());
-//			dialog.show();
-//			service.start();
-//
-//		}
-//	}
 
 	private void taskExport() throws FileNotFoundException {
 		DirectoryChooser dir = new DirectoryChooser();
@@ -148,24 +93,22 @@ public class ExcelDialog extends BorderPane {
 							int progress = 0;
 							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
 							updateMessage("Création des titres");
-							fillWorkbookExport(wb,sheet);
-//							for (Person person : listPerson) {
-//							for (Person person : listPerson) {
-//								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
-//										datePickerEnd.getValue());
-//								PoiUtil.export(exp.getMap(), wb,  sheet);
-//								updateProgress(progress++, listPerson.size() + 1);
-//								updateMessage("Ligne : "+progress);
-////								try  {
-////									wb.write(output);
-////
-////								} catch (IOException e) {
-////									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
-////									alert.showAndWait();
-////
-////								}
-//
-//							}
+							for (Person person : listPerson) {
+								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
+										datePickerEnd.getValue());
+								PoiUtil.export(exp.getMap(), wb,  sheet);
+								updateProgress(progress++, listPerson.size() + 1);
+								updateMessage("Ligne : "+progress);
+								try  {
+									wb.write(output);
+
+								} catch (IOException e) {
+									Alert alert = new Alert(AlertType.ERROR, e.getCause().getLocalizedMessage());
+									alert.showAndWait();
+
+								}
+
+							}
 							System.out.println("test");
 
 							updateMessage("Adaptation de la largeur des colonnes");
@@ -267,20 +210,6 @@ public class ExcelDialog extends BorderPane {
 			fxmlLoader.load();
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
-		}
-	}
-
-	public void fillWorkbookExport(XSSFWorkbook wb, XSSFSheet sheet){
-
-		try{
-			for (Person person : listPerson) {
-				PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
-						datePickerEnd.getValue());
-				PoiUtil.export(exp.getMap(), wb, sheet);
-			}
-		}
-		catch(Exception e){
-			e.getMessage();
 		}
 	}
 
