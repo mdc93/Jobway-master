@@ -116,6 +116,10 @@ public class EventManager extends BorderPane {
 	/** The checkcombobox for the employee */
 	@FXML
 	private CheckComboBox<Employee> comboEmp;
+	
+	/** The combobox for the exit */
+	@FXML
+	private ComboBox<String> comboTypeSortie;
 
 	/** The datepicker for the event date */
 	@FXML
@@ -136,6 +140,10 @@ public class EventManager extends BorderPane {
 	/** The button to save */
 	@FXML
 	private Button buttonSaveAll;
+	
+	/** The button to choose if it s an exit theme */
+	@FXML
+	private Button buttonSortie;
 
 	/** The spinner for the duration (hours) */
 	@FXML

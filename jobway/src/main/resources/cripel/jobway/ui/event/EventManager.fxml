@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -24,7 +25,7 @@
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="523.0" prefWidth="822.0" BorderPane.alignment="CENTER">
          <children>
@@ -119,7 +120,7 @@
                            <children>
                               <Button fx:id="buttonAddNewTheme" mnemonicParsing="false" onAction="#addNewTheme" prefHeight="40.0" prefWidth="38.0">
                                  <graphic>
-                                    <FontIcon iconLiteral="fas-plus" iconSize="25" />
+                                    <FontIcon iconLiteral="fas-plus" iconSize="25" text="" />
                                  </graphic>
                                  <tooltip>
                                     <Tooltip height="20.0" text="Ajouter" width="20.0" />
@@ -201,7 +202,9 @@
                               <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="111.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="27.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="43.99998982747394" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="43.99998982747394" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="82.66667683919269" minHeight="0.0" prefHeight="78.66667683919269" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Label text="Date">
@@ -239,9 +242,9 @@
                                     <Insets right="3.0" />
                                  </GridPane.margin>
                               </TextArea>
-                              <Button mnemonicParsing="false" onAction="#actionCancel" prefHeight="25.0" prefWidth="78.0" text="Annuler" GridPane.rowIndex="6" />
-                              <Button fx:id="buttonAddCurrentTheme" alignment="CENTER" mnemonicParsing="false" onAction="#actionAdd" text="Ajouter" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Button fx:id="buttonModifyCurentTheme" mnemonicParsing="false" onAction="#actionModify" text="Modifier" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Button mnemonicParsing="false" onAction="#actionCancel" prefHeight="25.0" prefWidth="78.0" text="Annuler" GridPane.rowIndex="8" />
+                              <Button fx:id="buttonAddCurrentTheme" alignment="CENTER" mnemonicParsing="false" onAction="#actionAdd" text="Ajouter" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Button fx:id="buttonModifyCurentTheme" mnemonicParsing="false" onAction="#actionModify" text="Modifier" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                               <Label text="Durée" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="15.0" />
@@ -266,6 +269,18 @@
                                     <Label text="Minutes:" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
+                              <Label text="Sortie" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="buttonSortie" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label text="Type de sortie" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="comboTypeSortie" prefHeight="25.0" prefWidth="188.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                            </children>
                         </GridPane>
                         <Region prefHeight="154.0" prefWidth="258.0" />
