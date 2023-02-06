@@ -184,6 +184,7 @@
                               <TableColumn fx:id="columnType" prefWidth="75.0" text="Type" />
                               <TableColumn fx:id="columnDuration" maxWidth="3000.0" prefWidth="219.0" text="Durée (mois)" />
                               <TableColumn fx:id="columnBelgium" maxWidth="3000.0" prefWidth="108.0" text="Lieu : Belgique" />
+                              <TableColumn fx:id="columnTaches" prefWidth="75.0" text="Tâche(s)" />
                               <TableColumn fx:id="columnEdit" maxWidth="1000.0" prefWidth="75.0" />
                               <TableColumn fx:id="columnDel" maxWidth="1000.0" prefWidth="30.0" />
                           </columns>

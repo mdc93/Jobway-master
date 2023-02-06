@@ -162,7 +162,8 @@ public class MenuForms extends BorderPane {
 		tabPane.getTabs().add(new Tab("Page 4", formD = new FormD(person)));
 		tabPane.getTabs().add(new Tab("Page 5", formE = new FormE(person)));
 		tabPane.getTabs().add(new Tab("Page 6", formF = new FormF(person)));
-		tabPane.getTabs().add(new Tab("Page 7", formH = new FormH(person)));
+		tabPane.getTabs().add(new Tab("Page 7", formG = new FormG(person)));
+		tabPane.getTabs().add(new Tab("Page 8", formH = new FormH(person)));
 	}
 
 	/**

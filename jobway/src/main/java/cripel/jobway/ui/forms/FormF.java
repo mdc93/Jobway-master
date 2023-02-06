@@ -96,6 +96,12 @@ public class FormF extends BorderPane {
 	@FXML
 	private TableColumn<WorkExperience, Boolean> columnBelgium;
 
+
+	/** The column for the tasks history */
+	@FXML
+	private TableColumn<WorkExperience, String> columnTaches;
+
+
 	/** The column for the button delete */
 	@FXML
 	private TableColumn<WorkExperience, Button> columnDel;
@@ -192,6 +198,8 @@ public class FormF extends BorderPane {
 		columnType.setCellValueFactory(new PropertyValueFactory<>("workexptype"));
 		columnExpName.setCellValueFactory(new PropertyValueFactory<>("workExpName"));
 		columnBelgium.setCellValueFactory(new PropertyValueFactory<>("workExpBelgium"));
+
+		columnTaches.setCellValueFactory(new PropertyValueFactory<>("worktasks"));
 
 		columnDel.setCellFactory(ButtonTableCell.<WorkExperience>forTableColumn(null, "button-delete", "fas-trash-alt",
 				(WorkExperience w) -> {

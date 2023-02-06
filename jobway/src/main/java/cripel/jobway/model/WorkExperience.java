@@ -6,6 +6,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +35,30 @@ public class WorkExperience {
 	private Boolean workExpBelgium;
 	private String workSector;
 	private Set<WorkTask> worktasks = new HashSet<>(0);
+	public StringProperty worktasksProperty;
+
+	//To display the tasks in the FormG setUpTableView() columnTaches
+	public StringProperty worktasksProperty()
+	{
+		StringBuilder s = new StringBuilder();
+
+		worktasks.forEach(
+				wt -> {
+
+					System.out.println(wt.getWorkTaskDescription());
+
+					s.append("+ ").append(wt.getWorkTaskDescription()).append("\n");
+
+				});
+
+		System.out.println(s);
+
+		//YES
+		StringProperty sp = new SimpleStringProperty(s.toString());
+
+		return sp;
+
+	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

@@ -2,7 +2,10 @@ package cripel.jobway.ui.forms;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.controlsfx.control.ListSelectionView;
 
 import cripel.jobway.dao.EventTypeDAO;
@@ -62,6 +65,21 @@ public class FormG extends BorderPane {
 	public FormG() {
 		load();
 		setup();
+	}
+
+	public FormG(Person person) {
+		load();
+		setup();
+
+		//Transform person.getEvents() to an ObservableList
+//		ObservableList<Theme> test = FXCollections.observableArrayList(person.getEvents().toArray());
+
+		List<Theme> themesByPerson = person.getEvents().stream()
+				.map(event -> event.getTheme())
+				.collect(Collectors.toList());
+
+		//--Event-- Theme not person
+		listSelection.getTargetItems().addAll(themesByPerson);
 	}
 
 	// **************************************************************************************************
