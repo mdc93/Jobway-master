@@ -162,8 +162,8 @@ public class FormB extends BorderPane {
 			.observableArrayList(new CivilStatusDAO().getListDelete(false));
 	private ObservableList<IncomeType> listIncome = FXCollections
 			.observableArrayList(new IncomeTypeDAO().getListDelete(false));
-	private ObservableList<String> listUnemployementDuration = FXCollections.observableArrayList("< 6 mois",
-			"de 6 à 12 mois", "de 12 à 18 mois", "> 18 mois");
+	private ObservableList<String> listUnemployementDuration = FXCollections.observableArrayList("Moins de 12 mois",
+			"Entre 12 et 24 mois", "Plus de 24 mois");
 
 
 
