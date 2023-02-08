@@ -57,5 +57,19 @@ public class PoiTableViewExcel {
 				}
 			}
 		}
+		
+		int lastRow = sheet.getLastRowNum();
+		XSSFRow rowTotal = sheet.createRow(lastRow + 1);
+		PoiUtil.createCell(workbook, rowTotal, 0, "Total");
+		for (int j = 1; j < tableView.getColumns().size(); j++) {
+			Double total = 0.0;
+			for (int i = 0; i < tableView.getItems().size(); i++) {
+				Object cell = tableView.getColumns().get(j).getCellData(i);
+				if (cell instanceof Number) {
+					total += ((Number) cell).doubleValue();
+				}
+			}
+			PoiUtil.createCell(workbook, rowTotal, j, total);
+		}
 	}
 }
