@@ -49,6 +49,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ObservableValue;
+
 /**
  * The Controller Class FormA is the first form where the person's informations
  * are inputed.
@@ -179,6 +185,10 @@ public class FormA extends BorderPane {
 	@FXML
 	private ToggleGroup toggleGroup;
 
+	/** Label to show {@link #comboBoxNationality} is UE or not */
+	@FXML
+	private Label labelRessortissant;
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
@@ -276,6 +286,18 @@ public class FormA extends BorderPane {
 		dateArrivingBelgium.setValue(DateUtil.convertToLocalDate(person.getPersonArrivalDate()));
 		comboBoxNativeCountry.setValue(person.getCountryByIdCountry());
 		checkBoxNationalityBelgian.setSelected(person.isPersonIsBelgian());
+
+		comboBoxNationality.getSelectionModel().selectedItemProperty()
+				.addListener((observableValue, oldValue, newValue) -> {
+					if(observableValue.getValue() != null)
+						labelRessortissant.setText(observableValue.getValue().getCountrytype().getCountryTypeName());
+				});
+
+		if(comboBoxNationality.getSelectionModel().getSelectedItem() != null)
+		{
+			ObservableStringValue osv = new SimpleStringProperty(comboBoxNationality.getSelectionModel().getSelectedItem().getCountrytype().getCountryTypeName());
+			labelRessortissant.setText(osv.getValue());
+		}
 
 		if (person.getPersonOrientation() != null) {
 			if (person.getPersonOrientation().contains("Forem")) {
@@ -586,6 +608,8 @@ public class FormA extends BorderPane {
 		person.setCity(comboBoxCity.getSelectionModel().getSelectedItem());
 		person.setPersonIsBelgian(checkBoxNationalityBelgian.isSelected());
 
+		//pour ajouter la "nationnalité", ils ont clear la collection country qu'ils
+		//ont rempli avec tous les pays. Et il la reremplisse ici avec le pays choisi.
 		person.getCountries().clear();
 		person.getCountries().add(comboBoxNationality.getSelectionModel().getSelectedItem());
 		person.setSituationterritory(comboBoxSituation.getSelectionModel().getSelectedItem());

@@ -31,6 +31,7 @@ public class PersonExportHeader {
 		header.add("Date de naissance");
 		header.add("Sexe");
 		header.add("Nationalité");
+		header.add("UE / hors-UE");
 		header.add("Revenu");
 		header.add("Date inscription Forem");
 		header.add("Durée d'innocupation");

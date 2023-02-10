@@ -1,10 +1,8 @@
 package cripel.jobway.exportexcel;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import cripel.jobway.model.Event;
 import cripel.jobway.model.Formation;
@@ -35,6 +33,8 @@ public class PersonExport {
 	 */
 	private void exportTable(Person person, LocalDate begin, LocalDate end) {
 		int index = 0;
+		String nationalite;
+		Set<String> fse;
 		// Important Data
 		map.put(index++, person.getIdPerson());
 		map.put(index++, person.getPersonLastName());
@@ -45,8 +45,21 @@ public class PersonExport {
 		map.put(index++, person.getPersonBirthDate());
 		map.put(index++, person.getPersonGender());
 		if (person.getCountries() != null) {
-			map.put(index++, person.getCountries().toString().replaceAll(BRACKETLESS, ""));
+			//ABUSE mdr
+			nationalite = person.getCountries().toString().replaceAll(BRACKETLESS, "");
+			map.put(index++, nationalite);
 		} else
+			map.put(index++, " ");
+
+		if (person.getCountries() != null) {
+			//Faudrait exclure INCONNU, mais c'est pas important maintenant
+			fse = person.getCountries().stream()
+					.map( type -> type.getCountrytype().getCountryTypeName())
+					.collect(Collectors.toSet());
+
+			map.put(index++, fse.toString().replaceAll(BRACKETLESS, ""));
+		}
+		else
 			map.put(index++, " ");
 		if (person.getIncometypes() != null) {
 			map.put(index++, person.getIncometypes().toString().replaceAll(BRACKETLESS, ""));
