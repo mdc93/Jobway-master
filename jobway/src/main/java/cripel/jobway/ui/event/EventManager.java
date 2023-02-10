@@ -803,8 +803,8 @@ public class EventManager extends BorderPane {
 		
 		DoubleBinding totalMinute = Bindings.createDoubleBinding(() -> {
 		    double total = 0;
-		    for (Event person : tableView.getItems()) {
-		        total += person.getEventDuration();
+		    for (Event event : tableView.getItems()) {
+		        total += event.getEventDuration();
 		    }
 		    return total;
 		}, tableView.getItems());
