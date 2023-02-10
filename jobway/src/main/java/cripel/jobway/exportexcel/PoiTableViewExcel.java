@@ -57,7 +57,7 @@ public class PoiTableViewExcel {
 				}
 			}
 		}
-		
+		// add a line "Total", SUM of all colonnes 
 		int lastRow = sheet.getLastRowNum();
 		XSSFRow rowTotal = sheet.createRow(lastRow + 1);
 		PoiUtil.createCell(workbook, rowTotal, 0, "Total");
