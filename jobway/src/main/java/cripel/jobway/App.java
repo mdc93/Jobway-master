@@ -70,7 +70,7 @@ public class App extends Application {
 		primaryStage.setMinHeight(993);
 		primaryStage.setMinWidth(1185);
 		primaryStage.setScene(scene);
-		primaryStage.show();
+		primaryStage.show(); 
 
 	}
 
