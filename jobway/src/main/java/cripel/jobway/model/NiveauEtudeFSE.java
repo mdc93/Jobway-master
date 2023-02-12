@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-//@Entity
-//@Table(name = "niveauetudefse", catalog = "jobway")
+@Entity
+@Table(name = "niveauetudefse", catalog = "jobway")
 public class NiveauEtudeFSE {
 
     private Integer id;
@@ -23,8 +23,8 @@ public class NiveauEtudeFSE {
         this.id = id;
     }
 
-//    @Column(name = "disOther", nullable = false, length = 50)
-    public String getNiveauEtuder() {
+    @Column(name = "niveauetude", nullable = false, length = 50)
+    public String getNiveauEtude() {
         return this.niveauEtude;
     }
 
