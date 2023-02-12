@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
+
+<fx:root prefHeight="917.0" prefWidth="1137.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="191.0" prefWidth="916.0">
+               <children>
+                  <GridPane alignment="CENTER" prefHeight="251.0" prefWidth="835.0" styleClass="colorZoneBox" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="174.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="196.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="152.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="252.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="119.0" text="Titre de Séjour :">
+                           <font>
+                         <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboBoxResidencePermit" onAction="#ifOther" prefWidth="150.0" GridPane.columnIndex="1" />     
+                        <TextField fx:id="textFieldOtherResidencePermit" maxWidth="150.0" visible="false" GridPane.columnIndex="3" />
+                        <DatePicker fx:id="dateStartingValidity" promptText="jj/mm/aaaa" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="dateEndingValidity" disable="true" promptText="jj/mm/aaaa" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label text="Début de validité :" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label text="Fin de validité : " GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelOtherResidentPermit" text="Autre :" visible="false" GridPane.columnIndex="2">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+            <Separator prefWidth="835.0" style="-fx-background-color: darkred;" />
+            <HBox prefHeight="450.0" prefWidth="916.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <GridPane prefHeight="280.0" prefWidth="835.0" styleClass="colorZoneBox" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="213.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="158.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="475.0" minWidth="10.0" prefWidth="79.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="0.0" prefWidth="192.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="10.0" prefWidth="288.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="141.0" minHeight="0.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="131.0" minHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets left="15.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Label text="Etat Civil :">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="51.0" prefWidth="202.0" text="Composition du ménage :" wrapText="true" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Enfants :" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label text="Besoins de garde : " GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label text="Adultes :" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="26.0" prefWidth="181.0" text="Moyen(s) de garde ISP :" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label text="Le(s)quel(s) :" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboBoxCivilStatus" onAction="#listenerComboBoxCivilStatus" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <Label fx:id="labelOtherCivilStatus" text="Autre état civil :" visible="false" GridPane.columnIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textFieldOtherCivilStatus" maxWidth="150.0" visible="false" GridPane.columnIndex="4" />
+                        <Spinner fx:id="spinnerNumberOfChildren" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <GridPane alignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="68.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="220.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ToggleButton fx:id="tgbuttonGuardYes" mnemonicParsing="false" text="Oui">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="groupGuardNeeded" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tgbuttonGuardNo" mnemonicParsing="false" text="Non" toggleGroup="$groupGuardNeeded" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </ToggleButton>
+                           </children>
+                        </GridPane>
+                        <Spinner fx:id="spinnerNumberOfAdults" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <GridPane alignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="68.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="220.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ToggleButton fx:id="tgbuttonIspYes" mnemonicParsing="false" text="Oui">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="groupIspNeeded" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tgbuttonIspNo" mnemonicParsing="false" text="Non" toggleGroup="$groupIspNeeded" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </ToggleButton>
+                           </children>
+                        </GridPane>
+                        <TextField fx:id="textFieldWichGuard" disable="true" maxHeight="10.0" maxWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                           <GridPane.margin>
+                              <Insets left="-60.0" />
+                           </GridPane.margin></TextField>
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+            <Separator prefWidth="835.0" style="-fx-background-color: darkred;" />
+            <HBox prefHeight="353.0" prefWidth="916.0">
+               <children>
+                  <GridPane prefHeight="465.0" prefWidth="916.0" styleClass="colorZoneBox" HBox.hgrow="ALWAYS">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="547.0" minWidth="10.0" prefWidth="280.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="0.0" prefWidth="246.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="170.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="201.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="73.0" minHeight="9.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets left="15.0" top="15.0" />
+                     </padding>
+                     <children>
+                        <GridPane prefHeight="50.0" prefWidth="248.0" GridPane.columnIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="66.0" minWidth="10.0" prefWidth="65.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="63.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ToggleButton fx:id="tgbuttonMutualYes" mnemonicParsing="false" text="Oui">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="groupMutualNeeded" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tgbuttonMutualNo" mnemonicParsing="false" text="Non" toggleGroup="$groupMutualNeeded" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </ToggleButton>
+                           </children>
+                        </GridPane>
+                        <Label prefWidth="165.0" text="Inscription mutuelle : ">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelMutual" text="Nom de la mutuelle :" visible="false" GridPane.columnIndex="2">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="Durée d'inoccupation (mois) :" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label text="Revenu(s) : " GridPane.rowIndex="2">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textFieldMutualName" maxHeight="25.0" maxWidth="150.0" prefWidth="138.0" visible="false" GridPane.columnIndex="3" />
+                        <ComboBox fx:id="comboBoxUnemployementDuration" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckListView fx:id="checkListIncome" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" right="50.0" />
+                           </GridPane.margin>
+                        </CheckListView>
+                        <CheckBox fx:id="checkBoxOtherIncome" mnemonicParsing="false" text="Autre revenu : " GridPane.rowIndex="4">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                        <TextField fx:id="textFieldOtherIncome" maxHeight="10.0" maxWidth="150.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </GridPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="917.0" prefWidth="175.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="78.0" prefWidth="275.0" styleClass="title" text="Situation administrative BIS" textAlignment="CENTER" textFill="#3b93ad" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Region prefHeight="79.0" prefWidth="175.0" />
+            <Label prefHeight="78.0" prefWidth="198.0" styleClass="title" text="Situation familiale" textAlignment="CENTER" textFill="#3b93ad" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Region prefHeight="343.0" prefWidth="175.0" />
+            <Label prefHeight="90.0" prefWidth="221.0" styleClass="title" text="Situation socio-économique" textAlignment="CENTER" textFill="#3b93ad" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </left>
+</fx:root>

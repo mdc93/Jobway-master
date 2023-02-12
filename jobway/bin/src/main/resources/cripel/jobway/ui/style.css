@@ -1,0 +1,132 @@
+.root{
+	-fx-base: 	#192734;
+	-fx-font-size: 10pt;
+	-fx-font-family: Trebuchet;
+	-fx-text-fill: -fx-textcolor;
+}
+
+#darkMode
+{
+	-fx-icon-code:bi-sun;
+
+}
+
+
+.region-header1{
+	-fx-background-color :transparent;
+	
+}
+
+.region-header2{
+	-fx-background-color :transparent;
+}
+
+.toggle-button:selected{
+	-fx-base:teal;
+}
+
+.button-menu .ikonli-font-icon{
+	
+	-fx-icon-size: 20;
+}
+
+.button-menu{
+	-fx-content-display: graphic-only;
+	-fx-background-color : derive(teal,-50%);
+}
+
+.button-menu:hover {
+	-fx-background-color: -fx-base;
+	-fx-text-fill: white;
+	-fx-border-width: 1px;
+	-fx-border-color: -fx-base;
+	-fx-min-width: 115px;
+	-fx-font-size:12px;
+	-fx-content-display: text-only;
+	-fx-label-padding: 0 0 0 25;
+}
+
+.title{
+	-text-fill: white;
+}
+
+.button-edit{
+	-fx-border-color: transparent;
+	-fx-background-color:transparent;
+	-fx-font-size: 8pt;
+	-fx-text-fill:-fx-base;
+}
+	
+.button-delete{
+	-fx-border-color: transparent;
+	-fx-background-color:transparent;
+	-fx-font-size: 8pt;
+	-fx-text-fill:-fx-base;
+}
+
+.button-delete .ikonli-font-icon{
+	-fx-fill: black;
+	
+}
+.button-edit .ikonli-font-icon{
+	-fx-fill: black;
+	
+}
+.button-edit:hover{
+	-fx-border-color: derive(-fx-base,30%);
+	-fx-background-color:derive(-fx-base,30%);
+}
+
+.button-delete:hover{
+	-fx-border-color: derive(-fx-base,30%);
+	-fx-background-color:derive(-fx-base,30%);
+}
+/* GENERAL ICON STYLE */
+
+.ikonli-font-icon{
+	-fx-fill:white;
+}
+
+.colorZoneBox
+{
+	
+		-fx-background-color : derive(-fx-base,20%);
+}
+
+.date-picker-popup > * > .week-number-cell {
+    -fx-text-fill: white;
+}
+
+
+.listSelection .grid-pane .move-to-source-button .glyph-font {
+	-fx-text-fill:white;
+}
+
+.listSelection .grid-pane .move-to-target-button .glyph-font {
+	-fx-text-fill:white;
+}
+
+.listSelection .grid-pane .move-to-source-all-button .glyph-font {
+	-fx-text-fill:white;
+}
+
+.listSelection .grid-pane .move-to-target-all-button .glyph-font {
+	-fx-text-fill:white;
+}
+
+.notification-bar .pane .label{
+	-fx-text-fill: white;
+}
+
+.dialog-pane{
+	-fx-background-color:#192734;
+}
+
+#VBoxmenu{
+	-fx-background-color : derive(-fx-base,-50%);
+}
+
+.tableViewClass .table-column {
+    -fx-alignment: CENTER;
+}
+
