@@ -287,12 +287,6 @@ public class FormA extends BorderPane {
 		comboBoxNativeCountry.setValue(person.getCountryByIdCountry());
 		checkBoxNationalityBelgian.setSelected(person.isPersonIsBelgian());
 
-		comboBoxNationality.getSelectionModel().selectedItemProperty()
-				.addListener((observableValue, oldValue, newValue) -> {
-					if(observableValue.getValue() != null)
-						labelRessortissant.setText(observableValue.getValue().getCountrytype().getCountryTypeName());
-				});
-
 		if(comboBoxNationality.getSelectionModel().getSelectedItem() != null)
 		{
 			ObservableStringValue osv = new SimpleStringProperty(comboBoxNationality.getSelectionModel().getSelectedItem().getCountrytype().getCountryTypeName());
@@ -372,6 +366,12 @@ public class FormA extends BorderPane {
 		comboBoxEmployee.getItems().addAll(listEmployee);
 		comboBoxFileStatus.setItems(listFileStatus);
 		comboBoxReunionNationality.setItems(listCountry);
+
+		comboBoxNationality.getSelectionModel().selectedItemProperty()
+				.addListener((observableValue, oldValue, newValue) -> {
+					if(observableValue.getValue() != null)
+						labelRessortissant.setText(observableValue.getValue().getCountrytype().getCountryTypeName());
+				});
 	}
 
 	/**

@@ -296,6 +296,20 @@ public class FormB extends BorderPane {
 				}
 		});
 
+		groupFOREMNeeded.selectedToggleProperty().addListener((obs,oldValue,newValue)-> {
+
+			if (newValue == tgbuttonFOREMYes) {
+
+				comboBoxUnemployementDuration.setDisable(true);
+
+			}
+			if (newValue == tgbuttonFOREMNo) {
+
+				comboBoxUnemployementDuration.setDisable(false);
+
+			}
+		});
+
 	}
 
 	/**
