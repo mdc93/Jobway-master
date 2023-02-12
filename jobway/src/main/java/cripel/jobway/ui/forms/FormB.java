@@ -149,6 +149,18 @@ public class FormB extends BorderPane {
     @FXML
     private ToggleGroup groupMutualNeeded;
 
+	@FXML
+	private ToggleGroup groupFOREMNeeded;
+
+	/** The togglebutton to specify that the person isn't subscribed to FOREM */
+	@FXML
+	private ToggleButton tgbuttonFOREMNo;
+
+	/** The togglebutton to specify that the person is subscribed to FOREM */
+	@FXML
+	private ToggleButton tgbuttonFOREMYes;
+
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
