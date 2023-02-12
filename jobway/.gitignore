@@ -19,3 +19,9 @@ buildNumber.properties
 
 # Shade jar
 shade/
+
+
+/bin/
+/target/
+*/.idea
+/.settings/
