@@ -46,6 +46,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableCell;
@@ -116,6 +117,14 @@ public class EventManager extends BorderPane {
 	/** The checkcombobox for the employee */
 	@FXML
 	private CheckComboBox<Employee> comboEmp;
+	
+	/** The button to choose is this is the exit event*/
+	@FXML
+	private RadioButton buttonExit;
+	
+	/** The Combo box to choose the type of exit*/
+	@FXML
+	private ComboBox<String> comboTypeExit;
 
 	/** The datepicker for the event date */
 	@FXML
