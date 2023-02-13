@@ -1,10 +1,7 @@
 package cripel.jobway.exportexcel;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import cripel.jobway.model.Event;
 import cripel.jobway.model.Formation;
@@ -35,6 +32,13 @@ public class PersonExport {
 	 */
 	private void exportTable(Person person, LocalDate begin, LocalDate end) {
 		int index = 0;
+
+		String situationProfFSE;
+		String niveauEtudeFSE;
+
+		Set<String> setSituationProfFSE;
+		Set<String> setNiveauEtudeFSE;
+
 		// Important Data
 		map.put(index++, person.getIdPerson());
 		map.put(index++, person.getPersonLastName());

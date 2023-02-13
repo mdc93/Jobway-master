@@ -252,25 +252,25 @@ public class Person implements java.io.Serializable {
 
 //	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@JoinColumn(name = "idNiveauEtudeFSE")
-//	public NiveauEtudeFSE getNiveauEtudeFSE() {
-//		return niveauEtudeFSE;
-//	}
-//
-//
-//	public void setNiveauEtudeFSE(NiveauEtudeFSE niveauEtudeFSE) {
-//		this.niveauEtudeFSE = niveauEtudeFSE;
-//	}
-//
+	public NiveauEtudeFSE getNiveauEtudeFSE() {
+		return niveauEtudeFSE;
+	}
+
+
+	public void setNiveauEtudeFSE(NiveauEtudeFSE niveauEtudeFSE) {
+		this.niveauEtudeFSE = niveauEtudeFSE;
+	}
+
 //	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@JoinColumn(name = "idNiveauEtudeFSE")
-//	public SituationProfFSE getSituationProfFSE() {
-//		return situationProfFSE;
-//	}
-//
-//	public void setSituationProfFSE(SituationProfFSE situationProfFSE) {
-//		this.situationProfFSE = situationProfFSE;
-//	}
-//
+	public SituationProfFSE getSituationProfFSE() {
+		return situationProfFSE;
+	}
+
+	public void setSituationProfFSE(SituationProfFSE situationProfFSE) {
+		this.situationProfFSE = situationProfFSE;
+	}
+
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idOther")
 	public Other getOther() {
