@@ -262,7 +262,7 @@ public class PersonExport {
 		if (begin == null || end == null) {
 			for (Event event : person.getEvents()) {
 				if (event.getEventDuration() != null && event.getEventDate() != null
-						&& DateUtil.convertToLocalDate(event.getEventDate()).getYear() == LocalDate.now().getYear()) {
+						&& DateUtil.convertToLocalDate(event.getEventDate()).getYear() != LocalDate.now().getYear()) {
 					total += event.getEventDuration();
 				}
 			}
