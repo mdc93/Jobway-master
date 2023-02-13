@@ -149,6 +149,18 @@ public class FormB extends BorderPane {
     @FXML
     private ToggleGroup groupMutualNeeded;
 
+	@FXML
+	private ToggleGroup groupFOREMNeeded;
+
+	/** The togglebutton to specify that the person isn't subscribed to FOREM */
+	@FXML
+	private ToggleButton tgbuttonFOREMNo;
+
+	/** The togglebutton to specify that the person is subscribed to FOREM */
+	@FXML
+	private ToggleButton tgbuttonFOREMYes;
+
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
@@ -162,8 +174,8 @@ public class FormB extends BorderPane {
 			.observableArrayList(new CivilStatusDAO().getListDelete(false));
 	private ObservableList<IncomeType> listIncome = FXCollections
 			.observableArrayList(new IncomeTypeDAO().getListDelete(false));
-	private ObservableList<String> listUnemployementDuration = FXCollections.observableArrayList("< 6 mois",
-			"de 6 à 12 mois", "de 12 à 18 mois", "> 18 mois");
+	private ObservableList<String> listUnemployementDuration = FXCollections.observableArrayList("Moins de 12 mois",
+			"Entre 12 et 24 mois", "Plus de 24 mois");
 
 
 
@@ -294,6 +306,20 @@ public class FormB extends BorderPane {
 					labelMutual.setVisible(false);
 					textFieldMutualName.setVisible(false);
 				}
+		});
+
+		groupFOREMNeeded.selectedToggleProperty().addListener((obs,oldValue,newValue)-> {
+
+			if (newValue == tgbuttonFOREMYes) {
+
+				comboBoxUnemployementDuration.setDisable(true);
+
+			}
+			if (newValue == tgbuttonFOREMNo) {
+
+				comboBoxUnemployementDuration.setDisable(false);
+
+			}
 		});
 
 	}

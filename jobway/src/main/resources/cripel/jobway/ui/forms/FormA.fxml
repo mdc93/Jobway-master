@@ -286,6 +286,7 @@
                               <SearchableComboBox fx:id="comboBoxReunionNationality" maxHeight="10.0" maxWidth="150.0" prefHeight="17.0" prefWidth="222.0" GridPane.columnIndex="3" />
                            </children>
                         </GridPane>
+                        <Label fx:id="labelRessortissant" prefHeight="37.0" prefWidth="255.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

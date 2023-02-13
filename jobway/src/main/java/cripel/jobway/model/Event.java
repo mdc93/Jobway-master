@@ -47,6 +47,9 @@ public class Event implements java.io.Serializable {
 
 	/** The event note. */
 	private String eventNote;
+	
+	/** The boolean value for the exit */
+	private boolean exit;
 
 	/** The employees that participated in the event */
 	private Set<Employee> employees = new HashSet<>(0);
@@ -120,7 +123,16 @@ public class Event implements java.io.Serializable {
 	public void setEventNote(String eventNote) {
 		this.eventNote = eventNote;
 	}
-
+	
+	public void setExit(boolean ex) {
+		this.exit = ex;
+	}
+	
+	@Column(name = "exit",nullable=false)
+	public boolean getExit() {
+		return this.exit;
+	}
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "emp_eve", catalog = "jobway", joinColumns = {
 			@JoinColumn(name = "idEvent", nullable = false, updatable = false) }, inverseJoinColumns = {

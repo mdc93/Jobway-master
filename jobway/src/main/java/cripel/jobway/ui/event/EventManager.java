@@ -31,6 +31,8 @@ import cripel.jobway.utilities.fxutil.Confirm;
 import cripel.jobway.utilities.fxutil.DatePickerUtil;
 import cripel.jobway.utilities.fxutil.DurationPicker;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +49,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableCell;
@@ -70,6 +73,11 @@ public class EventManager extends BorderPane {
 	// FXML FIELDS
 	// **************************************************************************************************
 
+	/** Label of sum Duration*/
+	/*@FXML
+	private Label totalMinuteLabel;
+	*/
+	
 	/** The column for the event's date */
 	@FXML
 	private TableColumn<Event, Date> columnDate;
@@ -121,10 +129,6 @@ public class EventManager extends BorderPane {
 	/** The button to choose is this is the exit event*/
 	@FXML
 	private RadioButton buttonExit;
-	
-	/** The Combo box to choose the type of exit*/
-	@FXML
-	private ComboBox<String> comboTypeExit;
 
 	/** The datepicker for the event date */
 	@FXML
@@ -263,6 +267,8 @@ public class EventManager extends BorderPane {
 				hBoxFilter.setManaged(true);
 			}
 		});
+		
+		//sumColumnDuration();
 	}
 
 	// **************************************************************************************************
@@ -570,6 +576,8 @@ public class EventManager extends BorderPane {
 			eve.setEventType(comboType.getSelectionModel().getSelectedItem());
 			eve.setPerson(selected);
 			eve.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
+			if(buttonExit.isSelected())
+				eve.setExit(true);
 			listEvent.add(eve);
 			tableView.refresh();
 
@@ -780,15 +788,38 @@ public class EventManager extends BorderPane {
 
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-
+		
 		try {
 			fxmlLoader.load();
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
+		
+		
 	}
 
 	public boolean getSaveState() {
 		return saveState;
 	}
+	
+	/**
+	 *  Method to Sum all ColumnDuration divide by 60
+	 */
+	 
+	/*public void sumColumnDuration() {
+			
+		
+		DoubleBinding totalMinute = Bindings.createDoubleBinding(() -> {
+		    double total = 0;
+		    for (Event event : tableView.getItems()) {
+		        total += event.getEventDuration();
+		    }
+		    return total;
+		}, tableView.getItems());
+		
+		DoubleBinding divisionTotalMinute = totalMinute.divide(60.0);
+
+		totalMinuteLabel.textProperty().bind(divisionTotalMinute.asString());
+	}*/
+	
 }
