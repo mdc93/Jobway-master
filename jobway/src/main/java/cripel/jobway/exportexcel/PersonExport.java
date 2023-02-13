@@ -56,9 +56,25 @@ public class PersonExport {
 			map.put(index++, person.getIncometypes().toString().replaceAll(BRACKETLESS, ""));
 		} else
 			map.put(index++, " ");
+
+//		if(person.getSituationProfFSE()!=null && person.getSituationProfFSE().getSituationProf()!=null){
+//			map.put(index++, person.getSituationProfFSE().getSituationProf());
+//
+//		}
+//		else{
+//			map.put(index++, " ");
+//
+//		}
 		map.put(index++, person.getPersonForemInsDate());
 		map.put(index++, person.getPersonUnemployementDuration());
 		map.put(index++, exportFormation(person));
+//		if(person.getNiveauEtudeFSE()!=null && person.getNiveauEtudeFSE().getNiveauEtude()!=null){
+//			map.put(index++, person.getNiveauEtudeFSE().getNiveauEtude());
+//		}
+//		else{
+//			map.put(index++, " ");
+//
+//		}
 		if (person.getHousehold().getHouseholdNumberAdult() == 0)
 			map.put(index++, " ");
 		else if ((person.getHousehold().getHouseholdNumberAdult() + person.getHousehold().getHouseholdNumberChildren())==1)
