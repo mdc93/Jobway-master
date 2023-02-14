@@ -25,7 +25,7 @@
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="523.0" prefWidth="822.0" BorderPane.alignment="CENTER">
          <children>
@@ -268,8 +268,8 @@
                                     <Label text="Minutes:" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
-                              <RadioButton fx:id="buttonExit" mnemonicParsing="false" GridPane.columnIndex="1" />
-                              <Label text="Sortie">
+                              <RadioButton fx:id="checkExit" mnemonicParsing="false" GridPane.columnIndex="1" />
+                              <Label prefHeight="18.0" prefWidth="78.0" text="Sortie: ">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

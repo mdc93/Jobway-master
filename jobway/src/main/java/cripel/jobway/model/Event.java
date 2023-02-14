@@ -54,6 +54,24 @@ public class Event implements java.io.Serializable {
 	/** The employees that participated in the event */
 	private Set<Employee> employees = new HashSet<>(0);
 
+
+	private Boolean exit;
+
+	/**
+	 * @return the exit
+	 */
+	@Column(name = "exitEvent", nullable = true)
+	public Boolean getExit() {
+		return exit;
+	}
+
+	/**
+	 * @param exit the exit to set
+	 */
+	public void setExit(Boolean exit) {
+		this.exit = exit;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 

@@ -135,6 +135,10 @@ public class MenuPerson extends BorderPane {
 	/** The button to export people's data in an excel file */
 	@FXML
 	private Button buttonExport;
+
+	/** The button to import people's data from an excel file */
+	@FXML
+	private Button buttonImport;
 	
 	@FXML
 	private Button buttonRefresh;
@@ -406,6 +410,16 @@ public class MenuPerson extends BorderPane {
 		stage.initOwner((this.getScene().getWindow()));
 
 		stage.showAndWait();
+	}
+
+	/**
+	 * {@link #buttonImport} on action to open a dialog to {@link ExcelDialog}
+	 *
+	 */
+	@FXML
+	private void excelImport()
+	{
+
 	}
 
 	/**
