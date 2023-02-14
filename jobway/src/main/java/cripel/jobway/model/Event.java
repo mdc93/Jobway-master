@@ -55,8 +55,6 @@ public class Event implements java.io.Serializable {
 	private Set<Employee> employees = new HashSet<>(0);
 
 
-	private Boolean exit;
-
 	/**
 	 * @return the exit
 	 */
@@ -142,14 +140,6 @@ public class Event implements java.io.Serializable {
 		this.eventNote = eventNote;
 	}
 	
-	public void setExit(boolean ex) {
-		this.exit = ex;
-	}
-	
-	@Column(name = "exit",nullable=false)
-	public boolean getExit() {
-		return this.exit;
-	}
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "emp_eve", catalog = "jobway", joinColumns = {

@@ -79,7 +79,16 @@ public class PersonExport {
 		map.put(index++, exportBoolean(person.getDisability().isDisReco()));
 		map.put(index++, person.getDisability().getDisOther());
 		map.put(index++, person.getFile().getRegistrationDate());
-		map.put(index++, " ");
+		//Event lastExit = null;
+		/*for(Event event : person.getEvents()) {
+			if(lastExit == null && event.getExit()) {
+				lastExit = event;
+			}
+			else if(event.getExit() && event.getEventDate().compareTo(lastExit.getEventDate()) > 0){
+				lastExit = event;
+			}
+		}*/
+		map.put(index++, ""/*lastExit.getEventDate()*/);
 		map.put(index++, totalHour(person, begin, end));
 
 		// Bonus Data
