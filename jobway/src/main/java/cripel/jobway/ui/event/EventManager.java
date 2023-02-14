@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javafx.scene.control.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.controlsfx.control.CheckComboBox;
@@ -43,19 +44,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -195,6 +184,9 @@ public class EventManager extends BorderPane {
 	/** The combobox to filter by event's type */
 	@FXML
 	private ComboBox<EventType> comboBoxFilterType;
+
+	@FXML
+	private RadioButton checkExit;
 	
 
 	// **************************************************************************************************
@@ -303,6 +295,7 @@ public class EventManager extends BorderPane {
 			textAreaNotes.setText(event.getEventNote());
 			comBoTheme.getSelectionModel().select(event.getTheme());
 			datePickerEvent.setValue(DateUtil.convertToLocalDate(event.getEventDate()));
+			checkExit.setSelected(event.getExit());
 
 			if (event.getEventDuration() != null) {
 				spinnerHour.getValueFactory().setValue(event.getEventDuration() / 60);
@@ -570,6 +563,7 @@ public class EventManager extends BorderPane {
 			eve.setEventType(comboType.getSelectionModel().getSelectedItem());
 			eve.setPerson(selected);
 			eve.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
+			eve.setExit(checkExit.isSelected());
 			listEvent.add(eve);
 			tableView.refresh();
 
@@ -611,7 +605,7 @@ public class EventManager extends BorderPane {
 			editEvent.setEventType(comboType.getSelectionModel().getSelectedItem());
 			editEvent.setPerson(selected);
 			editEvent.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
-
+			editEvent.setExit(checkExit.isSelected());
 			enableButtonsAndDisableNewThemFields();
 
 			clearFields();

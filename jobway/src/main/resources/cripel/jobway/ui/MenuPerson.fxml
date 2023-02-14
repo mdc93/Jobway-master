@@ -96,6 +96,14 @@
                         <Tooltip text="Export Excel de la table filtrée." />
                      </tooltip>
                   </Button>
+                  <Button fx:id="buttonImport" mnemonicParsing="false" onAction="#excelImport" prefHeight="36.0" prefWidth="45.0">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-file-import" iconSize="20" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Import les données depuis un excel dans la base de données" />
+                     </tooltip>
+                  </Button>
                   
                </children>
                <VBox.margin>
