@@ -7,6 +7,9 @@ import java.io.OutputStream;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -88,10 +91,18 @@ public class ExcelDialog extends BorderPane {
 							int progress = 0;
 							int countColumn = PersonExportHeader.createHeader(wb, sheet.createRow(0));
 							updateMessage("Création des titres");
+							
+//							List<Person> listfilter = listPerson.parallelStream()
+//							.filter( events -> events.getEvents().stream().filter( event -> {event.getEventDuration() > 0.0;}) != null))
+//							.collect(Collectors.toList());
+							
 							for (Person person : listPerson) {
 								PersonExport exp = new PersonExport(person, datePickerBegin.getValue(),
 										datePickerEnd.getValue());
-								PoiUtil.export(exp.getMap(), wb, sheet);
+								if((double) exp.getMap().get(21) > 0.0)
+								{									
+									PoiUtil.export(exp.getMap(), wb, sheet);
+								}
 								updateProgress(progress++, listPerson.size() + 1);
 								updateMessage("Ligne : "+progress);
 

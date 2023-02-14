@@ -32,6 +32,7 @@ public class PersonExport {
 	 * @param person
 	 */
 	private void exportTable(Person person, LocalDate begin, LocalDate end) {
+
 		int index = 0;
 		String nationalite;
 		Set<String> fse;
@@ -272,6 +273,7 @@ public class PersonExport {
 				LocalDate eventDate = DateUtil.convertToLocalDate(event.getEventDate());
 				if (event.getEventDuration() != null && eventDate != null && eventDate.isBefore(end)
 						&& eventDate.isAfter(begin)) {
+					
 					total += event.getEventDuration();
 				}
 			}
