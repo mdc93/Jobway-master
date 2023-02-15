@@ -41,6 +41,7 @@ public class TableManagementHome extends BorderPane {
 		tabPane.getTabs().add(new Tab("Etat civil", new TMCivilStatus()));
 		tabPane.getTabs().add(new Tab("Permis sé.", new TMResPerm()));
 		tabPane.getTabs().add(new Tab("Revenu", new TMIncomeType()));
+//		tabPane.getTabs().add(new Tab("Situation professionnelle FSE ", new TMSituationProfFSE()));
 		tabPane.getTabs().add(new Tab("Langue", new TMLanguage()));
 		tabPane.getTabs().add(new Tab("Test langue", new TMFrenchTest()));
 		tabPane.getTabs().add(new Tab("Transport", new TMLocomotionMean()));
@@ -50,6 +51,7 @@ public class TableManagementHome extends BorderPane {
 		tabPane.getTabs().add(new Tab("Dispon.", new TMAvailability()));
 		tabPane.getTabs().add(new Tab("Regroup", new TMFamReun()));
 		tabPane.getTabs().add(new Tab("Formation", new TMFormationType()));
+//		tabPane.getTabs().add(new Tab(" Niveau d'études FSE", new TMNiveauEtudeFSE()));
 	}
 
 	/**

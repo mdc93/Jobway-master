@@ -60,6 +60,10 @@ public class Person implements java.io.Serializable {
 	/** The city where the person live */
 	private City city;
 
+	private NiveauEtudeFSE niveauEtudeFSE;
+
+	private SituationProfFSE situationProfFSE;
+
 	/** OneToOne to represent other choice of the person */
 	private Other other;
 
@@ -245,6 +249,27 @@ public class Person implements java.io.Serializable {
 	public void setCity(City city) {
 		this.city = city;
 	}
+
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "idNiveauEtudeFSE")
+//	public NiveauEtudeFSE getNiveauEtudeFSE() {
+//		return niveauEtudeFSE;
+//	}
+//
+//
+//	public void setNiveauEtudeFSE(NiveauEtudeFSE niveauEtudeFSE) {
+//		this.niveauEtudeFSE = niveauEtudeFSE;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "idNiveauEtudeFSE")
+//	public SituationProfFSE getSituationProfFSE() {
+//		return situationProfFSE;
+//	}
+//
+//	public void setSituationProfFSE(SituationProfFSE situationProfFSE) {
+//		this.situationProfFSE = situationProfFSE;
+//	}
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idOther")

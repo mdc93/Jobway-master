@@ -33,9 +33,11 @@ public class PersonExportHeader {
 		header.add("Nationalité");
 		header.add("UE / hors-UE");
 		header.add("Revenu");
+//		header.add("Situation professionnelle FSE");
 		header.add("Date inscription Forem");
 		header.add("Durée d'innocupation");
 		header.add("Niveau d'éducation");
+//		header.add("Niveau d'éducation FSE");
 		header.add("Ménage");
 		header.add("Nombre d'enfant à charge");
 		header.add("Handicap reconnu");

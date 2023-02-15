@@ -161,6 +161,9 @@ public class FormB extends BorderPane {
 	private ToggleButton tgbuttonFOREMYes;
 
 
+	@FXML
+	private Label labelSituationProfFSE;
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************

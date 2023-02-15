@@ -262,6 +262,9 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
+                        <Label fx:id="labelSituationProfFSE" prefHeight="37.0" prefWidth="255.0"
+                               GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
                         <TextField fx:id="textFieldMutualName" maxHeight="25.0" maxWidth="150.0" prefWidth="138.0" visible="false" GridPane.columnIndex="3" />
                         <ComboBox fx:id="comboBoxUnemployementDuration" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <CheckListView fx:id="checkListIncome" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">

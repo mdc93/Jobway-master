@@ -2,7 +2,7 @@ package cripel.jobway.exportexcel;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 import cripel.jobway.model.Event;
 import cripel.jobway.model.Formation;
@@ -35,6 +35,13 @@ public class PersonExport {
 		int index = 0;
 		String nationalite;
 		Set<String> fse;
+
+		String situationProfFSE;
+		String niveauEtudeFSE;
+
+		Set<String> setSituationProfFSE;
+		Set<String> setNiveauEtudeFSE;
+
 		// Important Data
 		map.put(index++, person.getIdPerson());
 		map.put(index++, person.getPersonLastName());
@@ -65,9 +72,25 @@ public class PersonExport {
 			map.put(index++, person.getIncometypes().toString().replaceAll(BRACKETLESS, ""));
 		} else
 			map.put(index++, " ");
+
+//		if(person.getSituationProfFSE()!=null && person.getSituationProfFSE().getSituationProf()!=null){
+//			map.put(index++, person.getSituationProfFSE().getSituationProf());
+//
+//		}
+//		else{
+//			map.put(index++, " ");
+//
+//		}
 		map.put(index++, person.getPersonForemInsDate());
 		map.put(index++, person.getPersonUnemployementDuration());
 		map.put(index++, exportFormation(person));
+//		if(person.getNiveauEtudeFSE()!=null && person.getNiveauEtudeFSE().getNiveauEtude()!=null){
+//			map.put(index++, person.getNiveauEtudeFSE().getNiveauEtude());
+//		}
+//		else{
+//			map.put(index++, " ");
+//
+//		}
 		if (person.getHousehold().getHouseholdNumberAdult() == 0)
 			map.put(index++, " ");
 		else if ((person.getHousehold().getHouseholdNumberAdult() + person.getHousehold().getHouseholdNumberChildren())==1)
