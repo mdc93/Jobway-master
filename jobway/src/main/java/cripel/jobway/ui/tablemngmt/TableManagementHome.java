@@ -35,7 +35,6 @@ public class TableManagementHome extends BorderPane {
 		tabPane.getTabs().add(new Tab("Permis co.", new TMDriverLic()));
 		tabPane.getTabs().add(new Tab("Ville", new TMCity()));
 		tabPane.getTabs().add(new Tab("Code postal", new TMPostal()));
-		tabPane.getTabs().add(new Tab("Langue", new TMLanguage()));
 		tabPane.getTabs().add(new Tab("Pays", new TMCountry()));
 		tabPane.getTabs().add(new Tab("Pays type", new TMCountryType()));
 		tabPane.getTabs().add(new Tab("Etat civil", new TMCivilStatus()));

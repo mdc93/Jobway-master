@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,6 +25,18 @@ public class FormationType implements java.io.Serializable {
 
 	private Integer idFormationType;
 	private String formationTypeName;
+	/** The event type. */
+	private NiveauEtude niveauEtude;
+	
+
+	public void setNiveauEtude(NiveauEtude niveauEtude) {
+		this.niveauEtude = niveauEtude;
+	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idNiveauEtude")
+	public NiveauEtude getNiveauEtude() {
+		return niveauEtude;
+	}
 	private boolean isFormation;
 	private boolean isDelete;
 	private Set<Formation> formations = new HashSet<>(0);

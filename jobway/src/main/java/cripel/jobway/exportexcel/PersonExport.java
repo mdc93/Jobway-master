@@ -103,7 +103,34 @@ public class PersonExport {
 		map.put(index++, exportBoolean(person.getDisability().isDisReco()));
 		map.put(index++, person.getDisability().getDisOther());
 		map.put(index++, person.getFile().getRegistrationDate());
-		map.put(index++, " ");
+		//map.put(index++, " ");
+		//List <Event> events=new ArrayList<> ();
+		
+		  List <Event> filterevents = person.getEvents().stream().filter((Event event)
+		  ->{return event.getExit()!= null;}).collect(Collectors.toList());
+		 
+	
+		if (!filterevents.isEmpty()) {
+			int id = 0;
+			Event event = null;
+			for (Event eve : person.getEvents()) {
+				if (id < eve.getIdEvent()) {
+					event = eve;
+					id = eve.getIdEvent();
+				}
+
+			}
+			//map.put(index++, event.getEventType().toString());
+			map.put(index++, event.getEventDate());
+			//map.put(index++, event.getEventNote());
+			
+		} else {
+			map.put(index++, " ");
+			/*
+			 * map.put(index++, " "); map.put(index++, " ");
+			 */
+		
+		}
 		map.put(index++, totalHour(person, begin, end));
 
 		// Bonus Data
@@ -140,6 +167,7 @@ public class PersonExport {
 			map.put(index++, " ");
 			map.put(index++, " ");
 			map.put(index++, " ");
+		
 		}
 		map.put(index++, exportBoolean(person.isPersonIsBelgian()));
 		map.put(index++, nullCheck(person.getCivilstatus()));
@@ -204,6 +232,7 @@ public class PersonExport {
 					map.put(index++, " ");
 			}
 		}
+		
 	}
 
 	private int exportCity(Person person, int index) {

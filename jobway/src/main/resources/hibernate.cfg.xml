@@ -57,6 +57,7 @@
 		<mapping class="cripel.jobway.model.File" />
 		<mapping class="cripel.jobway.model.Formation" />
 		<mapping class="cripel.jobway.model.FormationType" />
+		<mapping class="cripel.jobway.model.NiveauEtude" />
 		<mapping class="cripel.jobway.model.FrenchTest" />
 		<mapping class="cripel.jobway.model.Household" />
 		<mapping class="cripel.jobway.model.IncomeType" />
