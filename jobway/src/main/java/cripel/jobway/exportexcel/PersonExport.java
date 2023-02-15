@@ -2,6 +2,7 @@ package cripel.jobway.exportexcel;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 import cripel.jobway.model.Event;
