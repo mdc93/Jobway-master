@@ -9,21 +9,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  * Person entity central in the database
@@ -31,6 +17,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "person", catalog = "jobway")
 public class Person implements java.io.Serializable {
+
 
 	private String niveauEtude;
 
@@ -630,13 +617,15 @@ public class Person implements java.io.Serializable {
 		this.workexperiences = workexperiences;
 	}
 
-	//pardon
+	//pardon, transient pour ne pas perturber Hibernate, vu que cette colonne n'est pas dans la DB
+	//cette méthode est là juste pour l'export.
+	@Transient
 	public String getNiveauEtude() {
 
+		//OK c'est triché de faire ça
 		int idTypeFormation = this.formations.stream()
 				.mapToInt(formation -> formation.getFormationtype().getIdFormationType())
-				.findFirst()
-				.getAsInt();
+				.sum();
 
 		switch(idTypeFormation)
 		{
