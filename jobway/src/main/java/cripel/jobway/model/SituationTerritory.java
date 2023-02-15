@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "situationterritory", catalog = "jobway")
-public class SituationTerritory {
+public class SituationTerritory {	
 
 	private Integer idSituationTerritory;
 	private String situationTerritoryName;

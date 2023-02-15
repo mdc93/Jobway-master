@@ -42,6 +42,7 @@
 			
 			
 		<!-- List of XML mapping files -->
+		
 		<mapping class="cripel.jobway.model.Person" />
 		<mapping class="cripel.jobway.model.Availability" />
 		<mapping class="cripel.jobway.model.City" />
@@ -73,6 +74,7 @@
 		<mapping class="cripel.jobway.model.Postalcode" />
 		<mapping class="cripel.jobway.model.ResidencePermit" />
 		<mapping class="cripel.jobway.model.ResidencePermitType" />
+		<mapping class="cripel.jobway.model.SituationProfessionnelle" />
 		<mapping class="cripel.jobway.model.SituationTerritory" />
 		<mapping class="cripel.jobway.model.Skill" />
 		<mapping class="cripel.jobway.model.SkilSect" />

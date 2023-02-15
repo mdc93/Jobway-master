@@ -164,6 +164,10 @@ public class Person implements java.io.Serializable {
 
 	/** The workexperiences of the person. */
 	private Set<WorkExperience> workexperiences = new HashSet<>(0);
+	/** The situation Professionnelle. */
+	private SituationProfessionnelle situationprofessionnelle;
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -221,9 +225,19 @@ public class Person implements java.io.Serializable {
 	public SituationTerritory getSituationterritory() {
 		return this.situationterritory;
 	}
-
+	
 	public void setSituationterritory(SituationTerritory situationterritory) {
 		this.situationterritory = situationterritory;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSituationProfessionnelle", nullable = true)
+	public SituationProfessionnelle getSituationProfessionnelle() {
+		return this.situationprofessionnelle;
+	}
+
+	public void setSituationProfessionnelle(SituationProfessionnelle situationprofessionnelle) {
+		this.situationprofessionnelle = situationprofessionnelle;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
