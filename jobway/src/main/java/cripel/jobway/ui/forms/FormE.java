@@ -2,6 +2,8 @@ package cripel.jobway.ui.forms;
 
 import java.io.IOException;
 
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import org.controlsfx.control.SearchableComboBox;
 
 import cripel.jobway.dao.FormationTypeDAO;
@@ -14,15 +16,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
@@ -128,6 +121,9 @@ public class FormE extends BorderPane {
 	@FXML
 	private TableColumn<Formation, Boolean> columnBelgium;
 
+	@FXML
+	private Label labelNiveauEtude;
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
@@ -199,7 +195,40 @@ public class FormE extends BorderPane {
 		radioButtonSetup();
 		toggleButtonSetup();
 		setUpTableView();
+		listenerComboboxEtude();
 
+	}
+
+	private void listenerComboboxEtude()
+	{
+		comboBoxDiplomaName.getSelectionModel().selectedItemProperty()
+				.addListener((observableValue, oldValue, newValue) -> {
+					if(observableValue.getValue() != null)
+					{
+						switch(observableValue.getValue().getIdFormationType())
+						{
+							case 1: case 2: case 3:
+								labelNiveauEtude.setText("Max. 1er cycle du secondaire");
+								labelNiveauEtude.setTextFill(Color.BLUEVIOLET);
+							labelNiveauEtude.setWrapText(true);
+							break;
+							case 4: case 5:
+								labelNiveauEtude.setText("Max. enseignement post-secondaire non supérieur");
+							labelNiveauEtude.setTextFill(Color.DARKGREEN);
+							labelNiveauEtude.setWrapText(true);
+								break;
+							case 6: case 7: case 8: case 9:
+								labelNiveauEtude.setText("Enseignement supérieur");
+							labelNiveauEtude.setTextFill(Color.DARKORANGE);
+							labelNiveauEtude.setWrapText(true);
+							break;
+							default:
+								labelNiveauEtude.setText(" ");
+								break;
+						}
+
+					}
+				});
 	}
 
 	/**
@@ -425,6 +454,9 @@ public class FormE extends BorderPane {
 	public void saveData(Person person) {
 		person.getFormations().clear();
 		person.getFormations().addAll(tableViewDiploma.getItems());
+
+		//pardon
+		person.setNiveauEtude(labelNiveauEtude.getText());
 
 	}
 

@@ -1,6 +1,8 @@
 package cripel.jobway.model;
 // Generated Feb 25, 2022, 8:26:41 PM by Hibernate Tools 4.3.5.Final
 
+import javafx.scene.paint.Color;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
@@ -29,6 +31,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "person", catalog = "jobway")
 public class Person implements java.io.Serializable {
+
+	private String niveauEtude;
 
 	/** The id person. */
 	private Integer idPerson;
@@ -60,9 +64,9 @@ public class Person implements java.io.Serializable {
 	/** The city where the person live */
 	private City city;
 
-	private NiveauEtudeFSE niveauEtudeFSE;
-
-	private SituationProfFSE situationProfFSE;
+//	private NiveauEtudeFSE niveauEtudeFSE;
+//
+//	private SituationProfFSE situationProfFSE;
 
 	/** OneToOne to represent other choice of the person */
 	private Other other;
@@ -626,4 +630,34 @@ public class Person implements java.io.Serializable {
 		this.workexperiences = workexperiences;
 	}
 
+	//pardon
+	public String getNiveauEtude() {
+
+		int idTypeFormation = this.formations.stream()
+				.mapToInt(formation -> formation.getFormationtype().getIdFormationType())
+				.findFirst()
+				.getAsInt();
+
+		switch(idTypeFormation)
+		{
+			case 1: case 2: case 3:
+			setNiveauEtude("Max. 1er cycle du secondaire");
+			break;
+			case 4: case 5:
+			setNiveauEtude("Max. enseignement post-secondaire non supérieur");
+			break;
+			case 6: case 7: case 8: case 9:
+			setNiveauEtude("Enseignement supérieur");
+			break;
+			default:
+				setNiveauEtude(" ");
+				break;
+		}
+
+		return niveauEtude;
+	}
+
+	public void setNiveauEtude(String niveauEtude) {
+		this.niveauEtude = niveauEtude;
+	}
 }

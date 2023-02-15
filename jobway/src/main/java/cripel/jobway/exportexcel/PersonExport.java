@@ -85,6 +85,10 @@ public class PersonExport {
 		map.put(index++, person.getPersonForemInsDate());
 		map.put(index++, person.getPersonUnemployementDuration());
 		map.put(index++, exportFormation(person));
+
+		map.put(index++, person.getNiveauEtude());
+
+// T'es trop nul martin, mdr
 //		if(person.getNiveauEtudeFSE()!=null && person.getNiveauEtudeFSE().getNiveauEtude()!=null){
 //			map.put(index++, person.getNiveauEtudeFSE().getNiveauEtude());
 //		}
