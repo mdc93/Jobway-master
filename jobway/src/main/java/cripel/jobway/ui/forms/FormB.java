@@ -149,6 +149,9 @@ public class FormB extends BorderPane {
     @FXML
     private ToggleGroup groupMutualNeeded;
 
+	@FXML
+	private Label labelSituationProfFSE;
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************

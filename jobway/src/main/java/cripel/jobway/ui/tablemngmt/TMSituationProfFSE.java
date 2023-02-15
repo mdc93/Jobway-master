@@ -1,7 +1,6 @@
 package cripel.jobway.ui.tablemngmt;
 
 import cripel.jobway.dao.SituationProfFSEDAO;
-import cripel.jobway.model.IncomeType;
 import cripel.jobway.model.SituationProfFSE;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
