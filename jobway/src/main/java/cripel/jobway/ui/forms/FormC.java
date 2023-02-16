@@ -99,6 +99,9 @@ public class FormC extends BorderPane {
 	@FXML
 	private ListSelectionView<DriverLicense> listSelectionViewLicense;
 
+	@FXML
+	private ComboBox<String> comboBoxSituationPro;
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
