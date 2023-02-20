@@ -27,7 +27,8 @@ public class FormationType implements java.io.Serializable {
 	private String formationTypeName;
 	/** The event type. */
 	private NiveauEtude niveauEtude;
-	
+	private boolean isFormation;
+	private boolean isDelete;
 
 	public void setNiveauEtude(NiveauEtude niveauEtude) {
 		this.niveauEtude = niveauEtude;
@@ -37,8 +38,7 @@ public class FormationType implements java.io.Serializable {
 	public NiveauEtude getNiveauEtude() {
 		return niveauEtude;
 	}
-	private boolean isFormation;
-	private boolean isDelete;
+	
 	private Set<Formation> formations = new HashSet<>(0);
 
 	@Id

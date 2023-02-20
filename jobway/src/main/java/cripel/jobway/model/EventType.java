@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "eventtype", catalog = "jobway")
-public class EventType {
+public class EventType implements java.io.Serializable{
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

@@ -52,6 +52,8 @@
 		<mapping class="cripel.jobway.model.DriverLicense" />
 		<mapping class="cripel.jobway.model.Employee" />
 		<mapping class="cripel.jobway.model.Event" />
+		<mapping class="cripel.jobway.model.Sortie" />
+		<mapping class="cripel.jobway.model.Acquis" />
 		<mapping class="cripel.jobway.model.EventType" />
 		<mapping class="cripel.jobway.model.FamilyReunion" />
 		<mapping class="cripel.jobway.model.File" />

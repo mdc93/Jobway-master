@@ -4,6 +4,7 @@ package cripel.jobway.model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -71,6 +72,25 @@ public class LocomotionMean implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return this.locomotionMeanName;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idLocomotionMean, isDelete, locomotionMeanName, persons);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LocomotionMean other = (LocomotionMean) obj;
+		return Objects.equals(idLocomotionMean, other.idLocomotionMean) && isDelete == other.isDelete
+				&& Objects.equals(locomotionMeanName, other.locomotionMeanName)
+				&& Objects.equals(persons, other.persons);
 	}
 
 }

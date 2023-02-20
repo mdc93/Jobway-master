@@ -60,7 +60,7 @@ public class Person implements java.io.Serializable {
 	/** The city where the person live */
 	private City city;
 
-	private NiveauEtudeFSE niveauEtudeFSE;
+	private NiveauEtude niveauEtude;
 
 	private SituationProfFSE situationProfFSE;
 

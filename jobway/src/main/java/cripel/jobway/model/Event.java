@@ -47,27 +47,30 @@ public class Event implements java.io.Serializable {
 
 	/** The event note. */
 	private String eventNote;
+	/** The sortie type. */
+	private Sortie sortie;
+	/** The acquis type. */
+	private Acquis acquis;
 
 	/** The employees that participated in the event */
 	private Set<Employee> employees = new HashSet<>(0);
 
 
-	private Boolean exit;
+	private Boolean isSortie;
 
 	/**
 	 * @return the exit
 	 */
-	@Column(name = "exitEvent", nullable = true)
-	public Boolean getExit() {
-		return exit;
+	@Column(name = "isSortie", nullable = true)
+	
+	public Boolean getIsSortie() {
+		return isSortie;
 	}
 
-	/**
-	 * @param exit the exit to set
-	 */
-	public void setExit(Boolean exit) {
-		this.exit = exit;
+	public void setIsSortie(Boolean isSortie) {
+		this.isSortie = isSortie;
 	}
+
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -150,5 +153,22 @@ public class Event implements java.io.Serializable {
 	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
 	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSortie", nullable = false)
+	public Sortie getSortie() {
+		return this.sortie;
+	}
 
+	public void setSortie(Sortie sortie) {
+		this.sortie = sortie;
+	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idAcquis", nullable = false)
+	public Acquis getAcquis() {
+		return this.acquis;
+	}
+
+	public void setAcquis(Acquis acquis) {
+		this.acquis = acquis;
+	}
 }

@@ -36,7 +36,7 @@ public class PersonExport {
 		int index = 0;
 		String nationalite;
 		Set<String> fse;
-
+		Set<Event> filtrEvents;
 		String situationProfFSE;
 		String niveauEtudeFSE;
 
@@ -104,31 +104,32 @@ public class PersonExport {
 		map.put(index++, person.getDisability().getDisOther());
 		map.put(index++, person.getFile().getRegistrationDate());
 		//map.put(index++, " ");
-		//List <Event> events=new ArrayList<> ();
 		
-		  List <Event> filterevents = person.getEvents().stream().filter((Event event)
-		  ->{return event.getExit()!= null;}).collect(Collectors.toList());
-		 
+		
+		filtrEvents=person.getEvents().stream()
+				.filter((Event e)->{return e.getIsSortie();})
+				.collect(Collectors.toSet());
 	
-		if (!filterevents.isEmpty()) {
-			int id = 0;
-			Event event = null;
-			for (Event eve : person.getEvents()) {
-				if (id < eve.getIdEvent()) {
-					event = eve;
-					id = eve.getIdEvent();
-				}
-
-			}
-			//map.put(index++, event.getEventType().toString());
-			map.put(index++, event.getEventDate());
-			//map.put(index++, event.getEventNote());
+		if (!filtrEvents.isEmpty())
 			
-		} else {
+		
+		 {
+			Event event=new Event();
+			for(Event e:filtrEvents) {
+				
+				event=e;
+				
+			}
+			if(event.getEventDate()!=null)
+				map.put(index++, event.getEventDate());
+
+			else {
+				map.put(index++, " ");}
+		}
+		
+		
+		else {
 			map.put(index++, " ");
-			/*
-			 * map.put(index++, " "); map.put(index++, " ");
-			 */
 		
 		}
 		map.put(index++, totalHour(person, begin, end));

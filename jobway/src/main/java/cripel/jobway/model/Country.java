@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "country", catalog = "jobway")
-public class Country {
+public class Country implements java.io.Serializable{
 
 	private Integer idCountry;
 	private CountryType countrytype;
