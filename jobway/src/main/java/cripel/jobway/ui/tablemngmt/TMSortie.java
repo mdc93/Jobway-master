@@ -5,9 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class TMSortie extends TableManagement<Sortie>{
-	private static SortieDAO dao = new SortieDAO();
+	private static SortieDAO sortieDAO = new SortieDAO();
 	private static ObservableList<Sortie> list = FXCollections.observableArrayList(
-			dao.getList());
+			sortieDAO.getList());
 	/** Selected city when modifying */
 	private Sortie selected;
 	
@@ -54,7 +54,7 @@ public class TMSortie extends TableManagement<Sortie>{
 
 	@Override
 	public void update(Sortie sortie) {
-		dao.saveOrUpdate(sortie,true);
+		sortieDAO.saveOrUpdate(sortie,true);
 		
 	}
 

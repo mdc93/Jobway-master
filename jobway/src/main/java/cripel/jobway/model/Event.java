@@ -162,13 +162,35 @@ public class Event implements java.io.Serializable {
 	public void setSortie(Sortie sortie) {
 		this.sortie = sortie;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idAcquis", nullable = false)
-	public Acquis getAcquis() {
-		return this.acquis;
+	
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  
+	  @JoinColumn(name = "idAcquis", nullable = false) public Acquis getAcquis() {
+	  return this.acquis; }
+	  
+	  public void setAcquis(Acquis acquis) { this.acquis = acquis; }
+
+	public Event() {
+		super();
+		
 	}
 
-	public void setAcquis(Acquis acquis) {
+	public Event(Integer idEvent, EventType eventType, Person person, Theme theme, Date eventDate,
+			Integer eventDuration, String eventNote, Sortie sortie, Acquis acquis, Set<Employee> employees,
+			Boolean isSortie) {
+		super();
+		this.idEvent = idEvent;
+		this.eventType = eventType;
+		this.person = person;
+		this.theme = theme;
+		this.eventDate = eventDate;
+		this.eventDuration = eventDuration;
+		this.eventNote = eventNote;
+		this.sortie = sortie;
 		this.acquis = acquis;
+		this.employees = employees;
+		this.isSortie = isSortie;
 	}
+	  
+	 
 }

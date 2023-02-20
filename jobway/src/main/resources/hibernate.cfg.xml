@@ -88,6 +88,9 @@
 		<mapping class="cripel.jobway.model.WorkSearch" />
 		<mapping class="cripel.jobway.model.WorkSector" />
 		<mapping class="cripel.jobway.model.WorkTask" />
+	
+		
+		
 		
 	</session-factory>
 </hibernate-configuration>

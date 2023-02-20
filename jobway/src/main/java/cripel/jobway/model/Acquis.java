@@ -16,18 +16,38 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+
 @Table(name = "acquis", catalog = "jobway")
-public class Acquis implements java.io.Serializable{
+public class Acquis implements java.io.Serializable {
 
 	@Id
+
 	@GeneratedValue(strategy = IDENTITY)
+
 	@Column(name = "idAcquis", unique = true, nullable = false)
 	private Integer idAcquis;
-	@Column(name = "acquisName", nullable = false,length = 50)
+
+	@Column(name = "acquisName", nullable = false, length = 50)
 	private String acquisName;
+
+	@Column(name = "isDelete", nullable = false)
+	private boolean isDelete;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "acquis")
 	private Set<Event> events = new HashSet<>(0);
+	
+	public Acquis() {
+		super();
+		
+	}
+
+	public Acquis(Integer idAcquis, String acquisName, boolean isDelete, Set<Event> events) {
+		super();
+		this.idAcquis = idAcquis;
+		this.acquisName = acquisName;
+		this.isDelete = isDelete;
+		this.events = events;
+	}
 
 	public Integer getIdAcquis()
 
@@ -38,12 +58,21 @@ public class Acquis implements java.io.Serializable{
 	public void setIdAcquis(Integer idAcquis) {
 		this.idAcquis = idAcquis;
 	}
+
 	public String getAcquisName() {
 		return acquisName;
 	}
 
 	public void setAcquisName(String acquisName) {
 		this.acquisName = acquisName;
+	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	public Set<Event> getEvents() {
@@ -72,7 +101,6 @@ public class Acquis implements java.io.Serializable{
 				&& Objects.equals(idAcquis, other.idAcquis);
 	}
 
-	
 	@Override
 	public String toString() {
 		return this.acquisName;

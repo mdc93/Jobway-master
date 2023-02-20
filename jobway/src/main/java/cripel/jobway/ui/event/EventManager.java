@@ -12,6 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
+import org.controlsfx.control.ToggleSwitch;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.dialog.ProgressDialog;
 
@@ -78,7 +79,10 @@ public class EventManager extends BorderPane {
 	/** The column for the theme's name */
 	@FXML
 	private TableColumn<Theme, String> columnTheme;
-
+	@FXML
+	private TableColumn<Sortie, String> columnSortie;
+	@FXML
+	private TableColumn<Acquis, String> columnAcquis;
 	/** The column for the employee's name */
 	@FXML
 	private TableColumn<Event, String> tableColumnEmployee;
@@ -198,7 +202,7 @@ public class EventManager extends BorderPane {
 	private ComboBox<EventType> comboBoxFilterType;
 
 	@FXML
-	private RadioButton checkExit;
+	 private ToggleSwitch checkExit;
 	
 	 @FXML
 	private ComboBox<Sortie> comboBoxTypeSortie;
@@ -314,6 +318,9 @@ public class EventManager extends BorderPane {
 			comboEmp.getCheckModel().clearChecks();
 			textAreaNotes.setText(event.getEventNote());
 			comBoTheme.getSelectionModel().select(event.getTheme());
+			comBoTheme.getSelectionModel().select(event.getTheme());
+			comboBoxAcquisFinAction.getSelectionModel().select(event.getAcquis());
+			comboBoxTypeSortie.getSelectionModel().select(event.getSortie());
 			datePickerEvent.setValue(DateUtil.convertToLocalDate(event.getEventDate()));
 			checkExit.setSelected(event.getIsSortie());
 
@@ -459,10 +466,12 @@ public class EventManager extends BorderPane {
 		columnDate.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
 		columnTheme.setCellValueFactory(new PropertyValueFactory<>("theme"));
 		tableColumnEmployee.setCellValueFactory(
-				cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
+		cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
 		columnNotes.setCellValueFactory(new PropertyValueFactory<>("eventNote"));
 		columnDuration.setCellValueFactory(new PropertyValueFactory<>("eventDuration"));
 		columnType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+		columnSortie.setCellValueFactory(new PropertyValueFactory<>("sortie"));
+		columnAcquis.setCellValueFactory(new PropertyValueFactory<>("acquis"));
 		columnEdit.setCellFactory(ButtonTableCell.<Event>forTableColumn(null, "button-edit", "far-edit", (Event e) -> {
 			vBoxEdit.setManaged(true);
 			vBoxEdit.setVisible(true);
@@ -657,7 +666,14 @@ public class EventManager extends BorderPane {
 	 */
 	@FXML
 	void addNewTheme(ActionEvent event) {
-		checkExit.setSelected(true);
+		checkExit.selectedProperty().addListener((obs, oldValue, newValue) -> {
+			if (!checkExit.isSelected()) {
+				vBoxSortie.setVisible(false);
+			} else {
+				vBoxSortie.setVisible(true);
+			}
+		});
+		
 		columnEdit.setVisible(false);
 		columnDelete.setVisible(false);
 		clearFields();

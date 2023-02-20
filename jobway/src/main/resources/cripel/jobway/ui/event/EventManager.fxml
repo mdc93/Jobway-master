@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -22,6 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
+<?import org.controlsfx.control.ToggleSwitch?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -190,8 +190,10 @@
                               <TableColumn fx:id="columnType" maxWidth="6000.0" prefWidth="100.0" text="Type" />
                               <TableColumn fx:id="tableColumnEmployee" prefWidth="72.0" text="Réferent(s)" />
                               <TableColumn fx:id="columnNotes" maxWidth="6000.0" prefWidth="130.0" text="Notes" />
-                              <TableColumn fx:id="columnEdit" maxWidth="1600.0" prefWidth="65.0" />
-                              <TableColumn fx:id="columnDelete" maxWidth="1600.0" prefWidth="75.0" />
+                              <TableColumn fx:id="columnEdit" maxWidth="1600.0" prefWidth="14.0" />
+                              <TableColumn fx:id="columnDelete" maxWidth="1600.0" prefWidth="49.0" />
+                              <TableColumn fx:id="columnSortie" maxWidth="1600.0" prefWidth="75.0" text="Sortie" />
+                              <TableColumn fx:id="columnAcquis" maxWidth="1600.0" prefWidth="75.0" text="Acquis" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -211,7 +213,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <RadioButton fx:id="checkExit" mnemonicParsing="false" prefHeight="55.0" prefWidth="19.0" selected="true" />
+                              <ToggleSwitch fx:id="checkExit" prefHeight="51.0" prefWidth="62.0" />
                            </children>
                         </HBox>
                         <VBox fx:id="vBoxSortie" prefHeight="200.0" prefWidth="100.0">

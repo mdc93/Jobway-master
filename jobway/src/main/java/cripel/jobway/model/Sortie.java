@@ -25,9 +25,15 @@ public class Sortie implements java.io.Serializable {
 	private Integer idSortie;
 	@Column(name = "sortieName")
 	private String sortieName;
-
+	@Column(name = "isDelete", nullable = false)
+	private boolean isDelete;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sortie")
 	private Set<Event> events = new HashSet<>(0);
+
+	public Sortie() {
+		super();
+	
+	}
 
 	public Integer getIdSortie()
 
@@ -45,6 +51,22 @@ public class Sortie implements java.io.Serializable {
 
 	public void setSortieName(String sortieName) {
 		this.sortieName = sortieName;
+	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public Set<Event> getEvents() {
+		return events;
+	}
+
+	public void setIdSortie(Integer idSortie) {
+		this.idSortie = idSortie;
 	}
 
 	public Set<Event> getEvent() {

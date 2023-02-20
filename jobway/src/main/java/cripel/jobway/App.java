@@ -17,7 +17,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		Thread.setDefaultUncaughtExceptionHandler(new CustomUncaughtExceptionHandler());
+		//Thread.setDefaultUncaughtExceptionHandler(new CustomUncaughtExceptionHandler());
 		primaryStage.getIcons().addAll(
 				new Image(getClass().getResource("ui/icons/picto_appli16x16.jpg").toExternalForm()),
 				new Image(getClass().getResource("ui/icons/picto_appli32x32.jpg").toExternalForm()),
