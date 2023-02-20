@@ -35,7 +35,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 	/**
 	 * Class of generic type
 	 */
-	private Class<T> cla;
+	private final Class<T> cla;
 
 	/**
 	 * Constructor of the abstract class which implements the interface Dao

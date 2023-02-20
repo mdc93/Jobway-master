@@ -126,6 +126,9 @@ public class Person implements java.io.Serializable {
 
 	/** The person notepad. */
 	private String personNotepad;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSituationPro", nullable = false)
+	private SituationPro situationPro;
 
 	/** The locomotion means. */
 	private Set<LocomotionMean> locomotionmeans = new HashSet<>(0);

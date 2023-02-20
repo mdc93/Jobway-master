@@ -187,6 +187,12 @@ public class EventManager extends BorderPane {
 
 	@FXML
 	private RadioButton checkExit;
+
+	@FXML
+	private ComboBox comboBoxTypeSortie;
+
+	@FXML
+	private ComboBox comboBoxAcquisFinAction;
 	
 
 	// **************************************************************************************************
