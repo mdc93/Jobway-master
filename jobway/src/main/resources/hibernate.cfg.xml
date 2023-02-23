@@ -38,8 +38,6 @@
 		<property name="dataSource.cacheServerConfiguration">true</property>
 		<property name="dataSource.elideSetAutoCommits">false</property>
 		<property name="dataSource.maintainTimeStats">false</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
-
 
 <!--		<property name="hibernate.hbm2ddl.auto">update</property>-->
 <!--		<property name="connection.url">jdbc:mariadb://localhost:3306/jobway</property>-->
@@ -49,7 +47,7 @@
 
 
 		<!-- List of XML mapping files -->
-		<mapping class="cripel.jobway.model.Person" />
+		<mapping class="cripel.jobway.model.Acquisfinaction"/>
 		<mapping class="cripel.jobway.model.Availability" />
 		<mapping class="cripel.jobway.model.City" />
 		<mapping class="cripel.jobway.model.Country" />
@@ -71,6 +69,7 @@
 		<mapping class="cripel.jobway.model.LocomotionMean" />
 		<mapping class="cripel.jobway.model.Logs" />
 		<mapping class="cripel.jobway.model.Other" />
+		<mapping class="cripel.jobway.model.Person" />
 		<mapping class="cripel.jobway.model.PerDrL" />
 		<mapping class="cripel.jobway.model.PerDrLId" />
 		<mapping class="cripel.jobway.model.PerLan" />
@@ -94,7 +93,6 @@
 		<mapping class="cripel.jobway.model.WorkSearch" />
 		<mapping class="cripel.jobway.model.WorkSector" />
 		<mapping class="cripel.jobway.model.WorkTask" />
-		<mapping class="cripel.jobway.model.Acquisfinaction"/>
 
 	</session-factory>
 </hibernate-configuration>

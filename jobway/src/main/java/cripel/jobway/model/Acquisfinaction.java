@@ -5,25 +5,25 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "acquisfinaction", catalog = "jobway")
+@Table(name = "acquired", catalog = "jobway")
 public class Acquisfinaction {
     private int idAcquisFinAction;
     private String nomAcquisFinAction;
+    @OneToMany(mappedBy = "acquired")
+    private Collection<Event> eventsByIdAcquisFinAction;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idAcquisFinAction", nullable = false)
+    @Column(name = "idAcquired", nullable = false)
     public int getIdAcquisFinAction() {
         return idAcquisFinAction;
     }
-
-    @OneToMany(mappedBy = "acquisfinactionByIdAcquisFinAction")
-    private Collection<Event> eventsByIdAcquisFinAction;
     public void setIdAcquisFinAction(int idAcquisFinAction) {
         this.idAcquisFinAction = idAcquisFinAction;
     }
 
     @Basic
-    @Column(name = "nomAcquisFinAction", nullable = true, length = 250)
+    @Column(name = "acquiredName", nullable = true, length = 250)
     public String getNomAcquisFinAction() {
         return nomAcquisFinAction;
     }

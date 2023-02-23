@@ -6,15 +6,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "typesortie", catalog = "jobway")
+@Table(name = "exitType", catalog = "jobway")
 public class TypeSortie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idTypeSortie", nullable = false)
+    @Column(name = "idExitType", nullable = false)
     private int idTypeSortie;
-    @Column(name = "nomTypeSortie", length = 250)
+    @Column(name = "exitTypeName", length = 250)
     private String nomTypeSortie;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "typesortie")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "exitType")
     private Set<Event> sorties = new HashSet<>(0);
 
 

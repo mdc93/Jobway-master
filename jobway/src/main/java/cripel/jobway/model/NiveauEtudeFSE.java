@@ -5,7 +5,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "niveauetudefse", catalog = "jobway")
+@Table(name = "studylevel", catalog = "jobway")
 public class NiveauEtudeFSE {
 
     private Integer id;
@@ -13,8 +13,7 @@ public class NiveauEtudeFSE {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "idStudyLevel", unique = true, nullable = false)
     public Integer getId() {
         return this.id;
     }
@@ -23,7 +22,7 @@ public class NiveauEtudeFSE {
         this.id = id;
     }
 
-    @Column(name = "niveauetude", nullable = false, length = 50)
+    @Column(name = "studylevelName", nullable = false, length = 250)
     public String getNiveauEtude() {
         return this.niveauEtude;
     }

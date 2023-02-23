@@ -34,21 +34,33 @@ public class Event implements Serializable {
 	/** The employees that participated in the event */
 	private Set<Employee> employees = new HashSet<>(0);
 	private Boolean exit;
+	@ManyToOne
+	@JoinColumn(name = "idExitType")
+	private TypeSortie exitType;
+	@ManyToOne
+	@JoinColumn(name = "idAcquired")
+	private Acquisfinaction acquired;
 
-    @ManyToOne
-    @JoinColumn(name = "idTypeSortie")
-    private TypeSortie typeSortie;
-	private Acquisfinaction acquisfinactionByIdAcquisFinAction;
 
 
-	@Column(name = "typeSortie", nullable = true)
-	public TypeSortie getTypeSortie() {
-        return typeSortie;
-    }
+	public Event() {
+	}
+	public TypeSortie getExitType() {
+		return exitType;
+	}
 
-    public void setTypeSortie(TypeSortie typeSortie) {
-        this.typeSortie = typeSortie;
-    }
+	public void setExitType(TypeSortie exitType) {
+		this.exitType = exitType;
+	}
+
+	public Acquisfinaction getAcquired() {
+		return acquired;
+	}
+
+	public void setAcquired(Acquisfinaction acquired) {
+		this.acquired = acquired;
+	}
+
 
     /**
 	 * @return the exit
@@ -157,14 +169,4 @@ public class Event implements Serializable {
 		this.employees = employees;
 	}
 
-
-	@ManyToOne
-	@JoinColumn(name = "idAcquisFinAction", referencedColumnName = "idAcquisFinAction")
-	public Acquisfinaction getAcquisfinactionByIdAcquisFinAction() {
-		return acquisfinactionByIdAcquisFinAction;
-	}
-
-	public void setAcquisfinactionByIdAcquisFinAction(Acquisfinaction acquisfinactionByIdAcquisFinAction) {
-		this.acquisfinactionByIdAcquisFinAction = acquisfinactionByIdAcquisFinAction;
-	}
 }

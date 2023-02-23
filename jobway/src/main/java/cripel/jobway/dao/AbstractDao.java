@@ -24,7 +24,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 	/**
 	 * Logger logback
 	 */
-	protected Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+//	protected Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	private static final String READERROR = "Erreur dans la lecture de la base de donnée";
 
@@ -57,7 +57,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		} catch (Exception e) {
 			if (tx != null)
 				tx.rollback();
-			logger.error("Erreur dans le save", e);
+//			logger.error("Erreur dans le save", e);
 		} finally {
 			session.close();
 		}
@@ -74,7 +74,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		} catch (Exception e) {
 			if (tx != null)
 				tx.rollback();
-			logger.error("Erreur dans l'update", e);
+//			logger.error("Erreur dans l'update", e);
 		} finally {
 			session.close();
 		}
@@ -90,7 +90,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 					.getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error(READERROR, e);
+//			logger.error(READERROR, e);
 		} finally {
 			session.close();
 		}
@@ -108,7 +108,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 			result = session.createQuery("From " + cla.getName() + " WHERE " + criteria, cla).getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error(READERROR, e);
+//			logger.error(READERROR, e);
 		} finally {
 
 			session.close();
@@ -132,7 +132,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		} catch (Exception e) {
 			if (tx != null)
 				tx.rollback();
-			logger.error("Erreur dans le save or update", e);
+//			logger.error("Erreur dans le save or update", e);
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("La sauvegarde a échouée");
 			alert.setContentText(ExceptionUtils.getRootCauseMessage(e.getCause()));
@@ -155,7 +155,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		} catch (Exception e) {
 			if (tx != null)
 				tx.rollback();
-			logger.error("Erreur dans la supression", e);
+//			logger.error("Erreur dans la supression", e);
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("La suppression a échouée");
 			alert.setContentText(ExceptionUtils.getRootCauseMessage(e.getCause()));
@@ -174,7 +174,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 			result = session.createQuery("From " + cla.getName(), cla).list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error(READERROR, e);
+//			logger.error(READERROR, e);
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText(READERROR);
 			alert.setContentText(ExceptionUtils.getRootCauseMessage(e.getCause()));
@@ -203,7 +203,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 			
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error(READERROR, e);
+//			logger.error(READERROR, e);
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText(READERROR);
 			alert.setContentText(ExceptionUtils.getRootCauseMessage(e.getCause()));
@@ -232,7 +232,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 			result=query.list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error(READERROR, e);
+//			logger.error(READERROR, e);
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText(READERROR);
 			alert.setContentText(ExceptionUtils.getRootCauseMessage(e.getCause()));
@@ -254,7 +254,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 			result = session.createQuery(query, cla).list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error(READERROR, e);
+//			logger.error(READERROR, e);
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText(READERROR);
 			alert.setContentText(ExceptionUtils.getRootCauseMessage(e.getCause()));
@@ -277,7 +277,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 			result = session.createQuery("From " + cla.getName() + " c ORDER BY c." + column, cla).list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error(READERROR, e);
+//			logger.error(READERROR, e);
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText(READERROR);
 			alert.setContentText(ExceptionUtils.getRootCauseMessage(e.getCause()));

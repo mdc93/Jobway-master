@@ -17,20 +17,19 @@ public class SituationPro implements Serializable {
     private int idSituationPro;
     @Column(name = "nomSituationPro", length = 250)
     private String nomSituationPro;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "situationpro")
-    private Set<Person> people = new HashSet<>(0);
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "situationPro")
+    private Set<Person> person = new HashSet<>(0);
 
 
     public SituationPro() {
     }
 
     public Set<Person> getPeople() {
-        return people;
+        return person;
     }
 
-    public void setPeople(Set<Person> people) {
-        this.people = people;
-    }
+    public void setPeople(Set<Person> person) {
+        this.person = person;}
 
     public int getIdSituationPro() {
         return this.idSituationPro;

@@ -3,6 +3,7 @@ package cripel.jobway.utilities;
 import java.io.File;
 import java.util.Properties;
 
+import cripel.jobway.ui.login.Login;
 import org.controlsfx.control.Notifications;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -11,6 +12,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import javafx.application.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Utilities class to manage hibernate
@@ -18,6 +21,8 @@ import javafx.application.Platform;
 public class HibernateUtil {
 
 	private static SessionFactory sessionFactory = buildSessionFactory();
+
+	private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
 	
 
 	/**
@@ -48,6 +53,8 @@ public class HibernateUtil {
 			Platform.runLater(()->Notifications.create().title("Erreur").text("La connexion à la base de données n'a pas pu être établie.")
 					.showError());
 			StandardServiceRegistryBuilder.destroy(registry);
+
+			logger.error("Erreur dans la connexion à la base de données: ", e);
 		}
 		return sessionFactory;
 	}
