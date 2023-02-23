@@ -1,8 +1,5 @@
 package cripel.jobway.ui.tablemngmt;
-
-import cripel.jobway.dao.ExitTypeDAO;
 import cripel.jobway.dao.RequiredDAO;
-import cripel.jobway.model.ExitType;
 import cripel.jobway.model.Required;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +8,7 @@ public class TMRequired extends TableManagement<Required>{
 	private static RequiredDAO requiredDAO = new RequiredDAO();
 	private static ObservableList<Required> list=FXCollections.observableArrayList(requiredDAO.getList());
 	private Required selected;
-	protected TMRequired() {
+	public TMRequired() {
 		super(list);
 		
 	}

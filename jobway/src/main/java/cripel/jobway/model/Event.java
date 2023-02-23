@@ -62,11 +62,11 @@ public class Event implements java.io.Serializable {
 	@Column(name = "eventNote", length = 100)
 	private String eventNote;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "exitType", nullable = false)
+	@JoinColumn(name = "idExitType", nullable = false)
 	private ExitType exitType;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "required", nullable = false)
+	@JoinColumn(name = "idRequired", nullable = false)
 	private Required required;
 	/** The employees that participated in the event */
 
@@ -76,22 +76,22 @@ public class Event implements java.io.Serializable {
 					@JoinColumn(name = "idEmployee", nullable = false, updatable = false) })
 	private Set<Employee> employees = new HashSet<>(0);
 
-	@Column(name = "exitEvent", nullable = true)
-	private Boolean exit;
+	@Column(name = "exitEvent",length = 2)
+	private Boolean exitEvent;
 
 	/**
 	 * @return the exit
 	 */
 	
 	public Boolean getExit() {
-		return exit;
+		return exitEvent;
 	}
 
 	/**
 	 * @param exit the exit to set
 	 */
 	public void setExit(Boolean exit) {
-		this.exit = exit;
+		this.exitEvent = exit;
 	}
 
 	public Integer getIdEvent() {
