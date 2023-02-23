@@ -53,11 +53,13 @@
 		<mapping class="cripel.jobway.model.Employee" />
 		<mapping class="cripel.jobway.model.Event" />
 		<mapping class="cripel.jobway.model.EventType" />
+		<mapping class="cripel.jobway.model.ExitType" />
 		<mapping class="cripel.jobway.model.FamilyReunion" />
 		<mapping class="cripel.jobway.model.File" />
 		<mapping class="cripel.jobway.model.Formation" />
 		<mapping class="cripel.jobway.model.FormationType" />
 		<mapping class="cripel.jobway.model.NiveauEtude" />
+		<mapping class="cripel.jobway.model.Required" />
 		<mapping class="cripel.jobway.model.FrenchTest" />
 		<mapping class="cripel.jobway.model.Household" />
 		<mapping class="cripel.jobway.model.IncomeType" />

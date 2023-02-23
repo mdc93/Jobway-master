@@ -15,24 +15,32 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "niveauetudesfe", catalog = "jobway")
-public class NiveauEtude {
+@Table(name = "niveauetudefse", catalog = "jobway")
+public class NiveauEtude implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "idNiveauType", unique = true, nullable = false)
-	private Integer idNiveauType;
-	@Column(name = "niveauTypeName")
-	private String niveauTypeName;
+	@Column(name = "idNiveauEtude", unique = true, nullable = false)
+	private Integer idNiveauEtude;
+	@Column(name = "niveauEtudeName")
+	private String niveauEtudeName;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "niveauEtude")
 	private Set<FormationType> formationstype = new HashSet<>(0);
-	public Integer getIdNiveauType() {
-		return idNiveauType;
+	public Integer getIdNiveauEtude() {
+		return idNiveauEtude;
 	}
 
-	public void setIdNiveauType(Integer idNiveauType) {
-		this.idNiveauType = idNiveauType;
+	public void setIdNiveauEtude(Integer idNiveauEtude) {
+		this.idNiveauEtude = idNiveauEtude;
+	}
+
+	public String getNiveauEtudeName() {
+		return niveauEtudeName;
+	}
+
+	public void setNiveauEtudeName(String niveauEtudeName) {
+		this.niveauEtudeName = niveauEtudeName;
 	}
 
 	public Set<FormationType> getFormationstype() {
@@ -45,7 +53,12 @@ public class NiveauEtude {
 
 	@Override
 	public String toString() {
-		return this.niveauTypeName;
+		return this.niveauEtudeName;
+	}
+
+	public NiveauEtude() {
+		super();
+		
 	}
 
 }
