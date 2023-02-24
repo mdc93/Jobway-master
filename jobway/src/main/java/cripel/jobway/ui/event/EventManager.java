@@ -185,8 +185,7 @@ public class EventManager extends BorderPane {
 	@FXML
 	private ComboBox<EventType> comboBoxFilterType;
 
-	@FXML
-	private RadioButton checkExit;
+	
 	
 
 	// **************************************************************************************************
@@ -295,7 +294,7 @@ public class EventManager extends BorderPane {
 			textAreaNotes.setText(event.getEventNote());
 			comBoTheme.getSelectionModel().select(event.getTheme());
 			datePickerEvent.setValue(DateUtil.convertToLocalDate(event.getEventDate()));
-			checkExit.setSelected(event.getExit());
+			//checkExit.setSelected(event.getExitEvent());
 
 			if (event.getEventDuration() != null) {
 				spinnerHour.getValueFactory().setValue(event.getEventDuration() / 60);
@@ -563,7 +562,7 @@ public class EventManager extends BorderPane {
 			eve.setEventType(comboType.getSelectionModel().getSelectedItem());
 			eve.setPerson(selected);
 			eve.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
-			eve.setExit(checkExit.isSelected());
+			//eve.setExitEvent(checkExit.isSelected());
 			listEvent.add(eve);
 			tableView.refresh();
 
@@ -605,7 +604,7 @@ public class EventManager extends BorderPane {
 			editEvent.setEventType(comboType.getSelectionModel().getSelectedItem());
 			editEvent.setPerson(selected);
 			editEvent.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
-			editEvent.setExit(checkExit.isSelected());
+			//editEvent.setExitEvent(checkExit.isSelected());
 			enableButtonsAndDisableNewThemFields();
 
 			clearFields();

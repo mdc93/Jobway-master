@@ -24,8 +24,9 @@ public class ExitType implements java.io.Serializable {
 	private Integer idExitType;
 	@Column(name = "exitTypeName")
 	private String exitTypeName;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exitType")
+	@Column(name = "isDelete", nullable = false)
+	private boolean isDelete;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exittype")
 	private Set<Event> events = new HashSet<>(0);
 
 	public Integer getIdExitType() {
@@ -56,6 +57,22 @@ public class ExitType implements java.io.Serializable {
 		super();
 		
 	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	@Override
+	public String toString() {
+		return this.exitTypeName;
+	}
+
+	
+
 	
 
 }

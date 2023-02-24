@@ -63,7 +63,7 @@ public class Event implements java.io.Serializable {
 	private String eventNote;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idExitType", nullable = false)
-	private ExitType exitType;
+	private ExitType exittype;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idRequired", nullable = false)
@@ -79,30 +79,14 @@ public class Event implements java.io.Serializable {
 	@Column(name = "exitEvent",length = 2)
 	private Boolean exitEvent;
 
-	/**
-	 * @return the exit
-	 */
-	
-	public Boolean getExit() {
-		return exitEvent;
-	}
-
-	/**
-	 * @param exit the exit to set
-	 */
-	public void setExit(Boolean exit) {
-		this.exitEvent = exit;
-	}
-
 	public Integer getIdEvent() {
-		return this.idEvent;
+		return idEvent;
 	}
 
 	public void setIdEvent(Integer idEvent) {
 		this.idEvent = idEvent;
 	}
 
-	
 	public EventType getEventType() {
 		return eventType;
 	}
@@ -111,34 +95,30 @@ public class Event implements java.io.Serializable {
 		this.eventType = eventType;
 	}
 
-	
 	public Person getPerson() {
-		return this.person;
+		return person;
 	}
 
 	public void setPerson(Person person) {
 		this.person = person;
 	}
 
-	
 	public Theme getTheme() {
-		return this.theme;
+		return theme;
 	}
 
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
 
-	
 	public Date getEventDate() {
-		return this.eventDate;
+		return eventDate;
 	}
 
 	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
 	}
 
-	
 	public Integer getEventDuration() {
 		return eventDuration;
 	}
@@ -147,29 +127,20 @@ public class Event implements java.io.Serializable {
 		this.eventDuration = eventDuration;
 	}
 
-
 	public String getEventNote() {
 		return eventNote;
 	}
-	
+
 	public void setEventNote(String eventNote) {
 		this.eventNote = eventNote;
 	}
 
-	public Set<Employee> getEmployees() {
-		return this.employees;
+	public ExitType getExittype() {
+		return exittype;
 	}
 
-	public void setEmployees(Set<Employee> employees) {
-		this.employees = employees;
-	}
-
-	public ExitType getExitType() {
-		return exitType;
-	}
-
-	public void setExitType(ExitType exitType) {
-		this.exitType = exitType;
+	public void setExittype(ExitType exittype) {
+		this.exittype = exittype;
 	}
 
 	public Required getRequired() {
@@ -180,9 +151,29 @@ public class Event implements java.io.Serializable {
 		this.required = required;
 	}
 
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
+	}
+
+	public Boolean getExitEvent() {
+		return exitEvent;
+	}
+
+	public void setExitEvent(Boolean exitEvent) {
+		this.exitEvent = exitEvent;
+	}
+
 	public Event() {
 		super();
 		
 	}
+
+	
+
+	
 
 }

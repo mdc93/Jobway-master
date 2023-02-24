@@ -24,7 +24,8 @@ public class NiveauEtude implements java.io.Serializable {
 	private Integer idNiveauEtude;
 	@Column(name = "niveauEtudeName")
 	private String niveauEtudeName;
-	
+	@Column(name = "isDelete", nullable = false)
+	private boolean isDelete;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "niveauEtude")
 	private Set<FormationType> formationstype = new HashSet<>(0);
 	public Integer getIdNiveauEtude() {
@@ -59,6 +60,14 @@ public class NiveauEtude implements java.io.Serializable {
 	public NiveauEtude() {
 		super();
 		
+	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 }

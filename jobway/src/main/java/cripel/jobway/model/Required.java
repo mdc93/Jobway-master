@@ -24,7 +24,8 @@ public class Required implements java.io.Serializable{
 	private Integer idRequired;
 	@Column(name = "requiredName")
 	private String requiredName;
-	
+	@Column(name = "isDelete", nullable = false)
+	private boolean isDelete;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "required")
 	private Set<Event> events = new HashSet<>(0);
 
@@ -55,6 +56,18 @@ public class Required implements java.io.Serializable{
 	public Required() {
 		super();
 		
+	}
+	@Override
+	public String toString() {
+		return this.requiredName;
+	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	

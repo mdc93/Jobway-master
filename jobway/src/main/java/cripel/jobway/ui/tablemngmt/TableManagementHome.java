@@ -40,7 +40,8 @@ public class TableManagementHome extends BorderPane {
 		tabPane.getTabs().add(new Tab("Etat civil", new TMCivilStatus()));
 		tabPane.getTabs().add(new Tab("Permis sé.", new TMResPerm()));
 		tabPane.getTabs().add(new Tab("Revenu", new TMIncomeType()));
-
+		tabPane.getTabs().add(new Tab("Type de sortie", new TMExitType()));
+		tabPane.getTabs().add(new Tab("Acquis", new TMRequired()));
 		tabPane.getTabs().add(new Tab("Langue", new TMLanguage()));
 		tabPane.getTabs().add(new Tab("Test langue", new TMFrenchTest()));
 		tabPane.getTabs().add(new Tab("Transport", new TMLocomotionMean()));
@@ -51,8 +52,7 @@ public class TableManagementHome extends BorderPane {
 		tabPane.getTabs().add(new Tab("Regroup", new TMFamReun()));
 		tabPane.getTabs().add(new Tab("Formation", new TMFormationType()));
 		tabPane.getTabs().add(new Tab("Niveau Etude", new TMNiveauEtude()));
-		tabPane.getTabs().add(new Tab("Type de sortie", new TMExitType()));
-		tabPane.getTabs().add(new Tab("Acquis", new TMRequired()));
+		
 	}
 
 	/**
