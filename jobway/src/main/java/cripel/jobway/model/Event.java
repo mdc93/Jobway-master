@@ -30,9 +30,16 @@ public class Event implements java.io.Serializable {
 	/** The id event. */
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "idEvent", unique = true, nullable = false)
 	private Integer idEvent;
+
+	@Override
+	public String toString() {
+		return "Event [idEvent=" + idEvent + ", eventType=" + eventType + ", person=" + person + ", theme=" + theme
+				+ ", eventDate=" + eventDate + ", eventDuration=" + eventDuration + ", eventNote=" + eventNote
+				+ ", exittype=" + exittype + ", required=" + required + ", employees=" + employees + ", exitEvent="
+				+ exitEvent + "]";
+	}
 
 	/** The event type. */
 	@ManyToOne(fetch = FetchType.LAZY)

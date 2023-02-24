@@ -12,19 +12,26 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
+import org.controlsfx.control.ToggleSwitch;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.dialog.ProgressDialog;
+
 
 import cripel.jobway.dao.EmployeeDAO;
 import cripel.jobway.dao.EventDAO;
 import cripel.jobway.dao.EventTypeDAO;
+import cripel.jobway.dao.ExitTypeDAO;
+import cripel.jobway.dao.RequiredDAO;
 import cripel.jobway.dao.ThemeDAO;
 import cripel.jobway.exportexcel.ImportEvent;
 import cripel.jobway.exportexcel.PoiTableViewExcel;
+
 import cripel.jobway.model.Employee;
 import cripel.jobway.model.Event;
 import cripel.jobway.model.EventType;
+import cripel.jobway.model.ExitType;
 import cripel.jobway.model.Person;
+import cripel.jobway.model.Required;
 import cripel.jobway.model.Theme;
 import cripel.jobway.utilities.DateUtil;
 import cripel.jobway.utilities.fxutil.ButtonTableCell;
@@ -47,6 +54,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
@@ -156,7 +164,13 @@ public class EventManager extends BorderPane {
 	/** The vbox that display the content */
 	@FXML
 	private VBox vBoxDisplay;
+	
+    @FXML
+    private HBox hBoxSortie;
 
+	/** The vbox that display the content sortie*/
+    @FXML
+    private VBox vBoxSortie;
 	/** The customTextfield for the searchbar */
 	@FXML
 	private CustomTextField searchBar;
@@ -185,8 +199,28 @@ public class EventManager extends BorderPane {
 	@FXML
 	private ComboBox<EventType> comboBoxFilterType;
 
+	@FXML
+	 private ToggleSwitch checkExit;
 	
+
+    @FXML
+    private ComboBox<Required> comboBoxAcquisFinAction;
+
 	
+    @FXML
+    private ComboBox<ExitType> comboBoxTypeSortie;
+    
+    @FXML
+    private TableColumn<?, ?> columnAcquis;
+
+
+	 
+	 @FXML
+	    private GridPane GridPaneSortie;
+	 
+
+	    @FXML
+	    private TableColumn<?, ?> columnSortie;
 
 	// **************************************************************************************************
 	// FIELDS
@@ -293,8 +327,13 @@ public class EventManager extends BorderPane {
 			comboEmp.getCheckModel().clearChecks();
 			textAreaNotes.setText(event.getEventNote());
 			comBoTheme.getSelectionModel().select(event.getTheme());
+		
+			/*
+			 * comboBoxAcquisFinAction.getSelectionModel().select(event.getAcquis());
+			 * comboBoxTypeSortie.getSelectionModel().select(event.getSortie());
+			 */
 			datePickerEvent.setValue(DateUtil.convertToLocalDate(event.getEventDate()));
-			//checkExit.setSelected(event.getExitEvent());
+		//	checkExit.setSelected(event.getIsSortie());
 
 			if (event.getEventDuration() != null) {
 				spinnerHour.getValueFactory().setValue(event.getEventDuration() / 60);
@@ -362,7 +401,6 @@ public class EventManager extends BorderPane {
 	/**
 	 * Boolean return true if the search bar has at least one letter of the property
 	 * in the table view
-	 *
 	 * @param event
 	 * @return boolean
 	 */
@@ -439,10 +477,12 @@ public class EventManager extends BorderPane {
 		columnDate.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
 		columnTheme.setCellValueFactory(new PropertyValueFactory<>("theme"));
 		tableColumnEmployee.setCellValueFactory(
-				cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
+		cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
 		columnNotes.setCellValueFactory(new PropertyValueFactory<>("eventNote"));
 		columnDuration.setCellValueFactory(new PropertyValueFactory<>("eventDuration"));
 		columnType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+		columnSortie.setCellValueFactory(new PropertyValueFactory<>("exittype"));
+		columnAcquis.setCellValueFactory(new PropertyValueFactory<>("required"));
 		columnEdit.setCellFactory(ButtonTableCell.<Event>forTableColumn(null, "button-edit", "far-edit", (Event e) -> {
 			vBoxEdit.setManaged(true);
 			vBoxEdit.setVisible(true);
@@ -495,6 +535,10 @@ public class EventManager extends BorderPane {
 		comboType.getItems().addAll(new EventTypeDAO().getList());
 		comboBoxFilterType.getItems().add(null);
 		comboBoxFilterType.getItems().addAll(comboType.getItems());
+		comboBoxTypeSortie.getItems().addAll(new ExitTypeDAO().getList());
+		comboBoxAcquisFinAction.getItems().addAll(new RequiredDAO().getList());
+		
+		
 
 	}
 
@@ -509,6 +553,8 @@ public class EventManager extends BorderPane {
 		comboType.setValue(null);
 		comboEmp.getCheckModel().clearChecks();
 		textAreaNotes.clear();
+		comboBoxTypeSortie.setValue(null);
+		comboBoxAcquisFinAction.setValue(null);
 	}
 
 	/**
@@ -548,11 +594,12 @@ public class EventManager extends BorderPane {
 			alert.showAndWait();
 		} else {
 			transition.startAddEventAnimation();
+			
 			vBoxEdit.setVisible(false);
 			vBoxEdit.setManaged(false);
 			columnEdit.setVisible(true);
 			columnDelete.setVisible(true);
-
+		
 			Event eve = new Event();
 			eve.getEmployees().addAll(comboEmp.getCheckModel().getCheckedItems());
 			eve.setEventNote(textAreaNotes.getText());
@@ -562,7 +609,9 @@ public class EventManager extends BorderPane {
 			eve.setEventType(comboType.getSelectionModel().getSelectedItem());
 			eve.setPerson(selected);
 			eve.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
-			//eve.setExitEvent(checkExit.isSelected());
+			eve.setExitEvent(checkExit.isSelected());
+			eve.setRequired(comboBoxAcquisFinAction.getSelectionModel().getSelectedItem());
+			eve.setExittype(comboBoxTypeSortie.getSelectionModel().getSelectedItem());
 			listEvent.add(eve);
 			tableView.refresh();
 
@@ -604,7 +653,9 @@ public class EventManager extends BorderPane {
 			editEvent.setEventType(comboType.getSelectionModel().getSelectedItem());
 			editEvent.setPerson(selected);
 			editEvent.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
-			//editEvent.setExitEvent(checkExit.isSelected());
+			editEvent.setRequired(comboBoxAcquisFinAction.getSelectionModel().getSelectedItem());
+			editEvent.setExittype(comboBoxTypeSortie.getSelectionModel().getSelectedItem());
+			editEvent.setExitEvent(checkExit.isSelected());
 			enableButtonsAndDisableNewThemFields();
 
 			clearFields();
@@ -626,6 +677,14 @@ public class EventManager extends BorderPane {
 	 */
 	@FXML
 	void addNewTheme(ActionEvent event) {
+		checkExit.selectedProperty().addListener((obs, oldValue, newValue) -> {
+			if (!checkExit.isSelected()) {
+				vBoxSortie.setVisible(false);
+			} else {
+				vBoxSortie.setVisible(true);
+			}
+		});
+		
 		columnEdit.setVisible(false);
 		columnDelete.setVisible(false);
 		clearFields();
