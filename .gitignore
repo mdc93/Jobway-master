@@ -3,3 +3,15 @@
 *.zip
 jobway/config.properties
 jobway/text.xlsx
+
+/bin/
+target/
+.idea/
+.settings/
+.jpb/
+build/
+jobway/build/
+jobway/target/
+jobway/.idea/
+jobway/.settings/
+jobway/jobway.iml
