@@ -25,3 +25,9 @@ shade/
 /target/
 */.idea
 /.settings/
+build/
+jobway/build/
+jobway/target/
+jobway/.idea/
+jobway/.settings/
+jobway/jobway.iml
