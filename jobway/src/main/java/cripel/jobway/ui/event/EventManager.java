@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,7 +17,6 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.control.ToggleSwitch;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.dialog.ProgressDialog;
-
 
 import cripel.jobway.dao.EmployeeDAO;
 import cripel.jobway.dao.EventDAO;
@@ -69,10 +70,10 @@ public class EventManager extends BorderPane {
 	// FXML FIELDS
 	// **************************************************************************************************
 
-	/** Label of sum Duration*/
+	/** Label of sum Duration */
 	@FXML
 	private Label totalMinuteLabel;
-	
+
 	/** The column for the event's date */
 	@FXML
 	private TableColumn<Event, Date> columnDate;
@@ -164,13 +165,13 @@ public class EventManager extends BorderPane {
 	/** The vbox that display the content */
 	@FXML
 	private VBox vBoxDisplay;
-	
-    @FXML
-    private HBox hBoxSortie;
 
-	/** The vbox that display the content sortie*/
-    @FXML
-    private VBox vBoxSortie;
+	@FXML
+	private HBox hBoxSortie;
+
+	/** The vbox that display the content sortie */
+	@FXML
+	private VBox vBoxSortie;
 	/** The customTextfield for the searchbar */
 	@FXML
 	private CustomTextField searchBar;
@@ -200,27 +201,22 @@ public class EventManager extends BorderPane {
 	private ComboBox<EventType> comboBoxFilterType;
 
 	@FXML
-	 private ToggleSwitch checkExit;
-	
+	private ToggleSwitch checkExit;
 
-    @FXML
-    private ComboBox<Required> comboBoxAcquisFinAction;
+	@FXML
+	private ComboBox<Required> comboBoxAcquisFinAction;
 
-	
-    @FXML
-    private ComboBox<ExitType> comboBoxTypeSortie;
-    
-    @FXML
-    private TableColumn<?, ?> columnAcquis;
+	@FXML
+	private ComboBox<ExitType> comboBoxTypeSortie;
 
+	@FXML
+	private TableColumn<Required, String> columnAcquis;
 
-	 
-	 @FXML
-	    private GridPane GridPaneSortie;
-	 
+	@FXML
+	private GridPane GridPaneSortie;
 
-	    @FXML
-	    private TableColumn<?, ?> columnSortie;
+	@FXML
+	private TableColumn<ExitType, String> columnSortie;
 
 	// **************************************************************************************************
 	// FIELDS
@@ -250,8 +246,8 @@ public class EventManager extends BorderPane {
 	 * The object confirm to create the PopUp Confirm
 	 */
 	private Confirm confirm = new Confirm();
-	
-	/**Object that manage the transition */
+
+	/** Object that manage the transition */
 	private EventManagerTransition transition;
 
 	// **************************************************************************************************
@@ -286,7 +282,7 @@ public class EventManager extends BorderPane {
 				hBoxFilter.setManaged(true);
 			}
 		});
-		
+
 		sumColumnDuration();
 	}
 
@@ -327,13 +323,12 @@ public class EventManager extends BorderPane {
 			comboEmp.getCheckModel().clearChecks();
 			textAreaNotes.setText(event.getEventNote());
 			comBoTheme.getSelectionModel().select(event.getTheme());
-		
-			/*
-			 * comboBoxAcquisFinAction.getSelectionModel().select(event.getAcquis());
-			 * comboBoxTypeSortie.getSelectionModel().select(event.getSortie());
-			 */
+
+			comboBoxAcquisFinAction.getSelectionModel().select(event.getRequired());
+			comboBoxTypeSortie.getSelectionModel().select(event.getExittype());
+
 			datePickerEvent.setValue(DateUtil.convertToLocalDate(event.getEventDate()));
-		//	checkExit.setSelected(event.getIsSortie());
+			checkExit.setSelected(event.getExitEvent());
 
 			if (event.getEventDuration() != null) {
 				spinnerHour.getValueFactory().setValue(event.getEventDuration() / 60);
@@ -367,26 +362,25 @@ public class EventManager extends BorderPane {
 		buttonSaveAll.setDisable(false);
 
 	}
-	
+
 	private void allFilter() {
-		
+
 	}
-	
+
 	/**
 	 * Fill the tableview if the date filter correspond with the data
 	 */
 	private void filterDate() {
 
 		listFil.predicateProperty().bind(Bindings.createObjectBinding(() -> event -> {
-			if ((datePickerBegin.getValue() == null) ||
-			(event.getEventDate().compareTo(DateUtil.convertToDate(datePickerBegin.getValue())) >= 0)
-				&& (datePickerEnd.getValue() == null) ||
-			event.getEventDate().compareTo(DateUtil.convertToDate(datePickerBegin.getValue())) >= 0
-			&& (event.getEventDate().compareTo(DateUtil.convertToDate(datePickerEnd.getValue())) <= 0))
+			if ((datePickerBegin.getValue() == null)
+					|| (event.getEventDate().compareTo(DateUtil.convertToDate(datePickerBegin.getValue())) >= 0)
+							&& (datePickerEnd.getValue() == null)
+					|| event.getEventDate().compareTo(DateUtil.convertToDate(datePickerBegin.getValue())) >= 0
+							&& (event.getEventDate().compareTo(DateUtil.convertToDate(datePickerEnd.getValue())) <= 0))
 				if (setupSearchBar(event))
 					if (filterComboBox(event))
 						return true;
-		
 
 			return false;
 		}, datePickerBegin.valueProperty(), datePickerEnd.valueProperty(), searchBar.textProperty(),
@@ -401,6 +395,7 @@ public class EventManager extends BorderPane {
 	/**
 	 * Boolean return true if the search bar has at least one letter of the property
 	 * in the table view
+	 * 
 	 * @param event
 	 * @return boolean
 	 */
@@ -438,8 +433,8 @@ public class EventManager extends BorderPane {
 	 * @return
 	 */
 	private boolean filterComboBox(Event event) {
-		if ((comboBoxFilterTheme.getValue() == null) ||  (event.getTheme() != null && comboBoxFilterTheme.getSelectionModel().getSelectedItem()
-				.getIdTheme().equals(event.getTheme().getIdTheme())))  {
+		if ((comboBoxFilterTheme.getValue() == null) || (event.getTheme() != null && comboBoxFilterTheme
+				.getSelectionModel().getSelectedItem().getIdTheme().equals(event.getTheme().getIdTheme()))) {
 			if (comboBoxFilterType.getValue() == null || event.getEventType() != null && comboBoxFilterType
 					.getSelectionModel().getSelectedItem().getIdEventType() == (event.getEventType().getIdEventType()))
 				if (comboBoxFilterEmployee.getValue() == null
@@ -464,7 +459,7 @@ public class EventManager extends BorderPane {
 	private void setupSpinner() {
 		spinnerHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0, 1));
 		spinnerMinute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60, 0, 1));
-		DurationPicker.avoidString(spinnerHour,4);
+		DurationPicker.avoidString(spinnerHour, 4);
 		DurationPicker.avoidString(spinnerMinute, 3);
 		DurationPicker.linkSpinner(spinnerMinute, spinnerHour, 60);
 
@@ -477,15 +472,18 @@ public class EventManager extends BorderPane {
 		columnDate.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
 		columnTheme.setCellValueFactory(new PropertyValueFactory<>("theme"));
 		tableColumnEmployee.setCellValueFactory(
-		cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
+				cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
 		columnNotes.setCellValueFactory(new PropertyValueFactory<>("eventNote"));
 		columnDuration.setCellValueFactory(new PropertyValueFactory<>("eventDuration"));
 		columnType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+
 		columnSortie.setCellValueFactory(new PropertyValueFactory<>("exittype"));
 		columnAcquis.setCellValueFactory(new PropertyValueFactory<>("required"));
+
 		columnEdit.setCellFactory(ButtonTableCell.<Event>forTableColumn(null, "button-edit", "far-edit", (Event e) -> {
 			vBoxEdit.setManaged(true);
 			vBoxEdit.setVisible(true);
+			
 			buttonModifyCurentTheme.setVisible(true);
 			editEvent = e;
 			fillField(e);
@@ -503,20 +501,19 @@ public class EventManager extends BorderPane {
 					return e;
 				}));
 
-		columnDate.setCellFactory(column -> 
-			new TableCell<>() {
-				private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		columnDate.setCellFactory(column -> new TableCell<>() {
+			private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
-				@Override
-				protected void updateItem(Date item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty) {
-						setText(null);
-					} else {
-						setText(format.format(item));
-					}
+			@Override
+			protected void updateItem(Date item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setText(null);
+				} else {
+					setText(format.format(item));
 				}
-			
+			}
+
 		});
 
 	}
@@ -537,8 +534,6 @@ public class EventManager extends BorderPane {
 		comboBoxFilterType.getItems().addAll(comboType.getItems());
 		comboBoxTypeSortie.getItems().addAll(new ExitTypeDAO().getList());
 		comboBoxAcquisFinAction.getItems().addAll(new RequiredDAO().getList());
-		
-		
 
 	}
 
@@ -562,7 +557,7 @@ public class EventManager extends BorderPane {
 	 */
 	private void deleteEvent(EventDAO dao) {
 		for (Event object : CollectionUtils.subtract(selected.getEvents(), listEvent)) {
-			dao.remove(object,false);
+			dao.remove(object, false);
 		}
 	}
 
@@ -594,12 +589,12 @@ public class EventManager extends BorderPane {
 			alert.showAndWait();
 		} else {
 			transition.startAddEventAnimation();
-			
+
 			vBoxEdit.setVisible(false);
 			vBoxEdit.setManaged(false);
 			columnEdit.setVisible(true);
 			columnDelete.setVisible(true);
-		
+
 			Event eve = new Event();
 			eve.getEmployees().addAll(comboEmp.getCheckModel().getCheckedItems());
 			eve.setEventNote(textAreaNotes.getText());
@@ -621,9 +616,9 @@ public class EventManager extends BorderPane {
 			buttonAddCurrentTheme.setVisible(false);
 			tableView.getSelectionModel().clearSelection();
 			tableView.sort();
-			
+
 		}
-		
+
 		saveState = false;
 
 	}
@@ -684,7 +679,7 @@ public class EventManager extends BorderPane {
 				vBoxSortie.setVisible(true);
 			}
 		});
-		
+
 		columnEdit.setVisible(false);
 		columnDelete.setVisible(false);
 		clearFields();
@@ -739,35 +734,34 @@ public class EventManager extends BorderPane {
 	@FXML
 	private void actionSave(ActionEvent eve) {
 		EventDAO dao = new EventDAO();
-		
+
 		Task<Void> task = new Task<>() {
 
 			@Override
 			protected Void call() throws Exception {
-				int progress=0;
+				int progress = 0;
 				for (Event event : listEvent) {
-					dao.saveOrUpdate(event,false);
-					updateProgress(progress++,listEvent.size());
-					updateMessage("Ligne : "+progress);
+					dao.saveOrUpdate(event, false);
+					updateProgress(progress++, listEvent.size());
+					updateMessage("Ligne : " + progress);
 				}
-				
+
 				deleteEvent(dao);
 				return null;
 			}
-			
+
 		};
-		
-		task.setOnSucceeded(event->Notifications.create().title("Info").text("Sauvegarde effectuée").showInformation());
-		if(listEvent.size()>20) {
-			ProgressDialog progressDialog=new ProgressDialog(task);
+
+		task.setOnSucceeded(
+				event -> Notifications.create().title("Info").text("Sauvegarde effectuée").showInformation());
+		if (listEvent.size() > 20) {
+			ProgressDialog progressDialog = new ProgressDialog(task);
 			progressDialog.setTitle("Sauvegarde");
 			progressDialog.setHeaderText("Sauvegarde en cours");
 			progressDialog.show();
 		}
-		Thread taskThread=new Thread(task);
+		Thread taskThread = new Thread(task);
 		taskThread.start();
-
-
 
 		Stage s = (Stage) ((Node) eve.getSource()).getScene().getWindow();
 		s.close();
@@ -818,12 +812,12 @@ public class EventManager extends BorderPane {
 	// **************************************************************************************************
 	// LOAD Methods
 	// **************************************************************************************************
-	
+
 	public void loadTransition() {
-		transition= new EventManagerTransition();
+		transition = new EventManagerTransition();
 		transition.addEventAnimation(tableView, vBoxEdit);
 	}
-	
+
 	/**
 	 * Method to load an fxml and set the controller
 	 */
@@ -832,38 +826,36 @@ public class EventManager extends BorderPane {
 
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-		
+
 		try {
 			fxmlLoader.load();
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
-		
+
 	}
 
 	public boolean getSaveState() {
 		return saveState;
 	}
-	
+
 	/**
-	 *  Method to Sum all ColumnDuration divide by 60
+	 * Method to Sum all ColumnDuration divide by 60
 	 */
-	 
+
 	public void sumColumnDuration() {
-			
-		
+
 		DoubleBinding totalMinute = Bindings.createDoubleBinding(() -> {
-		    double total = 0;
-		    for (Event event : tableView.getItems()) {
-		        total += event.getEventDuration();
-		    }
-		    return total;
+			double total = 0;
+			for (Event event : tableView.getItems()) {
+				total += event.getEventDuration();
+			}
+			return total;
 		}, tableView.getItems());
-		
+
 		DoubleBinding divisionTotalMinute = totalMinute.divide(60.0);
 
 		totalMinuteLabel.textProperty().bind(divisionTotalMinute.asString());
 	}
-	
+
 }

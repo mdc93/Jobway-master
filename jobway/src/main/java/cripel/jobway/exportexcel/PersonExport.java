@@ -107,8 +107,8 @@ public class PersonExport {
 		//List <Event> events=new ArrayList<> ();
 		
 		  List <Event> filterevents = person.getEvents().stream().filter((Event event)
-		  ->{return event.getExitEvent()!= null;}).collect(Collectors.toList());
-		 
+		  ->{return event.getExitEvent().toString()!="0";}).collect(Collectors.toList());
+		
 	
 		if (!filterevents.isEmpty()) {
 			int id = 0;

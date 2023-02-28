@@ -47,6 +47,9 @@ public class Person implements java.io.Serializable {
 
 	/** The situation territory. */
 	private SituationTerritory situationterritory;
+	
+	/** The situation Professionnelle. */
+	private SituationProf situationprof;
 
 	/** The worksearch information */
 	private WorkSearch worksearch;
@@ -229,6 +232,16 @@ public class Person implements java.io.Serializable {
 	public void setSituationterritory(SituationTerritory situationterritory) {
 		this.situationterritory = situationterritory;
 	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSituationProf", nullable = true)
+	public SituationProf getSituationprof() {
+		return this.situationprof;
+	}
+
+	public void setSituationprof(SituationProf situationprof) {
+		this.situationprof = situationprof;
+	}
+
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idWorkSearch")
