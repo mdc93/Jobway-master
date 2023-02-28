@@ -25,7 +25,7 @@
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="523.0" prefWidth="822.0" BorderPane.alignment="CENTER">
          <children>
@@ -206,20 +206,20 @@
                   </VBox>
                   <VBox fx:id="vBoxEdit" prefHeight="722.0" prefWidth="380.0">
                      <children>
-                        <HBox fx:id="hBoxSortie" prefHeight="100.0" prefWidth="200.0">
+                        <VBox fx:id="vBoxEdit1" prefHeight="786.0" prefWidth="380.0">
                            <children>
-                              <Label prefHeight="55.0" prefWidth="107.0" text="Sortie">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <ToggleSwitch fx:id="checkExit" prefHeight="51.0" prefWidth="62.0" selected="true" />
-                           </children>
-                        </HBox>
-                        <VBox fx:id="vBoxSortie" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Region prefHeight="23.0" prefWidth="380.0" />
-                              <GridPane fx:id="GridPaneSortie" prefHeight="164.0" prefWidth="380.0">
+                              <Region prefHeight="115.0" prefWidth="380.0" />
+                              <HBox fx:id="hBoxSortie" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="192.0" text="Sortie">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ToggleSwitch fx:id="checkExit" prefHeight="24.0" prefWidth="36.0" />
+                                 </children>
+                              </HBox>
+                              <GridPane fx:id="gridPaneSortie" prefHeight="164.0" prefWidth="380.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -243,10 +243,6 @@
                                     </Label>
                                  </children>
                               </GridPane>
-                           </children>
-                        </VBox>
-                        <VBox fx:id="vBoxEdit" prefHeight="554.0" prefWidth="380.0">
-                           <children>
                               <Region prefHeight="150.0" prefWidth="380.0" />
                               <GridPane prefHeight="547.0" prefWidth="380.0">
                                 <columnConstraints>
@@ -336,9 +332,9 @@
                                     </GridPane>
                                  </children>
                               </GridPane>
+                              <Region prefHeight="100.0" prefWidth="380.0" />
                            </children>
                         </VBox>
-                        <Region prefHeight="24.0" prefWidth="380.0" />
                      </children>
                      <HBox.margin>
                         <Insets left="10.0" />

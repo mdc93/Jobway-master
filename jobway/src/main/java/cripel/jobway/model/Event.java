@@ -43,7 +43,7 @@ public class Event implements java.io.Serializable {
 
 	/** The event type. */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idEventType")
+	@JoinColumn(name = "idEventType", nullable = true)
 	private EventType eventType;
 
 	/** The person which the event belong */
@@ -69,11 +69,11 @@ public class Event implements java.io.Serializable {
 	@Column(name = "eventNote", length = 100)
 	private String eventNote;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idExitType", nullable = false)
+	@JoinColumn(name = "idExitType", nullable = true)
 	private ExitType exittype;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idRequired", nullable = false)
+	@JoinColumn(name = "idRequired", nullable = true)
 	private Required required;
 	/** The employees that participated in the event */
 

@@ -21,6 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.SearchableComboBox?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
 
 <fx:root prefHeight="917.0" prefWidth="1137.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -36,10 +37,11 @@
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="307.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="58.99999084472656" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="121.0" minHeight="0.0" prefHeight="13.400009155273445" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="177.99999389648437" minHeight="10.0" prefHeight="131.8" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="121.0" minHeight="5.600006103515625" prefHeight="57.20001220703128" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="51.600006103515625" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Interne :" textAlignment="RIGHT" GridPane.rowIndex="2">
@@ -47,7 +49,7 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Externe :" GridPane.rowIndex="3">
+                        <Label text="Externe :" GridPane.rowIndex="4">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -61,11 +63,11 @@
                            <toggleGroup>
                               <ToggleGroup fx:id="toggleGroup" />
                            </toggleGroup></RadioButton>
-                        <RadioButton fx:id="radioBtForem" mnemonicParsing="false" text="Forem" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <RadioButton fx:id="radioBtForem" mnemonicParsing="false" text="Forem" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font size="15.0" />
                            </font></RadioButton>
-                        <RadioButton fx:id="radioBtOther" mnemonicParsing="false" text="Autre" toggleGroup="$toggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <RadioButton fx:id="radioBtOther" mnemonicParsing="false" text="Autre" toggleGroup="$toggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <font>
                               <Font size="15.0" />
                            </font></RadioButton>
@@ -87,7 +89,7 @@
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </VBox>
-                        <TextField fx:id="textFieldOtherOrientation" maxWidth="150.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <TextField fx:id="textFieldOtherOrientation" maxWidth="150.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                         <Label text="Référent Jobway :" textFill="#2384bc" GridPane.columnIndex="2">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -104,6 +106,12 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
+                        <Label text="Nom du référent DIPA" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <CustomTextField fx:id="labelRefDIPA" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                      <HBox.margin>
                         <Insets />

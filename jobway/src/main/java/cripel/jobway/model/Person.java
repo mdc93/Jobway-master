@@ -33,6 +33,11 @@ public class Person implements java.io.Serializable {
 	/** The id person. */
 	private Integer idPerson;
 
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "idDipa", nullable = true)
+	// pourquoi quand je rajoute la "clé" étrangère ici, ça ne se connecte plus à la DB ?
+	private Dipa dipa;
+
 	/** The civilstatus. */
 	private CivilStatus civilstatus;
 
@@ -171,6 +176,14 @@ public class Person implements java.io.Serializable {
 
 	/** The workexperiences of the person. */
 	private Set<WorkExperience> workexperiences = new HashSet<>(0);
+
+//	public Dipa getDipa() {
+//		return dipa;
+//	}
+//
+//	public void setDipa(Dipa dipa) {
+//		this.dipa = dipa;
+//	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

@@ -213,7 +213,7 @@ public class EventManager extends BorderPane {
 	private TableColumn<Required, String> columnAcquis;
 
 	@FXML
-	private GridPane GridPaneSortie;
+	private GridPane gridPaneSortie;
 
 	@FXML
 	private TableColumn<ExitType, String> columnSortie;
@@ -309,6 +309,15 @@ public class EventManager extends BorderPane {
 		tableView.getSortOrder().add(columnDate);
 		tableView.sort();
 		focusDatePicker();
+		gridPaneSortie.setVisible(false);
+
+		checkExit.selectedProperty().addListener((obs, oldValue, newValue) -> {
+			if (checkExit.isSelected()) {
+				gridPaneSortie.setVisible(true);
+			} else {
+				gridPaneSortie.setVisible(false);
+			}
+		});
 
 	}
 
@@ -550,6 +559,7 @@ public class EventManager extends BorderPane {
 		textAreaNotes.clear();
 		comboBoxTypeSortie.setValue(null);
 		comboBoxAcquisFinAction.setValue(null);
+		checkExit.setSelected(false);
 	}
 
 	/**
@@ -571,15 +581,16 @@ public class EventManager extends BorderPane {
 	@FXML
 	void actionAdd() {
 
-		if (datePickerEvent.getValue() == null) {
+		if (datePickerEvent.getValue() == null)
+		{
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Erreur");
 
 			alert.setContentText("La date doit être valide !");
 
 			alert.showAndWait();
-		} else if (comBoTheme.getValue() == null)
-
+		}
+		else if (comBoTheme.getValue() == null)
 		{
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Erreur");
@@ -587,13 +598,16 @@ public class EventManager extends BorderPane {
 			alert.setContentText("La thématique ne peut pas être vide");
 
 			alert.showAndWait();
-		} else {
+		}
+		else
+		{
 			transition.startAddEventAnimation();
 
 			vBoxEdit.setVisible(false);
 			vBoxEdit.setManaged(false);
 			columnEdit.setVisible(true);
 			columnDelete.setVisible(true);
+
 
 			Event eve = new Event();
 			eve.getEmployees().addAll(comboEmp.getCheckModel().getCheckedItems());
@@ -605,8 +619,13 @@ public class EventManager extends BorderPane {
 			eve.setPerson(selected);
 			eve.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
 			eve.setExitEvent(checkExit.isSelected());
-			eve.setRequired(comboBoxAcquisFinAction.getSelectionModel().getSelectedItem());
-			eve.setExittype(comboBoxTypeSortie.getSelectionModel().getSelectedItem());
+
+			if(checkExit.isSelected())
+			{
+				eve.setExittype(comboBoxTypeSortie.getSelectionModel().getSelectedItem());
+				eve.setRequired(comboBoxAcquisFinAction.getSelectionModel().getSelectedItem());
+			}
+
 			listEvent.add(eve);
 			tableView.refresh();
 
@@ -648,9 +667,19 @@ public class EventManager extends BorderPane {
 			editEvent.setEventType(comboType.getSelectionModel().getSelectedItem());
 			editEvent.setPerson(selected);
 			editEvent.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
-			editEvent.setRequired(comboBoxAcquisFinAction.getSelectionModel().getSelectedItem());
-			editEvent.setExittype(comboBoxTypeSortie.getSelectionModel().getSelectedItem());
 			editEvent.setExitEvent(checkExit.isSelected());
+
+			if(checkExit.isSelected())
+			{
+				editEvent.setExittype(comboBoxTypeSortie.getSelectionModel().getSelectedItem());
+				editEvent.setRequired(comboBoxAcquisFinAction.getSelectionModel().getSelectedItem());
+			}
+			else
+			{
+				editEvent.setExittype(null);
+				editEvent.setRequired(null);
+			}
+
 			enableButtonsAndDisableNewThemFields();
 
 			clearFields();
@@ -672,13 +701,6 @@ public class EventManager extends BorderPane {
 	 */
 	@FXML
 	void addNewTheme(ActionEvent event) {
-		checkExit.selectedProperty().addListener((obs, oldValue, newValue) -> {
-			if (!checkExit.isSelected()) {
-				vBoxSortie.setVisible(false);
-			} else {
-				vBoxSortie.setVisible(true);
-			}
-		});
 
 		columnEdit.setVisible(false);
 		columnDelete.setVisible(false);
