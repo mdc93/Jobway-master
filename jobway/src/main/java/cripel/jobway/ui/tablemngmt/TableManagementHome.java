@@ -46,6 +46,7 @@ public class TableManagementHome extends BorderPane {
 		tabPane.getTabs().add(new Tab("Test langue", new TMFrenchTest()));
 		tabPane.getTabs().add(new Tab("Transport", new TMLocomotionMean()));
 		tabPane.getTabs().add(new Tab("Situation", new TMSitTerr()));
+		tabPane.getTabs().add(new Tab("Situation Prof", new TMSitProf()));
 		tabPane.getTabs().add(new Tab("Exp Pro", new TMWorkExpType()));
 		tabPane.getTabs().add(new Tab("Secteur", new TMWorkSector()));
 		tabPane.getTabs().add(new Tab("Dispon.", new TMAvailability()));

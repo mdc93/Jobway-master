@@ -245,7 +245,7 @@
                               </GridPane>
                            </children>
                         </VBox>
-                        <VBox prefHeight="554.0" prefWidth="380.0">
+                        <VBox fx:id="vBoxEdit" prefHeight="554.0" prefWidth="380.0">
                            <children>
                               <Region prefHeight="150.0" prefWidth="380.0" />
                               <GridPane prefHeight="547.0" prefWidth="380.0">
