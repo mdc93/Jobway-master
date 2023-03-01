@@ -541,6 +541,7 @@ public class EventManager extends BorderPane {
 		comboType.getItems().addAll(new EventTypeDAO().getList());
 		comboBoxFilterType.getItems().add(null);
 		comboBoxFilterType.getItems().addAll(comboType.getItems());
+
 		comboBoxTypeSortie.getItems().addAll(new ExitTypeDAO().getList());
 		comboBoxAcquisFinAction.getItems().addAll(new RequiredDAO().getList());
 

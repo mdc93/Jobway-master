@@ -5,17 +5,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
-//@Table(name = "dipa")
+@Entity
+@Table(name = "dipa")
 public class Dipa implements Serializable {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "idDipa", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idDipa", nullable = false)
     private Integer idDipa;
     private String dipaName;
 
     private Boolean isDelete;
-//    @OneToMany(mappedBy = "dipa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "dipa")
     private List<Person> people = new ArrayList<Person>(0);
 
     public String getDipaName() {
@@ -50,4 +50,10 @@ public class Dipa implements Serializable {
         this.idDipa = id;
     }
 
+    @Override
+    public String toString() {
+        return "Dipa{" +
+                "dipaName='" + dipaName + '\'' +
+                '}';
+    }
 }

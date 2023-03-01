@@ -5,24 +5,12 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.function.UnaryOperator;
 
+import cripel.jobway.dao.*;
+import cripel.jobway.model.*;
+import javafx.scene.layout.RowConstraints;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.SearchableComboBox;
 
-import cripel.jobway.dao.CountryDAO;
-import cripel.jobway.dao.EmployeeDAO;
-import cripel.jobway.dao.FamilyReunionDAO;
-import cripel.jobway.dao.PersonDAO;
-import cripel.jobway.dao.PostalCodeDAO;
-import cripel.jobway.dao.SituationTerritoryDAO;
-import cripel.jobway.model.City;
-import cripel.jobway.model.Country;
-import cripel.jobway.model.Employee;
-import cripel.jobway.model.FamilyReunion;
-import cripel.jobway.model.Other;
-import cripel.jobway.model.Person;
-import cripel.jobway.model.Postalcode;
-import cripel.jobway.model.SituationTerritory;
-import cripel.jobway.model.User;
 import cripel.jobway.utilities.DateUtil;
 import cripel.jobway.utilities.fxutil.DatePickerUtil;
 import javafx.animation.FadeTransition;
@@ -54,6 +42,8 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableStringValue;
 import javafx.beans.value.ObservableValue;
+import org.controlsfx.control.textfield.CustomTextField;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * The Controller Class FormA is the first form where the person's informations
@@ -189,9 +179,19 @@ public class FormA extends BorderPane {
 	@FXML
 	private Label labelRessortissant;
 
+	@FXML
+	private SearchableComboBox<Dipa> comboBoxDipa;
+
+	@FXML
+	private Label labelDipa;
+
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
+
+	private ObservableList<Dipa> listDipa = FXCollections
+			.observableArrayList(new DipaDAO().getListDelete(false));
 
 	/** Observable list of country fetched from the database. */
 	private ObservableList<Country> listCountry = FXCollections
@@ -221,6 +221,7 @@ public class FormA extends BorderPane {
 
 	
 	private FadeTransition fade=new FadeTransition(Duration.millis(500));
+
 
 	// **************************************************************************************************
 	// CONSTRUCTORS
@@ -301,7 +302,8 @@ public class FormA extends BorderPane {
 				textFieldOtherOrientation.setText(person.getPersonOrientation());
 			} else {
 				radioBtRefDipa.setSelected(true);
-			}
+				comboBoxDipa.setValue(person.getDipa());
+				}
 		}
 	}
 
@@ -347,6 +349,19 @@ public class FormA extends BorderPane {
 				textAreaOrientationNote.setText(oldValue);
 			labelRemainingChar.setText((100 - newValue.length()) + "");
 		});
+
+		radioBtRefDipa.selectedProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue == true) {
+				comboBoxDipa.setVisible(true);
+				labelDipa.setVisible(true);
+			}
+			else {
+				comboBoxDipa.setVisible(false);
+				labelDipa.setVisible(false);
+			}
+		});
+
+		comboBoxDipa.setItems(listDipa);
 	}
 
 	/**
