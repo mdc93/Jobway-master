@@ -1,0 +1,144 @@
+/* Boutons */
+.button {
+    -fx-background-color: bleu;
+    -fx-text-fill: blanc;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 4px;
+    -fx-cursor: hand;
+}
+
+/* Etiquettes */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+}
+
+/* Zones de texte */
+.text-area {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+    -fx-background-color: blanc;
+    -fx-border-color: noir;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+/* ListView */
+.list-view {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background-color: blanc;
+    -fx-border-color: noir;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+/* Séparateur */
+.separator {
+    -fx-background-color: noir;
+}
+
+/* TableColumn */
+.table-column {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+}
+
+/* TableView */
+.table-view {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+}
+
+/* BorderPane */
+.border-pane {
+    -fx-background-color: blanc;
+}
+
+/* ColumnConstraints */
+.column-constraints {
+    -fx-pref-width: 100;
+}
+
+/* GridPane */
+.grid-pane {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}
+
+/* HBox */
+.h-box {
+    -fx-spacing: 10;
+}
+
+/* RowConstraints */
+.row-constraints {
+    -fx-pref-height: 30;
+}
+
+/* VBox */
+.v-box {
+    -fx-spacing: 10;
+}
+
+/* CheckBox */
+.check-box {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+    -fx-background-color: blanc;
+    -fx-border-color: noir;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+/* DatePicker */
+.date-picker {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+    -fx-background-color: blanc;
+    -fx-border-color: noir;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+/* ProgressIndicator */
+.progress-indicator {
+    -fx-progress-color: vert;
+}
+
+/* ToggleButton */
+.toggle-button {
+    -fx-background-color: blanc;
+    -fx-border-color: noir;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-cursor: hand;
+}
+
+/* Tooltip */
+.tooltip {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: noir;
+    -fx-background-color: blanc;
+    -fx-border-color:

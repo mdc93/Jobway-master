@@ -64,6 +64,7 @@ public class PoiTableViewExcel {
 
 		Double total = 0.0;
 		for (int i = 0; i < tableView.getItems().size(); i++) {
+			
 		  Object cell = tableView.getColumns().get(1).getCellData(i);
 		  if (cell instanceof Number) {
 		    total += ((Number) cell).doubleValue();
@@ -72,7 +73,9 @@ public class PoiTableViewExcel {
 		
 		total = total/ 60.0 ;
 		
-		PoiUtil.createCell(workbook, rowTotal, 1, total);
+		String formattedTotal = String.format("%.2f", total);
+		
+		PoiUtil.createCell(workbook, rowTotal, 1, formattedTotal);
 		}
 	
 }

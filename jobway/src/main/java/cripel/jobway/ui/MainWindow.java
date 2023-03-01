@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -48,6 +49,10 @@ public class MainWindow extends BorderPane {
 	/** The button to close the program */
 	@FXML
 	private Button buttonClose;
+	
+	/** The button to see statistique of employees */
+	@FXML
+	private Button buttonStat;
 
 	/** The label for the username connected */
 	@FXML
@@ -67,6 +72,8 @@ public class MainWindow extends BorderPane {
 	 * User currently selected
 	 */
 	User userSelected;
+	
+	
 
 	// **************************************************************************************************
 	// CONSTRUCTORS
@@ -116,6 +123,7 @@ public class MainWindow extends BorderPane {
 		if (userSelected.getUserlevel().getUserLevelName().contains("Administrateur")) {
 			buttonGestion.setDisable(false);
 			buttonUsers.setDisable(false);
+			buttonStat.setDisable(false);
 		}
 	}
 
@@ -123,6 +131,20 @@ public class MainWindow extends BorderPane {
 	// FXML Methods
 	// **************************************************************************************************
 
+	/**
+	 * Method to open the statistic's window
+	 */
+	@FXML
+	public void toStatistic() {
+		
+		if (borderPaneContent.getCenter() != null) {
+			borderPaneContent.setCenter(null);
+		}
+		borderPaneContent.setCenter(new MenuStat());
+		borderPaneContent.getLeft().setViewOrder(1);
+		borderPaneContent.getCenter().setViewOrder(2);
+	}
+	
 	/**
 	 * Method to open the gestion's window
 	 */
