@@ -252,7 +252,7 @@
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label text="Durée d'inoccupation (mois) :" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label text="Durée d'inoccupation (mois) :" GridPane.columnIndex="2">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -262,11 +262,10 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelSituationProfFSE" prefHeight="37.0" prefWidth="255.0"
-                               GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="labelSituationProfFSE" prefHeight="37.0" prefWidth="255.0" GridPane.columnIndex="2" />
 
                         <TextField fx:id="textFieldMutualName" maxHeight="25.0" maxWidth="150.0" prefWidth="138.0" visible="false" GridPane.columnIndex="3" />
-                        <ComboBox fx:id="comboBoxUnemployementDuration" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="comboBoxUnemployementDuration" prefWidth="150.0" GridPane.columnIndex="3" />
                         <CheckListView fx:id="checkListIncome" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
                            <GridPane.margin>
                               <Insets bottom="10.0" right="50.0" />
@@ -307,6 +306,12 @@
                               </ToggleButton>
                            </children>
                         </GridPane>
+                        <Label text="Date d'inscription forem :" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="datePickerForemSubscription" disable="true" promptText="jj/mm/aaaa" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                      </children>
                      <HBox.margin>
                         <Insets />

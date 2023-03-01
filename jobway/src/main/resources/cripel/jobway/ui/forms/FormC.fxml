@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -53,16 +52,10 @@
                         <Insets left="15.0" />
                      </padding>
                      <children>
-                        <CheckBox fx:id="checkBoxForemSubscription" mnemonicParsing="false" text="Inscription Forem :" GridPane.rowIndex="1">
+                        <CheckBox fx:id="checkBoxForemSubscription" mnemonicParsing="false" text="Inscription Forem :" visible="false">
                            <font>
                               <Font size="15.0" />
                            </font></CheckBox>
-                        <Label text="Date d'inscription forem :" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <DatePicker fx:id="datePickerForemSubscription" disable="true" promptText="jj/mm/aaaa" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <GridPane GridPane.rowIndex="2">
                           <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="82.0" />
@@ -149,6 +142,12 @@
                         </Label>
                         <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="3" />
                         <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="9" />
+                        <Label text="Situation professionnelle :" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboBoxSituationPro" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

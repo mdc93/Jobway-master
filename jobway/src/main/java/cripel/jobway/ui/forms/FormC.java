@@ -2,16 +2,13 @@ package cripel.jobway.ui.forms;
 
 import java.io.IOException;
 
+import cripel.jobway.dao.SituationProfDAO;
+import cripel.jobway.model.*;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.ListSelectionView;
 
 import cripel.jobway.dao.DriverLicenseDAO;
 import cripel.jobway.dao.LocomotionMeanDAO;
-import cripel.jobway.model.Disability;
-import cripel.jobway.model.DriverLicense;
-import cripel.jobway.model.LocomotionMean;
-import cripel.jobway.model.PerDrL;
-import cripel.jobway.model.Person;
 import cripel.jobway.utilities.DateUtil;
 import cripel.jobway.utilities.fxutil.DatePickerUtil;
 import javafx.beans.value.ObservableValue;
@@ -48,8 +45,8 @@ public class FormC extends BorderPane {
 	private ToggleButton tgbuttonDrivingLYes;
 
 	/** The checkbox for the forem subscription */
-	@FXML
-	private CheckBox checkBoxForemSubscription;
+//	@FXML
+//	private CheckBox checkBoxForemSubscription;
 
 	/** The checkbox to specify if the person has handicaps */
 	@FXML
@@ -72,8 +69,8 @@ public class FormC extends BorderPane {
 	private CheckComboBox<DriverLicense> checkComboBoxDrivingLicense;
 
 	/** The datepicker for the forum subscription */
-	@FXML
-	private DatePicker datePickerForemSubscription;
+//	@FXML
+//	private DatePicker datePickerForemSubscription;
 
 	/** The textfield other precision */
 	@FXML
@@ -99,6 +96,9 @@ public class FormC extends BorderPane {
 	@FXML
 	private ListSelectionView<DriverLicense> listSelectionViewLicense;
 
+	@FXML
+	private ComboBox<SituationProf> comboBoxSituationPro;
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
@@ -110,6 +110,8 @@ public class FormC extends BorderPane {
 			.observableArrayList(new LocomotionMeanDAO().getListDelete(false));
 	private ObservableList<DriverLicense> listDriverLicense = FXCollections
 			.observableArrayList(new DriverLicenseDAO().getListDelete(false));
+	private ObservableList<SituationProf> listSituationPro = FXCollections
+			.observableArrayList(new SituationProfDAO().getListDelete(false));
 
 	/**
 	 * Togglegroups for togglebuttons
@@ -139,18 +141,13 @@ public class FormC extends BorderPane {
 		load();
 		setUp();
 
-		datePickerForemSubscription.setValue(DateUtil.convertToLocalDate(person.getPersonForemInsDate()));
-
-		if (person.getPersonForemInsDate() != null) {
-			checkBoxForemSubscription.setSelected(true);
-		}
-
 		if (person.isPersonWorkAccess() != null) {
 			tgbuttonWorkAccessYes.setSelected(person.isPersonWorkAccess());
 			tgbuttonWorkAccessNo.setSelected(!person.isPersonWorkAccess());
 
 		}
 
+		comboBoxSituationPro.setValue(person.getSituationprof());
 		textFieldNotes.setText(person.getPersonNotes());
 
 		if (!person.getPerDrL().isEmpty()) {
@@ -200,10 +197,11 @@ public class FormC extends BorderPane {
 	public void setUp() {
 		comboBoxLocomotionMeans.setItems(listLocomotionMean);
 		checkComboBoxDrivingLicense.getItems().addAll(listDriverLicense);
+		comboBoxSituationPro.getItems().addAll(listSituationPro);
 
 		listenerEnableField();
 		toggleButtonsSetup();
-		focusDatePicker();
+//		focusDatePicker();
 
 		listSelectionViewLicense.setSourceHeader(new Label("Valable en Belgique"));
 		listSelectionViewLicense.getSourceHeader().setStyle("-fx-font-weight: bold;");
@@ -269,17 +267,6 @@ public class FormC extends BorderPane {
 	 */
 	public void listenerEnableField() {
 
-		checkBoxForemSubscription.selectedProperty()
-				.addListener((ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) -> {
-					if (Boolean.TRUE.equals(newValue))
-						datePickerForemSubscription.setDisable(false);
-					else {
-						datePickerForemSubscription.setDisable(true);
-						datePickerForemSubscription.setValue(null);
-					}
-
-				});
-
 		checkBoxOtherDifficulty.selectedProperty()
 				.addListener((ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) -> {
 					if (Boolean.TRUE.equals(newValue))
@@ -301,20 +288,13 @@ public class FormC extends BorderPane {
 	public boolean checkEncodingState() {
 		boolean encodingFlag;
 
-		if (datePickerForemSubscription.getValue() == null) {
-			encodingFlag = false;
-		} else
-			encodingFlag = true;
-
-		return encodingFlag;
-	}
-
-	/**
-	 * Check the value in {@link #datePickerForemSubscription} and replace by a
-	 * valid date if focus is lost.
-	 */
-	public void focusDatePicker() {
-		DatePickerUtil.listenerValidDate(datePickerForemSubscription);
+//		if (datePickerForemSubscription.getValue() == null) {
+//			encodingFlag = false;
+//		} else
+//			encodingFlag = true;
+//
+//		return encodingFlag;
+		return true;
 	}
 
 	/**
@@ -324,8 +304,7 @@ public class FormC extends BorderPane {
 	 */
 	public void saveData(Person person) {
 
-		person.setPersonForemInsDate(DateUtil.convertToDate(datePickerForemSubscription.getValue()));
-
+		person.setSituationprof(comboBoxSituationPro.getValue());
 		person.setPersonNotes(textFieldNotes.getText());
 
 		person.getPerDrL().clear();

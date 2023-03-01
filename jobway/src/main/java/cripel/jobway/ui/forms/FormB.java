@@ -2,6 +2,7 @@ package cripel.jobway.ui.forms;
 
 import java.io.IOException;
 
+import javafx.beans.value.ObservableValue;
 import org.controlsfx.control.CheckListView;
 
 import cripel.jobway.dao.CivilStatusDAO;
@@ -164,6 +165,10 @@ public class FormB extends BorderPane {
 	@FXML
 	private Label labelSituationProfFSE;
 
+	/** The datepicker for the forum subscription */
+	@FXML
+	private DatePicker datePickerForemSubscription;
+
 	// **************************************************************************************************
 	// FIELDS
 	// **************************************************************************************************
@@ -203,6 +208,11 @@ public class FormB extends BorderPane {
 	public FormB(Person person) {
 		load();
 		setup();
+
+		datePickerForemSubscription.setValue(DateUtil.convertToLocalDate(person.getPersonForemInsDate()));
+		if (person.getPersonForemInsDate() != null) {
+			groupFOREMNeeded.selectToggle(tgbuttonFOREMYes);
+		}
 
 		for (ResidencePermit res : person.getResidencepermits()) {
 			if (res.getResidencePermitAnnex() != null) {
@@ -287,6 +297,7 @@ public class FormB extends BorderPane {
 		spinnerNumberOfChildren.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10));
 		checkListIncome.setItems(listIncome);
 
+
 		listenerEnableField();
 		toggleButtonsSetup();
 		focusDatePicker();
@@ -334,12 +345,24 @@ public class FormB extends BorderPane {
 	public void focusDatePicker() {
 		DatePickerUtil.listenerValidDate(dateEndingValidity, dateStartingValidity);
 		DatePickerUtil.setLimit(dateStartingValidity, dateEndingValidity);
+		DatePickerUtil.listenerValidDate(datePickerForemSubscription);
 	}
 
 	/**
 	 * Listener to enable or disable certains fields
 	 */
 	public void listenerEnableField() {
+
+		tgbuttonFOREMYes.selectedProperty()
+				.addListener((ObservableValue<? extends Boolean> ov, Boolean oldValue, Boolean newValue) -> {
+					if (Boolean.TRUE.equals(newValue))
+						datePickerForemSubscription.setDisable(false);
+					else {
+						datePickerForemSubscription.setDisable(true);
+						datePickerForemSubscription.setValue(null);
+					}
+
+				});
 
 		checkBoxOtherIncome.selectedProperty()
 				.addListener((obs,oldValue,newValue) -> textFieldOtherIncome.setVisible(newValue));
@@ -354,7 +377,8 @@ public class FormB extends BorderPane {
 		boolean encodingFlag;
 
 		if (comboBoxUnemployementDuration.getSelectionModel().getSelectedItem() == null
-				|| checkListIncome.getCheckModel().getCheckedItems().isEmpty()) {
+				|| checkListIncome.getCheckModel().getCheckedItems().isEmpty()
+				|| datePickerForemSubscription.getValue() == null) {
 			encodingFlag = false;
 		} else
 			encodingFlag = true;
@@ -370,6 +394,8 @@ public class FormB extends BorderPane {
 	public void saveData(Person person) {
 
 		saveResidentPermit(person);
+
+		person.setPersonForemInsDate(DateUtil.convertToDate(datePickerForemSubscription.getValue()));
 
 		person.setCivilstatus(comboBoxCivilStatus.getSelectionModel().getSelectedItem());
 
