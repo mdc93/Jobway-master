@@ -33,6 +33,7 @@ public class PersonExport {
 	 * @param person
 	 */
 	private void exportTable(Person person, LocalDate begin, LocalDate end) {
+
 		int index = 0;
 		String nationalite;
 		Set<String> fse;
@@ -85,6 +86,10 @@ public class PersonExport {
 		map.put(index++, person.getPersonForemInsDate());
 		map.put(index++, person.getPersonUnemployementDuration());
 		map.put(index++, exportFormation(person));
+
+		map.put(index++, person.getNiveauEtude());
+
+// T'es trop nul martin, mdr
 //		if(person.getNiveauEtudeFSE()!=null && person.getNiveauEtudeFSE().getNiveauEtude()!=null){
 //			map.put(index++, person.getNiveauEtudeFSE().getNiveauEtude());
 //		}
@@ -315,7 +320,7 @@ public class PersonExport {
 		if (begin == null || end == null) {
 			for (Event event : person.getEvents()) {
 				if (event.getEventDuration() != null && event.getEventDate() != null
-						&& DateUtil.convertToLocalDate(event.getEventDate()).getYear() == LocalDate.now().getYear()) {
+						&& DateUtil.convertToLocalDate(event.getEventDate()).getYear() != LocalDate.now().getYear()) {
 					total += event.getEventDuration();
 				}
 			}
@@ -325,6 +330,7 @@ public class PersonExport {
 				LocalDate eventDate = DateUtil.convertToLocalDate(event.getEventDate());
 				if (event.getEventDuration() != null && eventDate != null && eventDate.isBefore(end)
 						&& eventDate.isAfter(begin)) {
+					
 					total += event.getEventDuration();
 				}
 			}

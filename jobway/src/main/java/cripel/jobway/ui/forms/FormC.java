@@ -45,8 +45,8 @@ public class FormC extends BorderPane {
 	private ToggleButton tgbuttonDrivingLYes;
 
 	/** The checkbox for the forem subscription */
-//	@FXML
-//	private CheckBox checkBoxForemSubscription;
+	// @FXML
+	// private CheckBox checkBoxForemSubscription;
 
 	/** The checkbox to specify if the person has handicaps */
 	@FXML
@@ -69,8 +69,8 @@ public class FormC extends BorderPane {
 	private CheckComboBox<DriverLicense> checkComboBoxDrivingLicense;
 
 	/** The datepicker for the forum subscription */
-//	@FXML
-//	private DatePicker datePickerForemSubscription;
+	// @FXML
+	// private DatePicker datePickerForemSubscription;
 
 	/** The textfield other precision */
 	@FXML
@@ -201,7 +201,7 @@ public class FormC extends BorderPane {
 
 		listenerEnableField();
 		toggleButtonsSetup();
-//		focusDatePicker();
+		// focusDatePicker();
 
 		listSelectionViewLicense.setSourceHeader(new Label("Valable en Belgique"));
 		listSelectionViewLicense.getSourceHeader().setStyle("-fx-font-weight: bold;");
@@ -245,19 +245,19 @@ public class FormC extends BorderPane {
 		tgbuttonWorkAccessYes.setToggleGroup(groupWorkAccess);
 		tgbuttonWorkAccessNo.setToggleGroup(groupWorkAccess);
 
-		groupDrivingLicense.selectedToggleProperty().addListener((obs,oldValue,newValue) -> {
-				if (newValue == tgbuttonDrivingLYes) {
+		groupDrivingLicense.selectedToggleProperty().addListener((obs, oldValue, newValue) -> {
+			if (newValue == tgbuttonDrivingLYes) {
 
-					checkComboBoxDrivingLicense.setDisable(false);
+				checkComboBoxDrivingLicense.setDisable(false);
 
-				} else {
-					checkComboBoxDrivingLicense.setDisable(true);
-					checkComboBoxDrivingLicense.getCheckModel().clearChecks();
-					listSelectionViewLicense.getTargetItems().clear();
-					listSelectionViewLicense.getSourceItems().clear();
-				}
+			} else {
+				checkComboBoxDrivingLicense.setDisable(true);
+				checkComboBoxDrivingLicense.getCheckModel().clearChecks();
+				listSelectionViewLicense.getTargetItems().clear();
+				listSelectionViewLicense.getSourceItems().clear();
+			}
 
-			});
+		});
 	}
 
 	/**
@@ -288,12 +288,12 @@ public class FormC extends BorderPane {
 	public boolean checkEncodingState() {
 		boolean encodingFlag;
 
-//		if (datePickerForemSubscription.getValue() == null) {
-//			encodingFlag = false;
-//		} else
-//			encodingFlag = true;
-//
-//		return encodingFlag;
+		// if (datePickerForemSubscription.getValue() == null) {
+		// encodingFlag = false;
+		// } else
+		// encodingFlag = true;
+		//
+		// return encodingFlag;
 		return true;
 	}
 

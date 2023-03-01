@@ -34,8 +34,8 @@
                     <rowConstraints>
                         <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="221.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="241.0" minHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="241.0" minHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="205.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="205.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
@@ -75,12 +75,12 @@
                               <ToggleButton fx:id="tgbuttonWorkAccessNo" mnemonicParsing="false" text="Non" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
-                        <Label text="Remarque(s)* : " GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label text="Remarque(s)* : " GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="textFieldNotes" maxWidth="180.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <TextField fx:id="textFieldNotes" maxWidth="180.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                         <GridPane prefWidth="356.0" GridPane.rowIndex="4">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="83.0" />
@@ -140,7 +140,7 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+                        <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="2" />
                         <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="9" />
                         <Label text="Situation professionnelle :" GridPane.rowIndex="1">
                            <font>

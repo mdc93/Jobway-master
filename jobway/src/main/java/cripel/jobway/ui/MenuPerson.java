@@ -19,6 +19,8 @@ import cripel.jobway.utilities.fxutil.ButtonTableCell;
 import cripel.jobway.utilities.fxutil.Confirm;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -260,6 +262,7 @@ public class MenuPerson extends BorderPane {
 					return p;
 				}));
 		tableViewPerson.setItems(listPerson);
+		
 
 	}
 	

@@ -172,6 +172,11 @@
                                     <Insets bottom="10.0" />
                                  </GridPane.margin>
                               </HBox>
+                              <Label fx:id="labelNiveauEtude" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="Cambria" size="16.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </GridPane>
                      </children>

@@ -1,27 +1,15 @@
 package cripel.jobway.model;
 // Generated Feb 25, 2022, 8:26:41 PM by Hibernate Tools 4.3.5.Final
 
+import javafx.scene.paint.Color;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  * Person entity central in the database
@@ -30,12 +18,16 @@ import javax.persistence.TemporalType;
 @Table(name = "person", catalog = "jobway")
 public class Person implements java.io.Serializable {
 
+	private String niveauEtude;
+	// private NiveauEtude niveauEtude;
+
 	/** The id person. */
 	private Integer idPerson;
 
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "idDipa", nullable = true)
-	// pourquoi quand je rajoute la "clé" étrangère ici, ça ne se connecte plus à la DB ?
+	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	// @JoinColumn(name = "idDipa", nullable = true)
+	// pourquoi quand je rajoute la "clé" étrangère ici, ça ne se connecte plus à la
+	// DB ?
 	private Dipa dipa;
 
 	/** The civilstatus. */
@@ -52,7 +44,7 @@ public class Person implements java.io.Serializable {
 
 	/** The situation territory. */
 	private SituationTerritory situationterritory;
-	
+
 	/** The situation Professionnelle. */
 	private SituationProf situationprof;
 
@@ -67,10 +59,6 @@ public class Person implements java.io.Serializable {
 
 	/** The city where the person live */
 	private City city;
-
-	private NiveauEtude niveauEtude;
-
-
 
 	/** OneToOne to represent other choice of the person */
 	private Other other;
@@ -177,13 +165,13 @@ public class Person implements java.io.Serializable {
 	/** The workexperiences of the person. */
 	private Set<WorkExperience> workexperiences = new HashSet<>(0);
 
-//	public Dipa getDipa() {
-//		return dipa;
-//	}
-//
-//	public void setDipa(Dipa dipa) {
-//		this.dipa = dipa;
-//	}
+	// public Dipa getDipa() {
+	// return dipa;
+	// }
+	//
+	// public void setDipa(Dipa dipa) {
+	// this.dipa = dipa;
+	// }
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -245,6 +233,7 @@ public class Person implements java.io.Serializable {
 	public void setSituationterritory(SituationTerritory situationterritory) {
 		this.situationterritory = situationterritory;
 	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSituationProf", nullable = true)
 	public SituationProf getSituationprof() {
@@ -254,7 +243,6 @@ public class Person implements java.io.Serializable {
 	public void setSituationprof(SituationProf situationprof) {
 		this.situationprof = situationprof;
 	}
-
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idWorkSearch")
@@ -275,9 +263,8 @@ public class Person implements java.io.Serializable {
 	public void setCity(City city) {
 		this.city = city;
 	}
-	
 
-		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idOther")
 	public Other getOther() {
 		return other;
@@ -632,4 +619,42 @@ public class Person implements java.io.Serializable {
 		this.workexperiences = workexperiences;
 	}
 
+	// pardon, transient pour ne pas perturber Hibernate, vu que cette colonne n'est
+	// pas dans la DB
+	// cette méthode est là juste pour l'export.
+	@Transient
+	public String getNiveauEtude() {
+
+		// OK c'est triché de faire ça
+		int idTypeFormation = this.formations.stream()
+				.mapToInt(formation -> formation.getFormationtype().getIdFormationType())
+				.sum();
+
+		switch (idTypeFormation) {
+			case 1:
+			case 2:
+			case 3:
+				setNiveauEtude("Max. 1er cycle du secondaire");
+				break;
+			case 4:
+			case 5:
+				setNiveauEtude("Max. enseignement post-secondaire non supérieur");
+				break;
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+				setNiveauEtude("Enseignement supérieur");
+				break;
+			default:
+				setNiveauEtude(" ");
+				break;
+		}
+
+		return niveauEtude;
+	}
+
+	public void setNiveauEtude(String niveauEtude) {
+		this.niveauEtude = niveauEtude;
+	}
 }

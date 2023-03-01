@@ -31,3 +31,5 @@ jobway/target/
 jobway/.idea/
 jobway/.settings/
 jobway/jobway.iml
+.idea/
+jobway.iml
