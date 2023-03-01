@@ -265,6 +265,8 @@ public class PersonExport {
 				if (event.getEventDuration() != null && event.getEventDate() != null
 						&& DateUtil.convertToLocalDate(event.getEventDate()).getYear() != LocalDate.now().getYear()) {
 					total += event.getEventDuration();
+					
+					String formattedTotal = String.format("%.2f", total);
 				}
 			}
 
@@ -275,6 +277,8 @@ public class PersonExport {
 						&& eventDate.isAfter(begin)) {
 					
 					total += event.getEventDuration();
+					
+					String formattedTotal = String.format("%.2f", total);
 				}
 			}
 		}

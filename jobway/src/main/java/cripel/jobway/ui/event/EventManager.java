@@ -810,8 +810,10 @@ public class EventManager extends BorderPane {
 		}, tableView.getItems());
 		
 		DoubleBinding divisionTotalMinute = totalMinute.divide(60.0);
+		
+		String formattedTotal = String.format("%.2f", divisionTotalMinute.getValue());
 
-		totalMinuteLabel.textProperty().bind(divisionTotalMinute.asString());
+		totalMinuteLabel.setText(formattedTotal);
 	}
 	
 }
