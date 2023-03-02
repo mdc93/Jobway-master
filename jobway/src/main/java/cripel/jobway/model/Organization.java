@@ -2,6 +2,7 @@ package cripel.jobway.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -18,7 +19,7 @@ public class Organization implements Serializable {
     @Column(name = "isDelete", length = 2)
     private Boolean isDeleted;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-    private List<Event> listEvent;
+    private List<Event> listEvent = new ArrayList<Event>(0);
 
     @Override
     public String toString() {

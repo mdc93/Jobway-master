@@ -600,7 +600,7 @@ public class Person implements java.io.Serializable {
 		this.perSkills = perSkills;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
 	public Set<Event> getEvents() {
 		return this.events;
 	}

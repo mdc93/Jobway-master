@@ -2,8 +2,11 @@ package cripel.jobway.ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 import cripel.jobway.dao.PersonDAO;
+import cripel.jobway.model.Event;
 import cripel.jobway.model.File;
 import cripel.jobway.model.Person;
 import cripel.jobway.model.User;
@@ -234,6 +237,9 @@ public class MenuForms extends BorderPane {
 		formH.saveData(person);
 		if (formG != null)
 			formG.saveData(person);
+
+		Set<Event> events = person.getEvents();
+		person.setEvents(events);
 
 		new PersonDAO().saveOrUpdate(person,true);
 
