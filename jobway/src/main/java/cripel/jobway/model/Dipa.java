@@ -12,8 +12,9 @@ public class Dipa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDipa", nullable = false)
     private Integer idDipa;
+    @Column(name = "dipaName", nullable = true, length = 50)
     private String dipaName;
-
+    @Column(name = "isDelete", nullable = true, columnDefinition = "TINYINT(1)")
     private Boolean isDelete;
     @OneToMany(mappedBy = "dipa")
     private List<Person> people = new ArrayList<Person>(0);
@@ -52,8 +53,6 @@ public class Dipa implements Serializable {
 
     @Override
     public String toString() {
-        return "Dipa{" +
-                "dipaName='" + dipaName + '\'' +
-                '}';
+        return dipaName ;
     }
 }

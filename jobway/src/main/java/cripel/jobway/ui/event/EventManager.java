@@ -9,6 +9,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import cripel.jobway.dao.*;
+import cripel.jobway.model.*;
 import javafx.scene.control.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,22 +20,9 @@ import org.controlsfx.control.ToggleSwitch;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.dialog.ProgressDialog;
 
-import cripel.jobway.dao.EmployeeDAO;
-import cripel.jobway.dao.EventDAO;
-import cripel.jobway.dao.EventTypeDAO;
-import cripel.jobway.dao.ExitTypeDAO;
-import cripel.jobway.dao.RequiredDAO;
-import cripel.jobway.dao.ThemeDAO;
 import cripel.jobway.exportexcel.ImportEvent;
 import cripel.jobway.exportexcel.PoiTableViewExcel;
 
-import cripel.jobway.model.Employee;
-import cripel.jobway.model.Event;
-import cripel.jobway.model.EventType;
-import cripel.jobway.model.ExitType;
-import cripel.jobway.model.Person;
-import cripel.jobway.model.Required;
-import cripel.jobway.model.Theme;
 import cripel.jobway.utilities.DateUtil;
 import cripel.jobway.utilities.fxutil.ButtonTableCell;
 import cripel.jobway.utilities.fxutil.Confirm;
@@ -86,9 +75,6 @@ public class EventManager extends BorderPane {
 	@FXML
 	private TableColumn<Event, String> tableColumnEmployee;
 
-	/** The column for the event's notes */
-	@FXML
-	private TableColumn<Event, String> columnNotes;
 
 	/** The column for the button edit */
 	@FXML
@@ -210,13 +196,11 @@ public class EventManager extends BorderPane {
 	private ComboBox<ExitType> comboBoxTypeSortie;
 
 	@FXML
-	private TableColumn<Required, String> columnAcquis;
+	private ComboBox<Organization> comboBoxOrganization;
 
 	@FXML
 	private GridPane gridPaneSortie;
 
-	@FXML
-	private TableColumn<ExitType, String> columnSortie;
 
 	// **************************************************************************************************
 	// FIELDS
@@ -482,12 +466,12 @@ public class EventManager extends BorderPane {
 		columnTheme.setCellValueFactory(new PropertyValueFactory<>("theme"));
 		tableColumnEmployee.setCellValueFactory(
 				cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
-		columnNotes.setCellValueFactory(new PropertyValueFactory<>("eventNote"));
+//		columnNotes.setCellValueFactory(new PropertyValueFactory<>("eventNote"));
 		columnDuration.setCellValueFactory(new PropertyValueFactory<>("eventDuration"));
 		columnType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
 
-		columnSortie.setCellValueFactory(new PropertyValueFactory<>("exittype"));
-		columnAcquis.setCellValueFactory(new PropertyValueFactory<>("required"));
+//		columnSortie.setCellValueFactory(new PropertyValueFactory<>("exittype"));
+//		columnAcquis.setCellValueFactory(new PropertyValueFactory<>("required"));
 
 		columnEdit.setCellFactory(ButtonTableCell.<Event>forTableColumn(null, "button-edit", "far-edit", (Event e) -> {
 			vBoxEdit.setManaged(true);
@@ -544,6 +528,7 @@ public class EventManager extends BorderPane {
 
 		comboBoxTypeSortie.getItems().addAll(new ExitTypeDAO().getList());
 		comboBoxAcquisFinAction.getItems().addAll(new RequiredDAO().getList());
+		comboBoxOrganization.getItems().addAll(new OrganizationDAO().getList());
 
 	}
 
@@ -560,6 +545,7 @@ public class EventManager extends BorderPane {
 		textAreaNotes.clear();
 		comboBoxTypeSortie.setValue(null);
 		comboBoxAcquisFinAction.setValue(null);
+		comboBoxOrganization.setValue(null);
 		checkExit.setSelected(false);
 	}
 
@@ -617,6 +603,7 @@ public class EventManager extends BorderPane {
 			eve.setEventDate(DateUtil.convertToDate(datePickerEvent.getValue()));
 			eve.setEventDuration(spinnerHour.getValue() * 60 + spinnerMinute.getValue());
 			eve.setEventType(comboType.getSelectionModel().getSelectedItem());
+			eve.setOrganization(comboBoxOrganization.getSelectionModel().getSelectedItem());
 			eve.setPerson(selected);
 			eve.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
 			eve.setExitEvent(checkExit.isSelected());
@@ -666,6 +653,7 @@ public class EventManager extends BorderPane {
 			editEvent.setEventDate(DateUtil.convertToDate(datePickerEvent.getValue()));
 			editEvent.setEventDuration(spinnerHour.getValue() * 60 + spinnerMinute.getValue());
 			editEvent.setEventType(comboType.getSelectionModel().getSelectedItem());
+			editEvent.setOrganization(comboBoxOrganization.getSelectionModel().getSelectedItem());
 			editEvent.setPerson(selected);
 			editEvent.setTheme(comBoTheme.getSelectionModel().getSelectedItem());
 			editEvent.setExitEvent(checkExit.isSelected());

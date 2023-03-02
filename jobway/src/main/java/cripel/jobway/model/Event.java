@@ -41,6 +41,10 @@ public class Event implements java.io.Serializable {
 				+ exitEvent + "]";
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "idOrganization", nullable = true)
+	private Organization organization;
+
 	/** The event type. */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEventType", nullable = true)
@@ -85,6 +89,14 @@ public class Event implements java.io.Serializable {
 
 	@Column(name = "exitEvent",length = 2)
 	private Boolean exitEvent;
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
 
 	public Integer getIdEvent() {
 		return idEvent;
@@ -173,6 +185,8 @@ public class Event implements java.io.Serializable {
 	public void setExitEvent(Boolean exitEvent) {
 		this.exitEvent = exitEvent;
 	}
+
+
 
 	public Event() {
 		super();

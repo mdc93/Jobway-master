@@ -24,8 +24,6 @@ public class Person implements java.io.Serializable {
 	/** The id person. */
 	private Integer idPerson;
 
-	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name = "idDipa", nullable = true)
 	// pourquoi quand je rajoute la "clé" étrangère ici, ça ne se connecte plus à la
 	// DB ?
 	private Dipa dipa;
@@ -164,7 +162,8 @@ public class Person implements java.io.Serializable {
 
 	/** The workexperiences of the person. */
 	private Set<WorkExperience> workexperiences = new HashSet<>(0);
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idDipa", nullable = true)
 	 public Dipa getDipa() {
 	 return dipa;
 	 }

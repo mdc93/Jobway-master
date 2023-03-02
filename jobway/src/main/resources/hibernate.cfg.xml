@@ -43,6 +43,8 @@
 			
 		<!-- List of XML mapping files -->
 		<mapping class="cripel.jobway.model.Person" />
+		<mapping class="cripel.jobway.model.Dipa" />
+		<mapping class="cripel.jobway.model.Organization" />
 		<mapping class="cripel.jobway.model.Availability" />
 		<mapping class="cripel.jobway.model.City" />
 		<mapping class="cripel.jobway.model.Country" />

@@ -184,25 +184,28 @@
                         </HBox>
                         <TableView fx:id="tableView" prefHeight="541.0" prefWidth="538.0" styleClass="test" VBox.vgrow="ALWAYS">
                           <columns>
+                            <TableColumn fx:id="columnTheme" minWidth="0.0" prefWidth="258.0" text="Thématique" />
                             <TableColumn fx:id="columnDate" prefWidth="99.0" text="Date" />
                               <TableColumn fx:id="columnDuration" maxWidth="4000.0" prefWidth="75.0" text="Durée(Min)" />
-                            <TableColumn fx:id="columnTheme" minWidth="0.0" prefWidth="258.0" text="Thématique" />
                               <TableColumn fx:id="columnType" maxWidth="6000.0" prefWidth="100.0" text="Type" />
                               <TableColumn fx:id="tableColumnEmployee" prefWidth="72.0" text="Réferent(s)" />
-                              <TableColumn fx:id="columnNotes" maxWidth="6000.0" prefWidth="130.0" text="Notes" />
                               <TableColumn fx:id="columnEdit" maxWidth="1600.0" prefWidth="14.0" />
                               <TableColumn fx:id="columnDelete" maxWidth="1600.0" prefWidth="49.0" />
-                              <TableColumn fx:id="columnSortie" maxWidth="1600.0" prefWidth="75.0" text="Sortie" />
-                              <TableColumn fx:id="columnAcquis" maxWidth="1600.0" prefWidth="75.0" text="Acquis" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                            <VBox.margin>
-                              <Insets right="1.0" />
+                              <Insets right="2.0" />
                            </VBox.margin>
                         </TableView>
                      </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
                   </VBox>
                   <VBox fx:id="vBoxEdit" prefHeight="722.0" prefWidth="380.0">
                      <children>
@@ -246,8 +249,8 @@
                               <Region prefHeight="150.0" prefWidth="380.0" />
                               <GridPane prefHeight="547.0" prefWidth="380.0">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.80001220703124" minWidth="10.0" prefWidth="156.80001220703124" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="220.79998779296878" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.80001220703124" minWidth="10.0" prefWidth="97.6000244140625" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.8" minWidth="10.0" prefWidth="282.3999755859375" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
@@ -255,7 +258,7 @@
                                     <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="111.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="27.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
@@ -290,13 +293,12 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </ComboBox>
-                                    <ComboBox fx:id="comboType" maxWidth="185.0" prefHeight="25.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <CheckComboBox fx:id="comboEmp" maxWidth="185.0" prefHeight="25.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
                                     </CheckComboBox>
-                                    <TextArea fx:id="textAreaNotes" maxHeight="90.0" maxWidth="180.0" prefHeight="77.0" prefWidth="207.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                    <TextArea fx:id="textAreaNotes" maxHeight="90.0" maxWidth="180.0" prefHeight="120.0" prefWidth="207.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                        <GridPane.margin>
                                           <Insets right="3.0" />
                                        </GridPane.margin>
@@ -330,6 +332,26 @@
                                           <Label text="Minutes:" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <ComboBox fx:id="comboType" maxWidth="185.0" prefHeight="25.0" prefWidth="185.0">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <ComboBox fx:id="comboBoxOrganization" prefHeight="26.0" prefWidth="142.0">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                       </children>
+                                       <padding>
+                                          <Insets top="15.0" />
+                                       </padding>
+                                    </HBox>
                                  </children>
                               </GridPane>
                               <Region prefHeight="100.0" prefWidth="380.0" />
