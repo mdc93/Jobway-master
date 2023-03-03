@@ -18,7 +18,7 @@ import javax.persistence.*;
 @Table(name = "person", catalog = "jobway")
 public class Person implements java.io.Serializable {
 
-	private String niveauEtude;
+	private String niveauEtude = "";
 	// private NiveauEtude niveauEtude;
 
 	/** The id person. */
@@ -129,6 +129,8 @@ public class Person implements java.io.Serializable {
 
 	/** The person notepad. */
 	private String personNotepad;
+
+	private Boolean isFSE;
 
 	/** The locomotion means. */
 	private Set<LocomotionMean> locomotionmeans = new HashSet<>(0);
@@ -655,5 +657,37 @@ public class Person implements java.io.Serializable {
 
 	public void setNiveauEtude(String niveauEtude) {
 		this.niveauEtude = niveauEtude;
+	}
+
+	@Transient
+	public Boolean getIsFSE() {
+	//pour faire apparaitre cette infos dans le tableau recap,
+		//je fais le check des données ici.
+		//les encodingState dans les forms sont basés sur la validation des éléments graphiques
+		//des formulaires, donc pas récupérable dans le tableau de personnes
+
+		//je refais le même check que dans le formulaire, les mêmes conditions,
+		//à voir si je dois modifier par rapport aux critères FSE,
+		//surement checker en plus la date du 1e event et du dernier event??
+		//plus le type de sortie.
+		if(city==null || countries==null || events==null) {
+			return false;
+		}
+
+		return !personFirstName.isEmpty()
+				&& !personLastName.isEmpty()
+				&& !personAddress.isEmpty()
+				&& city.getPostalcode() != null
+				&& !personPhone.isEmpty()
+				&& personBirthDate != null
+				&& !personGender.isEmpty()
+				&& !countries.isEmpty()
+				&& situationprof != null
+				&& (personForemInsDate != null || personUnemployementDuration != null);
+//				&& !niveauEtude.isEmpty();
+	}
+
+	public void setIsFSE(Boolean FSE) {
+		isFSE = FSE;
 	}
 }

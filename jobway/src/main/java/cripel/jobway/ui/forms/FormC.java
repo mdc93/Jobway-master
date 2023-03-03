@@ -294,7 +294,9 @@ public class FormC extends BorderPane {
 		// encodingFlag = true;
 		//
 		// return encodingFlag;
-		return true;
+		encodingFlag = comboBoxSituationPro.getSelectionModel().getSelectedItem() != null;
+
+		return encodingFlag;
 	}
 
 	/**

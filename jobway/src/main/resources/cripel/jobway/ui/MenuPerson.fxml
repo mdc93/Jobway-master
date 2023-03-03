@@ -174,8 +174,9 @@
                <children>
                   <TableView fx:id="tableViewPerson" onMouseClicked="#openPersonDisplayOnMouseClicked" prefHeight="665.0" prefWidth="1097.0" styleClass="tableViewClass" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="columnId" prefWidth="75.0" text="Id" />
-                      <TableColumn fx:id="columnLastName" prefWidth="75.0" text="Nom" />
+                        <TableColumn fx:id="columnId" prefWidth="96.79998779296875" text="Id" />
+                        <TableColumn fx:id="columnIsFSE" maxWidth="1500.0" prefWidth="100.800048828125" text="FSE" />
+                      <TableColumn fx:id="columnLastName" prefWidth="128.80003356933594" text="Nom" />
                       <TableColumn fx:id="columnFirstName" prefWidth="75.0" text="Prénom" />
                         <TableColumn fx:id="columnNiss" prefWidth="75.0" text="Niss" />
                         <TableColumn fx:id="columnEmployee" prefWidth="75.0" text="Référent" />

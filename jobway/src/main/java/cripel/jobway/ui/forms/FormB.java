@@ -376,12 +376,10 @@ public class FormB extends BorderPane {
 	public boolean checkEncodingState() {
 		boolean encodingFlag;
 
-		if (comboBoxUnemployementDuration.getSelectionModel().getSelectedItem() == null
-				|| checkListIncome.getCheckModel().getCheckedItems().isEmpty()
-				|| datePickerForemSubscription.getValue() == null) {
-			encodingFlag = false;
-		} else
-			encodingFlag = true;
+		encodingFlag = (comboBoxUnemployementDuration.getSelectionModel().getSelectedItem() != null
+				|| datePickerForemSubscription.getValue() != null)
+				&& !checkListIncome.getCheckModel().getCheckedItems().isEmpty()
+				&& comboBoxUnemployementDuration.getSelectionModel().getSelectedItem() != null;
 
 		return encodingFlag;
 	}

@@ -3,6 +3,11 @@ package cripel.jobway.ui;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Callback;
 import org.apache.commons.collections4.CollectionUtils;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -30,16 +35,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -89,6 +85,9 @@ public class MenuPerson extends BorderPane {
 	private TableColumn<Person, Button> columnEdit;
 	@FXML
 	private TableColumn<Person, Button> columnPermanentDel;
+
+	@FXML
+	private TableColumn<Person, Circle> columnIsFSE;
 
 	/** The column for the person history */
 	@FXML
@@ -177,6 +176,22 @@ public class MenuPerson extends BorderPane {
 	private static final String QUERYPERSON = "SELECT DISTINCT p FROM Person p LEFT JOIN FETCH p.employee "
 			+ "LEFT JOIN FETCH p.file LEFT JOIN FETCH p.worksearch w LEFT JOIN FETCH w.workSectors ORDER BY p.idPerson";
 
+	Callback<TableColumn<Person, Circle>, TableCell<Person, Circle>> circleValueFactory = new Callback<TableColumn<Person, Circle>, TableCell<Person, Circle>>() {
+		@Override
+		public TableCell<Person, Circle> call(TableColumn<Person, Circle> param) {
+			TableCell<Person, Circle> cell = new TableCell<Person, Circle>() {
+				@Override
+				public void updateItem(Circle item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item != null) {
+						setGraphic(item);
+					}
+				}
+			};
+			return cell;
+		}
+	};
+
 	// **************************************************************************************************
 	// CONSTRUCTORS
 	// **************************************************************************************************
@@ -228,6 +243,27 @@ public class MenuPerson extends BorderPane {
 	public void setUpTableView() {
 
 		columnId.setCellValueFactory(new PropertyValueFactory<>("idPerson"));
+		columnIsFSE.setCellValueFactory(cellData -> {
+			boolean isFSE = cellData.getValue().getIsFSE();
+			Circle circle = new Circle(20, isFSE ? Color.GREEN : Color.RED);
+			return new SimpleObjectProperty<>(circle);
+		});
+		columnIsFSE.setCellFactory(column -> new TableCell<Person, Circle>() {
+			private final Circle circle = new Circle(5);
+			{
+				setGraphic(circle);
+				setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			}
+			@Override
+			protected void updateItem(Circle item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					circle.setFill(Color.TRANSPARENT);
+				} else {
+					circle.setFill(item.getFill());
+				}
+			}
+		});
 		columnFirstName.setCellValueFactory(new PropertyValueFactory<>("personFirstName"));
 		columnLastName.setCellValueFactory(new PropertyValueFactory<>("personLastName"));
 		columnNiss.setCellValueFactory(new PropertyValueFactory<>("personNiss"));
