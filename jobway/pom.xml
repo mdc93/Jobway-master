@@ -17,6 +17,7 @@
 			<artifactId>javafx-controls</artifactId>
 			<version>17.0.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
@@ -65,6 +66,7 @@
 			<artifactId>hibernate-hikaricp</artifactId>
 			<version>5.6.5.Final</version>
 		</dependency>
+
 		<!-- Ikonli dependencies -->
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
@@ -114,6 +116,7 @@
 			<artifactId>spring-security-crypto</artifactId>
 			<version>5.6.2</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

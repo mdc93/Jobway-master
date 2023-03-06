@@ -105,12 +105,12 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelDipa" prefHeight="26.0" prefWidth="174.0" text="Nom du référent DIPA" GridPane.rowIndex="3">
+                        <Label fx:id="labelDipa" prefHeight="26.0" prefWidth="174.0" text="Nom du référent DIPA" visible="false" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <SearchableComboBox fx:id="comboBoxDipa" editable="true" prefHeight="32.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <SearchableComboBox fx:id="comboBoxDipa" editable="true" prefHeight="32.0" prefWidth="194.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                      <HBox.margin>
                         <Insets />
