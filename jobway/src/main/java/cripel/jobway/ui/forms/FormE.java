@@ -123,6 +123,11 @@ public class FormE extends BorderPane {
 
 	@FXML
 	private Label labelNiveauEtude;
+	@FXML
+	private TableColumn<Formation, String> columnDomainName;
+
+	@FXML
+	private TextField textFieldDomain;
 
 	// **************************************************************************************************
 	// FIELDS
@@ -135,6 +140,7 @@ public class FormE extends BorderPane {
 			.observableArrayList(FormationTypeDAO.getListFormationTypeDiploma());
 	private ObservableList<FormationType> listFormationTypeFormation = FXCollections
 			.observableArrayList(FormationTypeDAO.getListFormationTypeFormation());
+
 
 	/**
 	 * Selected formation
@@ -370,6 +376,7 @@ public class FormE extends BorderPane {
 		columnDiplomaSubject.setCellValueFactory(new PropertyValueFactory<>("formationName"));
 		columnEquiObtained.setCellValueFactory(new PropertyValueFactory<>("equObt"));
 		columnBelgium.setCellValueFactory(new PropertyValueFactory<>("foreignFormation"));
+		columnDomainName.setCellValueFactory(new PropertyValueFactory<>("domainName"));
 
 		columnEquiAsked.setCellValueFactory(new PropertyValueFactory<>("equIntro"));
 
@@ -484,6 +491,8 @@ public class FormE extends BorderPane {
 		form.setFormationtype(comboBoxDiplomaName.getSelectionModel().getSelectedItem());
 
 		form.setForeignFormation(radioButtonDiplomaForeign.isSelected());
+
+		form.setDomainName(textFieldDomain.getText());
 
 		if (tgbuttonEU.isSelected()) {
 			form.setForeignHUE(false);

@@ -30,6 +30,17 @@ public class Formation implements java.io.Serializable {
 	private Integer idFormation;
 	private FormationType formationtype;
 	private String formationName;
+
+	@Column(name = "domainName", nullable = false, length = 250)
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	private String domainName;
 	private Boolean equIntro;
 	private Boolean equObt;
 	private boolean foreignFormation;
@@ -58,7 +69,7 @@ public class Formation implements java.io.Serializable {
 		this.formationtype = formationtype;
 	}
 
-	@Column(name = "formationName", nullable = false, length = 50)
+	@Column(name = "formationName", nullable = false, length = 150)
 	public String getFormationName() {
 		return this.formationName;
 	}

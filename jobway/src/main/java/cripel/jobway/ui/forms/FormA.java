@@ -253,7 +253,8 @@ public class FormA extends BorderPane {
 	 * @param person
 	 */
 	private void loadPerson(Person person) {
-		comboBoxFileStatus.setValue(person.getFile().getFileStatus());
+		if(person.getFile().getFileStatus() != null)
+			comboBoxFileStatus.setValue(person.getFile().getFileStatus());
 		if (Boolean.TRUE.equals(person.isPersonIsDelete()))
 			comboBoxFileStatus.setDisable(true);
 

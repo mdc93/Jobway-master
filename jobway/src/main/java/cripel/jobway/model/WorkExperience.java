@@ -31,7 +31,7 @@ public class WorkExperience {
 	private Person person;
 	private WorkExpType workExptype;
 	private String workExpName;
-	private int workExpDurationMonth;
+	private String workExpDurationMonth;
 	private Boolean workExpBelgium;
 	private String workSector;
 	private Set<WorkTask> worktasks = new HashSet<>(0);
@@ -101,11 +101,11 @@ public class WorkExperience {
 	}
 
 	@Column(name = "workExpDurationMonth", nullable = false)
-	public int getWorkExpDurationMonth() {
+	public String getWorkExpDurationMonth() {
 		return this.workExpDurationMonth;
 	}
 
-	public void setWorkExpDurationMonth(int workExpDurationMonth) {
+	public void setWorkExpDurationMonth(String workExpDurationMonth) {
 		this.workExpDurationMonth = workExpDurationMonth;
 	}
 

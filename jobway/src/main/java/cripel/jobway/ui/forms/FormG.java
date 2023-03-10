@@ -91,6 +91,7 @@ public class FormG extends BorderPane {
 	 *
 	 * @param person the new person
 	 */
+
 	public void saveData(Person person) {
 
 		person.getEvents().clear();

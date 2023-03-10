@@ -2,6 +2,8 @@ package cripel.jobway.ui.forms;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.controlsfx.control.SearchableComboBox;
 
@@ -289,8 +291,20 @@ public class FormF extends BorderPane {
 				}
 			}
 
-			spinnerWorkDurationYear.getValueFactory().setValue(workExp.getWorkExpDurationMonth()/12);
-			spinnerWorkDurationMonth.getValueFactory().setValue(workExp.getWorkExpDurationMonth() % 12);
+			String workExpDuration = workExp.getWorkExpDurationMonth(); // "x années y mois"
+			Pattern pattern = Pattern.compile("(\\d+) années (\\d+) mois");
+			Matcher matcher = pattern.matcher(workExpDuration);
+			if (matcher.find()) {
+				int years = Integer.parseInt(matcher.group(1));
+				int months = Integer.parseInt(matcher.group(2));
+				int totalMonths = years * 12 + months;
+				spinnerWorkDurationYear.getValueFactory().setValue(totalMonths / 12);
+				// You can also set the value of the spinner for months if you want
+				 spinnerWorkDurationMonth.getValueFactory().setValue(totalMonths % 12);
+			}
+
+//			spinnerWorkDurationYear.getValueFactory().setValue(workExp.getWorkExpDurationMonth().substring(0)/12);
+//			spinnerWorkDurationMonth.getValueFactory().setValue(workExp.getWorkExpDurationMonth() % 12);
 			textfieldWorkExpName.setText(workExp.getWorkExpName());
 
 			if (workExp.isWorkExpBelgium() != null) {
@@ -330,7 +344,8 @@ public class FormF extends BorderPane {
 		}
 		workExp.setWorkExpName(textfieldWorkExpName.getText());
 		workExp.setWorkSector(comboBoxWorkExpSector.getSelectionModel().getSelectedItem().getWorkSectorName());
-		workExp.setWorkExpDurationMonth(spinnerWorkDurationMonth.getValue()+spinnerWorkDurationYear.getValue()*12);
+		String spinnerValue = spinnerWorkDurationYear.getValue() + " années " + spinnerWorkDurationMonth.getValue() + " mois";
+		workExp.setWorkExpDurationMonth(spinnerValue);
 		workExp.setWorkexptype(comboBoxWorkExpType.getSelectionModel().getSelectedItem());
 
 		if (tgbuttonBelgiumYes.isSelected()) {
