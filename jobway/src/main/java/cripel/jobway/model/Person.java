@@ -8,6 +8,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.*;
 
@@ -105,6 +106,7 @@ public class Person implements java.io.Serializable {
 
 	/** The person inscription date to Forem. */
 	private Date personForemInsDate;
+	
 
 	/** The person orientation, who send them to Cripel. */
 	private String personOrientation;
@@ -140,6 +142,8 @@ public class Person implements java.io.Serializable {
 
 	/** The Income source of the person. */
 	private Set<IncomeType> incometypes = new HashSet<>(0);
+	/** The difficulties of the person. */
+	private Set<Difficulty> difficulties = new HashSet<>(0);
 
 	/** The Driver License belonging to the person. */
 	private Set<PerDrL> perDrLs = new HashSet<>(0);
@@ -161,7 +165,7 @@ public class Person implements java.io.Serializable {
 
 	/** The events to this person */
 	private Set<Event> events = new HashSet<>(0);
-
+	
 	/** The workexperiences of the person. */
 	private Set<WorkExperience> workexperiences = new HashSet<>(0);
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -244,6 +248,8 @@ public class Person implements java.io.Serializable {
 	public void setSituationprof(SituationProf situationprof) {
 		this.situationprof = situationprof;
 	}
+	
+
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idWorkSearch")
@@ -280,6 +286,7 @@ public class Person implements java.io.Serializable {
 	public File getFile() {
 		return file;
 	}
+
 
 	public void setFile(File file) {
 		this.file = file;
@@ -529,6 +536,17 @@ public class Person implements java.io.Serializable {
 	public void setIncometypes(Set<IncomeType> incometypes) {
 		this.incometypes = incometypes;
 	}
+	@ManyToMany(cascade = { CascadeType.MERGE })
+	@JoinTable(name = "per_dif", joinColumns = {
+			@JoinColumn(name = "idPerson", nullable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "idDifficulty", nullable = false) })
+	public Set<Difficulty> getDifficulties() {
+		return this.difficulties;
+	}
+
+	public void setDifficulties(Set<Difficulty> difficulties) {
+		this.difficulties = difficulties;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id.person", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<PerDrL> getPerDrL() {
@@ -656,7 +674,8 @@ public class Person implements java.io.Serializable {
 	}
 
 	public void setNiveauEtude(String niveauEtude) {
-		this.niveauEtude = niveauEtude;
+		this.niveauEtude=niveauEtude;
+	
 	}
 
 	@Transient

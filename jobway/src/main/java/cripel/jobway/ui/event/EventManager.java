@@ -83,6 +83,9 @@ public class EventManager extends BorderPane {
 	/** The column for the button delete */
 	@FXML
 	private TableColumn<Event, Button> columnDelete;
+	/** The column for the button afficher */
+	@FXML
+	private TableColumn<Event, Button> columnAfficher;
 
 	/** The tableview Event */
 	@FXML
@@ -91,6 +94,8 @@ public class EventManager extends BorderPane {
 	/** The column for the event's duration */
 	@FXML
 	private TableColumn<Event, String> columnDuration;
+	@FXML
+	private TableColumn<Event, String> columnNote;
 
 	/** The column for the event's type */
 	@FXML
@@ -185,7 +190,7 @@ public class EventManager extends BorderPane {
 	/** The combobox to filter by event's type */
 	@FXML
 	private ComboBox<EventType> comboBoxFilterType;
-
+	
 	@FXML
 	private ToggleSwitch checkExit;
 
@@ -466,7 +471,7 @@ public class EventManager extends BorderPane {
 		columnTheme.setCellValueFactory(new PropertyValueFactory<>("theme"));
 		tableColumnEmployee.setCellValueFactory(
 				cdf -> new SimpleStringProperty(cdf.getValue().getEmployees().toString().replaceAll("\\[|\\]", "")));
-//		columnNotes.setCellValueFactory(new PropertyValueFactory<>("eventNote"));
+		//columnNote.setCellValueFactory(new PropertyValueFactory<>("eventNote"));
 		columnDuration.setCellValueFactory(new PropertyValueFactory<>("eventDuration"));
 		columnType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
 
@@ -482,7 +487,7 @@ public class EventManager extends BorderPane {
 			fillField(e);
 			return e;
 		}));
-
+		
 		columnDelete.setCellFactory(
 				ButtonTableCell.<Event>forTableColumn(null, "button-delete", "fas-trash-alt", (Event e) -> {
 
@@ -593,6 +598,7 @@ public class EventManager extends BorderPane {
 			vBoxEdit.setVisible(false);
 			vBoxEdit.setManaged(false);
 			columnEdit.setVisible(true);
+			columnAfficher.setVisible(true);
 			columnDelete.setVisible(true);
 
 

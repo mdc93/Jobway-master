@@ -94,4 +94,9 @@ public class Language implements java.io.Serializable {
 		return Objects.equals(languageName, other.languageName);
 	}
 
+	public Language() {
+		super();
+	}
+
+	
 }

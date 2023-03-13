@@ -25,7 +25,7 @@
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="759.0" prefWidth="1007.0" type="BorderPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="523.0" prefWidth="822.0" BorderPane.alignment="CENTER">
          <children>
@@ -189,6 +189,7 @@
                               <TableColumn fx:id="columnDuration" maxWidth="4000.0" prefWidth="75.0" text="Durée(Min)" />
                               <TableColumn fx:id="columnType" maxWidth="6000.0" prefWidth="100.0" text="Type" />
                               <TableColumn fx:id="tableColumnEmployee" prefWidth="72.0" text="Réferent(s)" />
+                              <TableColumn fx:id="columnAfficher" maxWidth="1600.0" prefWidth="14.0" text="Notes" />
                               <TableColumn fx:id="columnEdit" maxWidth="1600.0" prefWidth="14.0" />
                               <TableColumn fx:id="columnDelete" maxWidth="1600.0" prefWidth="49.0" />
                           </columns>

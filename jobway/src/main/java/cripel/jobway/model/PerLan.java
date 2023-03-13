@@ -84,6 +84,11 @@ public class PerLan implements java.io.Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return "PerLan [id=" + id + ", langCom=" + langCom + ", langLevel=" + langLevel + "]";
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -93,9 +98,6 @@ public class PerLan implements java.io.Serializable {
 		return Objects.equals(id.getLanguage(), other.id.getLanguage());
 	}
 
-	@Override
-	public String toString() {
-		return this.getLanguage().getLanguageName();
-	}
+	
 
 }

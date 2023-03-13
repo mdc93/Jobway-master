@@ -7,7 +7,9 @@ import cripel.jobway.model.*;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.ListSelectionView;
 
+import cripel.jobway.dao.DifficultyDAO;
 import cripel.jobway.dao.DriverLicenseDAO;
+import cripel.jobway.dao.EmployeeDAO;
 import cripel.jobway.dao.LocomotionMeanDAO;
 import cripel.jobway.utilities.DateUtil;
 import cripel.jobway.utilities.fxutil.DatePickerUtil;
@@ -98,6 +100,9 @@ public class FormC extends BorderPane {
 
 	@FXML
 	private ComboBox<SituationProf> comboBoxSituationPro;
+    @FXML
+    private ComboBox<Difficulty> comboBoxDifficulte;
+  
 
 	// **************************************************************************************************
 	// FIELDS
@@ -112,6 +117,8 @@ public class FormC extends BorderPane {
 			.observableArrayList(new DriverLicenseDAO().getListDelete(false));
 	private ObservableList<SituationProf> listSituationPro = FXCollections
 			.observableArrayList(new SituationProfDAO().getListDelete(false));
+	private ObservableList<Difficulty> listDifficulty = FXCollections
+			.observableArrayList(new DifficultyDAO().getListDelete(false));
 
 	/**
 	 * Togglegroups for togglebuttons
@@ -148,6 +155,7 @@ public class FormC extends BorderPane {
 		}
 
 		comboBoxSituationPro.setValue(person.getSituationprof());
+	
 		textFieldNotes.setText(person.getPersonNotes());
 
 		if (!person.getPerDrL().isEmpty()) {
@@ -175,7 +183,10 @@ public class FormC extends BorderPane {
 		for (LocomotionMean loco : person.getLocomotionmeans()) {
 			comboBoxLocomotionMeans.setValue(loco);
 		}
-
+		for (Difficulty diff : person.getDifficulties()) {
+			comboBoxDifficulte.setValue(diff);
+		}
+		
 		if (person.getDisability() != null) {
 			checkBoxHandicaps.setSelected(person.getDisability().isDisReco());
 			textFieldOtherPrecision.setText(person.getDisability().getDisOther());
@@ -198,6 +209,7 @@ public class FormC extends BorderPane {
 		comboBoxLocomotionMeans.setItems(listLocomotionMean);
 		checkComboBoxDrivingLicense.getItems().addAll(listDriverLicense);
 		comboBoxSituationPro.getItems().addAll(listSituationPro);
+		comboBoxDifficulte.getItems().addAll(listDifficulty);
 
 		listenerEnableField();
 		toggleButtonsSetup();
@@ -307,6 +319,7 @@ public class FormC extends BorderPane {
 	public void saveData(Person person) {
 
 		person.setSituationprof(comboBoxSituationPro.getValue());
+	//	person.setDifficulties(comboBoxDifficulte.getValue());checkBoxOtherDifficulty
 		person.setPersonNotes(textFieldNotes.getText());
 
 		person.getPerDrL().clear();
@@ -325,10 +338,14 @@ public class FormC extends BorderPane {
 			perDrL.setPerson(person);
 			person.getPerDrL().add(perDrL);
 		}
+		
 
 		person.getLocomotionmeans().clear();
 		person.getLocomotionmeans().add(comboBoxLocomotionMeans.getValue());
 		person.setPersonHasVehicle(checkBoxVehicle.isSelected());
+		person.getDifficulties().clear();
+		person.getDifficulties().add(comboBoxDifficulte.getValue());
+		person.setPersonHasVehicle(checkBoxOtherDifficulty.isSelected());
 
 		if (tgbuttonWorkAccessYes.isSelected()) {
 			person.setPersonWorkAccess(true);

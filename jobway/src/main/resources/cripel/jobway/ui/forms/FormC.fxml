@@ -18,7 +18,7 @@
 <?import org.controlsfx.control.CheckComboBox?>
 <?import org.controlsfx.control.ListSelectionView?>
 
-<fx:root prefHeight="917.0" prefWidth="1137.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="917.0" prefWidth="1137.0" type="BorderPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -148,6 +148,7 @@
                            </font>
                         </Label>
                         <ComboBox fx:id="comboBoxSituationPro" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="comboBoxDifficulte" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                      </children>
                   </GridPane>
                </children>

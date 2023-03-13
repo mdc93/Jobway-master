@@ -1,7 +1,9 @@
 package cripel.jobway.ui;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.*;
@@ -15,11 +17,14 @@ import org.controlsfx.control.textfield.CustomTextField;
 import cripel.jobway.dao.EmployeeDAO;
 import cripel.jobway.dao.PersonDAO;
 import cripel.jobway.dao.WorkSectorDAO;
+import cripel.jobway.model.Difficulty;
 import cripel.jobway.model.Employee;
+import cripel.jobway.model.Event;
 import cripel.jobway.model.Person;
 import cripel.jobway.model.User;
 import cripel.jobway.model.WorkSector;
 import cripel.jobway.ui.event.EventManager;
+import cripel.jobway.utilities.DateUtil;
 import cripel.jobway.utilities.fxutil.ButtonTableCell;
 import cripel.jobway.utilities.fxutil.Confirm;
 import javafx.application.Platform;
@@ -85,10 +90,14 @@ public class MenuPerson extends BorderPane {
 	private TableColumn<Person, Button> columnEdit;
 	@FXML
 	private TableColumn<Person, Button> columnPermanentDel;
+	@FXML
+	private TableColumn<Event, Date> columnDateDebut;
 
 	@FXML
 	private TableColumn<Person, Circle> columnIsFSE;
 
+@FXML
+	private TableColumn<Event, Date> columnDateFin;
 	/** The column for the person history */
 	@FXML
 	private TableColumn<Person, Button> columnHist;
@@ -117,6 +126,7 @@ public class MenuPerson extends BorderPane {
 	@FXML
 	private CheckComboBox<WorkSector> comboBoxWorkSector;
 
+
 	/** The combobox to filter by file status */
 	@FXML
 	private ComboBox<String> comboBoxFileStatus;
@@ -140,13 +150,13 @@ public class MenuPerson extends BorderPane {
 	/** The button to import people's data from an excel file */
 	@FXML
 	private Button buttonImport;
-	
+
 	@FXML
 	private Button buttonRefresh;
-	
-	/**Progress indicator to show loading state of data */
-    @FXML
-    private ProgressIndicator progressIndicator;
+
+	/** Progress indicator to show loading state of data */
+	@FXML
+	private ProgressIndicator progressIndicator;
 
 	// **************************************************************************************************
 	// FIELDS
@@ -157,7 +167,9 @@ public class MenuPerson extends BorderPane {
 	 */
 	private ObservableList<Person> listPerson = FXCollections.observableArrayList();
 	private FilteredList<Person> listFil = new FilteredList<>(listPerson);
-
+	private ObservableList<Event> listEvent = FXCollections.observableArrayList();
+	private FilteredList<Event> listFilE = new FilteredList<>(listEvent);
+	
 	/**
 	 * The object confirm to create the PopUp Confirm
 	 */
@@ -167,12 +179,12 @@ public class MenuPerson extends BorderPane {
 	 * The object user
 	 */
 	private User user;
-	
+
 	/** Constant for the admin level */
 	private static final String ADMIN = "Administrateur";
-	/**Constant to set the user denied message */
+	/** Constant to set the user denied message */
 	private static final String ACCESSDENIED = "Vous n'avez pas les droits pour modifier ce dossier";
-	/**Constant with a fetch query for all person */
+	/** Constant with a fetch query for all person */
 	private static final String QUERYPERSON = "SELECT DISTINCT p FROM Person p LEFT JOIN FETCH p.employee "
 			+ "LEFT JOIN FETCH p.file LEFT JOIN FETCH p.worksearch w LEFT JOIN FETCH w.workSectors ORDER BY p.idPerson";
 
@@ -198,6 +210,7 @@ public class MenuPerson extends BorderPane {
 
 	/**
 	 * Constructor with parameter user
+	 * 
 	 * @param user the user connected
 	 */
 	public MenuPerson(User user) {
@@ -208,6 +221,7 @@ public class MenuPerson extends BorderPane {
 
 	/**
 	 * Setup all listener and data in javafx node in the page
+	 * 
 	 * @param user the user connected
 	 */
 	private void setup(User user) {
@@ -233,6 +247,7 @@ public class MenuPerson extends BorderPane {
 		refresh();
 	}
 
+	
 	// **************************************************************************************************
 	// METHODS
 	// **************************************************************************************************
@@ -269,9 +284,8 @@ public class MenuPerson extends BorderPane {
 		columnNiss.setCellValueFactory(new PropertyValueFactory<>("personNiss"));
 		columnEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
 		columnFileStatus.setCellValueFactory(new PropertyValueFactory<>("file"));
-
-		columnEdit
-				.setCellFactory(ButtonTableCell.<Person>forTableColumn(null, "button-edit", "far-edit", (Person p) -> {
+		
+		columnEdit.setCellFactory(ButtonTableCell.<Person>forTableColumn(null, "button-edit", "far-edit", (Person p) -> {
 
 					modify(p);
 					return p;
@@ -292,16 +306,18 @@ public class MenuPerson extends BorderPane {
 		columnPermanentDel.setCellFactory(
 				ButtonTableCell.<Person>forTableColumn(null, "button-delete", "fas-trash-alt", (Person p) -> {
 					if (confirm.confirmPopUp(true)) {
-						new PersonDAO().remove(p,true);
+						new PersonDAO().remove(p, true);
 						listPerson.remove(p);
 					}
 					return p;
 				}));
+		
+
 		tableViewPerson.setItems(listPerson);
 		
 
 	}
-	
+
 	/**
 	 * Setup combo box with value from the database
 	 */
@@ -335,13 +351,13 @@ public class MenuPerson extends BorderPane {
 				|| String.valueOf(person.getPersonLastName()).toLowerCase().contains(lowerCaseFilter)
 				|| String.valueOf(
 						(person.getPersonLastName()).toLowerCase() + " " + person.getPersonFirstName().toLowerCase())
-				.contains(lowerCaseFilter)
+						.contains(lowerCaseFilter)
 				|| String.valueOf(
 						(person.getPersonFirstName()).toLowerCase() + " " + person.getPersonLastName().toLowerCase())
-				.contains(lowerCaseFilter)
+						.contains(lowerCaseFilter)
 				|| String.valueOf(person.getPersonNiss()).toLowerCase().contains(lowerCaseFilter)
 				|| String.valueOf(person.getPersonPhone()).toLowerCase()
-				.contains(lowerCaseFilter.replaceAll("\\s", "")));
+						.contains(lowerCaseFilter.replaceAll("\\s", "")));
 
 	}
 
@@ -354,11 +370,11 @@ public class MenuPerson extends BorderPane {
 	 */
 	public void setFilter(boolean filter) {
 		listFil.predicateProperty().bind(Bindings.createObjectBinding(
-				//Condition
+				// Condition
 				() -> person -> ((person.isPersonIsDelete() && filter) || (!person.isPersonIsDelete() && !filter))
 						&& (predicateEmployee(person)) && (setupSearchBar(person)) && (predicateWorkSector(person))
 						&& (predicateWorkSearch(person)) && (checkFileStatus(person)),
-				//Property to bind
+				// Property to bind
 				searchTextField.textProperty(), checkBoxDeleted.selectedProperty(),
 				comboBoxEmployee.getCheckModel().getCheckedItems(), checkBoxWorkSearch.selectedProperty(),
 				comboBoxWorkSector.getCheckModel().getCheckedItems(), comboBoxFileStatus.valueProperty()));
@@ -368,18 +384,17 @@ public class MenuPerson extends BorderPane {
 		tableViewPerson.setItems(sortedData);
 
 	}
-	
-	
+
 	private boolean predicateEmployee(Person person) {
 		return comboBoxEmployee.getCheckModel().getCheckedItems().isEmpty() || (person.getEmployee() != null
 				&& comboBoxEmployee.getCheckModel().getCheckedItems().contains(person.getEmployee()));
 	}
-	
+
 	private boolean predicateWorkSector(Person person) {
-		return comboBoxWorkSector.getCheckModel().getCheckedItems().isEmpty()
-				|| CollectionUtils.containsAny(comboBoxWorkSector.getCheckModel().getCheckedItems(),
-						person.getWorksearch().getWorkSectors());
+		return comboBoxWorkSector.getCheckModel().getCheckedItems().isEmpty() || CollectionUtils.containsAny(
+				comboBoxWorkSector.getCheckModel().getCheckedItems(), person.getWorksearch().getWorkSectors());
 	}
+
 	private boolean predicateWorkSearch(Person person) {
 		return !checkBoxWorkSearch.isSelected() || (checkBoxWorkSearch.isSelected()
 				&& person.getWorksearch().isSearching() != null && person.getWorksearch().isSearching());
@@ -456,8 +471,7 @@ public class MenuPerson extends BorderPane {
 	 *
 	 */
 	@FXML
-	private void excelImport()
-	{
+	private void excelImport() {
 
 	}
 
@@ -515,7 +529,8 @@ public class MenuPerson extends BorderPane {
 	 */
 	void toEvent(Person person) {
 
-		if (person.getEmployee() != null && !user.getEmployee().getIdEmployee().equals(person.getEmployee().getIdEmployee())
+		if (person.getEmployee() != null
+				&& !user.getEmployee().getIdEmployee().equals(person.getEmployee().getIdEmployee())
 				&& !user.getUserlevel().getUserLevelName().contains(ADMIN)
 				&& !user.getUserlevel().getUserLevelName().contains("Editeur")) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -574,12 +589,12 @@ public class MenuPerson extends BorderPane {
 				if (Boolean.TRUE.equals(person.isPersonIsDelete())) {
 					person.setPersonIsDelete(false);
 					person.getFile().setFileStatus("Actif");
-					new PersonDAO().saveOrUpdate(person,true);
+					new PersonDAO().saveOrUpdate(person, true);
 					setFilter(true);
 				} else {
 					person.setPersonIsDelete(true);
 					person.getFile().setFileStatus("Supprimé");
-					new PersonDAO().saveOrUpdate(person,true);
+					new PersonDAO().saveOrUpdate(person, true);
 					setFilter(false);
 				}
 			}
@@ -681,9 +696,10 @@ public class MenuPerson extends BorderPane {
 		checkBoxWorkSearch.setSelected(false);
 		setFilter(false);
 	}
-	
+
 	/**
 	 * Event handler that opens {@link Person} information on double click
+	 * 
 	 * @param event the mouse event
 	 */
 	@FXML

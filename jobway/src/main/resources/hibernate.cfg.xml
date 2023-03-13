@@ -80,6 +80,7 @@
 		<mapping class="cripel.jobway.model.ResidencePermitType" />
 		<mapping class="cripel.jobway.model.SituationTerritory" />
 		<mapping class="cripel.jobway.model.SituationProf" />
+		<mapping class="cripel.jobway.model.Difficulty" />
 		<mapping class="cripel.jobway.model.Skill" />
 		<mapping class="cripel.jobway.model.SkilSect" />
 		<mapping class="cripel.jobway.model.SkilSectId" />
